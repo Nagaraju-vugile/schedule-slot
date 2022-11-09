@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import "./index.css";
 
 const AppointmentsWithDate = ({ date, timings, size }) => {
   const updatedDate = new Date(date);
-  const [count, setCount] = useState(2);
   const handleBookAppointment = ()=>{
   }
   
@@ -44,7 +43,7 @@ const AppointmentsWithDate = ({ date, timings, size }) => {
       </div>
       <div className="availabilities-slots">
         {timings?.map((timing, index) => {
-          return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={timing}><button className="timing" onClick={()=>handleBookAppointment()}>{timings[index]&&timing.StartTimeText}</button></div>;
+          return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleBookAppointment()}>{timing?.StartTimeText}</button></div>;
         })}
       </div>
     </div>

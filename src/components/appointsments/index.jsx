@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+// import Calendar from 'react-calendar';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+// import 'react-calendar/dist/Calendar.css';
+// import moment from "moment";
 import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,18 +13,20 @@ import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
 
 const Appointments = ({ appointments }) => {
-  console.log("appointments****", appointments)
   let dispatch = useDispatch();
   const [value, onChange] = useState(new Date());
   const [viewCalender, setViewCalender] = useState(false);
   const prevDateSelected = useSelector(state => state?.availabilitiesReducer?.prevDateSelected);
-  const pyStatusMessage = useSelector(state => state?.availabilitiesReducer?.availabilities?.pyStatusMessage);
 
   const dates = appointments && appointments?.map(item=>item.ScheduledDate);
   const [size, setSize] = useState(5);
   const nextDays = (date, days)=>{
     return new Date(new Date(date).getTime()+days * 24*60*60*1000);
   };
+
+  let maxValue = appointments?.reduce((acc, value) => {
+    return (acc = acc > value.Slots.length ? acc : value.Slots.length);
+  }, 0);
 
   const prevDays = (date, days)=>{
     return new Date(new Date(date).getTime()-days * 24*60*60*1000);
@@ -35,23 +40,26 @@ const Appointments = ({ appointments }) => {
     dispatch(selectedDataDisplayT(prevBtnStartTime));
     setViewCalender(false);
     dispatch(getAvailabilities(prevBtnStartTime, prevBtnEndTime));
-
+    setSize(5);
   }
   const handleNext = ()=>{
     dispatch(selectedDataDisplayT(nextBtnStartTime));
     setViewCalender(false);
     dispatch(getAvailabilities(nextBtnStartTime, nextBtnEndTime));
+    setSize(5);
   }
 
   const setDate = (e)=>{
+    // console.log("e***", moment(new Date(e)).utc().format('YYYYMMDD'))
     onChange(e);
     setViewCalender(!viewCalender);
     dispatch(selectedDate(new Date(e)));
-    const start = nextDays(new Date(e), 1);
+    const start = nextDays(new Date(e), 0);
     // const start = new Date(e);
-    const end = nextDays(new Date(e), 6);
+    const end = nextDays(new Date(e), 5);
     dispatch(selectedDataDisplayT(e));
     dispatch(getAvailabilities(start, end));
+    setSize(5);
   }
   
   return (
@@ -74,14 +82,15 @@ const Appointments = ({ appointments }) => {
             </div>
             <div>
             <div><button className="view-calender" onClick={()=>setViewCalender(!viewCalender)}><FcCalendar className="view-calender-svg"/></button></div>
-            {viewCalender&&<Calendar onChange={setDate} value={value} />}
+            {/* {viewCalender&&<Calendar onChange={setDate} value={value} />} */}
+            {viewCalender&&<DatePicker  onChange={setDate} selected={value} />}
             </div>
           </div>
           {!appointments && <div className="no-availabilities-div">No schedules found</div>}
-          <div className="show-more-div">
-            <button className="show-more" onClick={() => setSize(10)}>MORE</button>
+          {appointments && <div className="show-more-div">
+            <button className="show-more" onClick={() => setSize(maxValue)}>MORE</button>
             <button className="show-more" onClick={() => setSize(5)}>LESS</button>
-          </div>
+          </div>}
           {/* <div className="actions-div">
             <button className="book-slot">Book</button>
           </div> */}
