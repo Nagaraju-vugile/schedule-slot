@@ -1,0 +1,131 @@
+.appointments {
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+  }
+  .availabilities-day-date {
+    display: flex;
+    margin-top: 2px;
+  }
+  .availabilities-day {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .timing {
+    min-width: 70px;
+    min-height:35px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    border: 1px solid #ffffff;
+    background-color: #d4f4fe;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .timing:hover{
+    background-color: #65b3cb;
+    cursor: pointer;
+  }
+
+  .show-more{
+    border: none;
+    background-color: white;
+    color: #2a82c5;
+    font-weight:700;
+  }
+
+  .show-more:hover{
+    
+    color: #17639d;
+    cursor: pointer;
+  }
+
+.show-more-div{
+  align-items: center;
+  display: flex!important;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+}
+
+.no-availabilities-div{
+  align-items: center;
+  display: flex!important;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.actions-div{
+  align-items: center;
+  display: flex!important;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.empty-div{
+  min-width: 30%
+}
+
+.loader{
+  align-items: center;
+  display: flex!important;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+}
+
+.availabilities-day-name{
+  font-weight: 700;
+}
+
+.availabilities-day-title {
+  font-size: 14px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.button-prev{
+  border:none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.button-next{
+  border:none;
+  background-color: white;
+  cursor: pointer;
+}
+
+.next-button-svg{
+  height: 24px;
+  width: 24px;
+}
+
+.prev-button-svg{
+  height: 24px;
+  width: 24px;
+}
+
+.view-calender{
+  border:none;
+  background-color: white;
+  cursor: pointer;
+  color: #2a82c5
+}
+
+.view-calender-svg{
+  height: 24px;
+  width: 24px;
+}
+
+
+  
