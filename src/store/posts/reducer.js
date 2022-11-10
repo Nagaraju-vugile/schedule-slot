@@ -6,7 +6,11 @@ import {
     GET_POST_DETAILS_SUCCESS,
     GET_POST_DETAILS_FAIL,
     SELECTED_DATE,
-    PREV_DATE_SELECTED
+    PREV_DATE_SELECTED,
+    GET_SCHEDULER_TYPES,
+    GET_SCHEDULER_TYPES_SUCCESS,
+    GET_SCHEDULER_TYPES_FAIL,
+    SELECTED_SLOT_DETAILS
   } from "./actionTypes";
   
   const initialState = {
@@ -19,6 +23,9 @@ import {
     },
     selectedDate: new Date()+'',
     prevDateSelected:new Date("2022-12-02"),
+    loadingSchedulerTypes: false,
+    schedulerTypes: [],
+    selectedSlotDetails: null,
   };
   
   const availabilitiesReducer = (state = initialState, action) => {
@@ -31,7 +38,18 @@ import {
         break;
       case SELECTED_DATE:
         state = {...state, selectedDate: action.payload+''};
-        // break;
+        break;
+      case SELECTED_SLOT_DETAILS:
+          state = {...state, selectedSlotDetails: action.payload};
+          break;
+      case GET_SCHEDULER_TYPES:
+        state = { ...state, loadingSchedulerTypes: true };
+        break;
+      case GET_SCHEDULER_TYPES_SUCCESS:
+        state = { ...state, schedulerTypes: action.payload, loadingSchedulerTypes: false };
+        break;
+      // case SELECTED_DATE:
+      //     state = {...state, selectedDate: action.payload+''};
       case PREV_DATE_SELECTED:
         state = {...state, prevDateSelected: action.payload};
         break;
@@ -44,6 +62,15 @@ import {
           loadingAvailabilities: false,
         };
         break;
+        case GET_SCHEDULER_TYPES_FAIL:
+          state = {
+            ...state,
+            error: {
+              message: "Error",
+            },
+            loadingSchedulerTypes: false,
+          };
+          break;
       case GET_POST_DETAILS:
         state = { ...state, loadingPostDetails: true };
         break;

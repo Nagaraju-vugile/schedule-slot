@@ -1,16 +1,18 @@
 import { takeLatest, put, call } from "redux-saga/effects";
 import {format} from 'date-fns';
 import moment from "moment";
-import { GET_AVAILABILITIES, GET_POST_DETAILS } from "./actionTypes";
+import { GET_AVAILABILITIES, GET_POST_DETAILS, GET_SCHEDULER_TYPES } from "./actionTypes";
 
 import {
   getAvailabilitiesSuccess,
   getAvailabilitiesFail,
   getPostDetailsSuccess,
   getPostDetailsFail,
+  getSchedulerTypeDetailsSuccess,
+  getSchedulerTypeDetailsFail,
 } from "./actions";
 
-import { getAvailabilities, getPostDetails } from "../../helpers/backend_helper";
+import { getAvailabilities, getPostDetails, getSchedulerTypeDetails } from "../../helpers/backend_helper";
 
 const days = [
   "Sunday",
@@ -36,7 +38,7 @@ const months = [
   "Dec"
 ];
 
-function* onGetAvailabilities({payload: prevDateSelected, payload:nextDate}) {
+function* onGetAvailabilities({payload: prevDateSelected, payload:nextDate, payload: id}) {
   try {
     // console.log("prevDateSelected saga****", prevDateSelected.prevDateSelected, nextDate.nextDate)
 
@@ -49,10 +51,19 @@ function* onGetAvailabilities({payload: prevDateSelected, payload:nextDate}) {
     // console.log("moment***********",moment(prevDateSelected).utc().format('YYYY-MM-DD'));
     // console.log("dat******+++++++", dat)
     // console.log("dat-----",new Date(prevDateSelected).getFullYear()+''+new Date(prevDateSelected).getMonth()+''+new Date(prevDateSelected).getDay());
-    const response = yield call(getAvailabilities, formattedDate, formattedNextDate);
+    const response = yield call(getAvailabilities, formattedDate, formattedNextDate, id.id);
     yield put(getAvailabilitiesSuccess(response));
   } catch (error) {
     yield put(getAvailabilitiesFail(error.response));
+  }
+}
+
+function* onGetSchedulerTypes() {
+  try {
+    const response = yield call(getSchedulerTypeDetails);
+    yield put(getSchedulerTypeDetailsSuccess(response));
+  } catch (error) {
+    yield put(getSchedulerTypeDetailsFail(error.response));
   }
 }
 
@@ -67,6 +78,7 @@ function* onGetPostDetails({ payload: id }) {
 
 function* CartSaga() {
   yield takeLatest(GET_AVAILABILITIES, onGetAvailabilities);
+  yield takeLatest(GET_SCHEDULER_TYPES, onGetSchedulerTypes);
   yield takeLatest(GET_POST_DETAILS, onGetPostDetails);
 }
 

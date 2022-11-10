@@ -1,9 +1,15 @@
 import React from "react";
+import {useDispatch} from "react-redux"
+import { selectedSlotDetails } from "../../store/posts/actions";
 import "./index.css";
 
 const AppointmentsWithDate = ({ date, timings, size }) => {
+  let dispatch = useDispatch();
   const updatedDate = new Date(date);
-  const handleBookAppointment = ()=>{
+  
+  const handleSelectedSlot = (timing)=>{
+    const formedTiming = {...timing, pyselected: true};
+    dispatch(selectedSlotDetails({timing: formedTiming, date}));
   }
   
   const days = [
@@ -43,7 +49,7 @@ const AppointmentsWithDate = ({ date, timings, size }) => {
       </div>
       <div className="availabilities-slots">
         {timings?.map((timing, index) => {
-          return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleBookAppointment()}>{timing?.StartTimeText}</button></div>;
+          return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleSelectedSlot(timing)}>{timing?.StartTimeText}</button></div>;
         })}
       </div>
     </div>
