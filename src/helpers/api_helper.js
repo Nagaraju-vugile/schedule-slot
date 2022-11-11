@@ -16,7 +16,7 @@ axiosApi.interceptors.response.use(
   (error) => Promise.reject(error)
 );
 
-export async function get(url, config, formattedDate, formattedNextDate) {
+export async function get(url, config) {
   // console.log("dat************",formattedDate, formattedNextDate)
   return await axiosApi
     .get(url, {
