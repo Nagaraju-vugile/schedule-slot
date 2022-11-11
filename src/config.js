@@ -1,0 +1,1 @@
+export const MIN_SLOTS_SIZE = 5;

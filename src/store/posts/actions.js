@@ -2,10 +2,6 @@ import {
     GET_AVAILABILITIES,
     GET_AVAILABILITIES_SUCCESS,
     GET_AVAILABILITIES_FAIL,
-    GET_POST_DETAILS,
-    GET_POST_DETAILS_SUCCESS,
-    GET_POST_DETAILS_FAIL,
-    SELECTED_DATE,
     PREV_DATE_SELECTED,
     GET_SCHEDULER_TYPES,
     GET_SCHEDULER_TYPES_FAIL,
@@ -13,11 +9,10 @@ import {
     SELECTED_SLOT_DETAILS,
   } from "./actionTypes";
   
-  export const getAvailabilities = (prevDateSelected, nextDate, id) => {
-    // console.log("action payload***",prevDateSelected)
+  export const getAvailabilities = (prevDateSelected, id) => {
     return {
       type: GET_AVAILABILITIES,
-      payload: {prevDateSelected, nextDate, id}
+      payload: {prevDateSelected, id}
     };
   };
   
@@ -34,34 +29,6 @@ import {
       payload: error,
     };
   };
-  
-  export const getPostDetails = (id) => {
-    return {
-      type: GET_POST_DETAILS,
-      payload: id,
-    };
-  };
-  
-  export const getPostDetailsSuccess = (post) => {
-    return {
-      type: GET_POST_DETAILS_SUCCESS,
-      payload: post,
-    };
-  };
-  
-  export const getPostDetailsFail = (error) => {
-    return {
-      type: GET_POST_DETAILS_FAIL,
-      payload: error,
-    };
-  };
-
-  export const selectedDate = (date) =>{
-    return {
-      type: SELECTED_DATE,
-      payload: date
-    }
-  }
 
   export const selectedDataDisplayT = (data)=>{
     return {

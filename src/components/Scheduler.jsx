@@ -1,27 +1,20 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom';
 import { getAvailabilities } from "../store/posts/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
-// import { ImSpinner } from "react-icons/im";
-import {  useParams } from 'react-router-dom';
-
 
 export default function Scheduler() {
   let dispatch = useDispatch();
   let { id } = useParams();
-  const stat = useSelector(state => state?.availabilitiesReducer?.availabilities?.SchedulerList);
+  const SchedulerList = useSelector(state => state?.availabilitiesReducer?.availabilities?.SchedulerList);
   const prevDateSelected = useSelector(state => state?.availabilitiesReducer?.prevDateSelected);
-  const formattedData = stat&&stat[0]?.SchedulerDetails?.Schedules;
- 
-  const nextDays = (date, days)=>{
-    return new Date(new Date(date).getTime()+days * 24*60*60*1000);
-  };
-  const nextDate = nextDays(new Date(prevDateSelected), 5);
+  const scheduledData = SchedulerList&&SchedulerList[0]?.SchedulerDetails?.Schedules;
 
   useEffect(() => {
-    !formattedData&&dispatch(getAvailabilities(prevDateSelected, nextDate, id));
+    !scheduledData&&dispatch(getAvailabilities(prevDateSelected, id));
   }, [dispatch]);
      
-  return  <Appointments appointments={formattedData} />
+  return  <Appointments appointments={scheduledData} />
 }
