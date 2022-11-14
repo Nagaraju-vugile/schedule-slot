@@ -13,11 +13,11 @@ import {
     SELECTED_SLOT_DETAILS,
   } from "./actionTypes";
   
-  export const getAvailabilities = (prevDateSelected, nextDate, id) => {
+  export const getAvailabilities = (prevDateSelected, nextDate, id, type) => {
     // console.log("action payload***",prevDateSelected)
     return {
       type: GET_AVAILABILITIES,
-      payload: {prevDateSelected, nextDate, id}
+      payload: {prevDateSelected, nextDate, id, type}
     };
   };
   

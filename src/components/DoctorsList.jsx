@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getSchedulerTypeDetails } from "../store/posts/actions";
 
@@ -10,7 +10,7 @@ const DoctorsList = ()=>{
       }, [dispatch]);
 
     return schedulerTypes?.map(item=>{
-        return <li key={item.SchedulerRefID}><a href = {'/scheduler/'+item.SchedulerRefID}>{item.Type}</a></li>
+        return <li key={item.SchedulerRefID}><a href = {'/scheduler/'+item.SchedulerRefID+'?Type='+item.Type}>{item.Type} - {item.SchedulerRefID}</a></li>
     })
 }
 

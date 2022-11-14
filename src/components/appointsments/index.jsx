@@ -7,16 +7,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { getAvailabilities, selectedDataDisplayT, selectedDate } from "../../store/posts/actions";
 import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
-import {  useParams, useNavigate } from 'react-router-dom';
 
 const Appointments = ({ appointments }) => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
   let { id } = useParams();
+  let query = new URLSearchParams(useLocation().search);
   const [value, onChange] = useState(new Date());
   const [viewCalender, setViewCalender] = useState(false);
   const prevDateSelected = useSelector(state => state?.availabilitiesReducer?.prevDateSelected);
@@ -43,13 +44,13 @@ const Appointments = ({ appointments }) => {
   const handlePrev = ()=>{
     dispatch(selectedDataDisplayT(prevBtnStartTime));
     setViewCalender(false);
-    dispatch(getAvailabilities(prevBtnStartTime, prevBtnEndTime, id));
+    dispatch(getAvailabilities(prevBtnStartTime, prevBtnEndTime, id, query.get("Type")));
     setSize(5);
   }
   const handleNext = ()=>{
     dispatch(selectedDataDisplayT(nextBtnStartTime));
     setViewCalender(false);
-    dispatch(getAvailabilities(nextBtnStartTime, nextBtnEndTime, id));
+    dispatch(getAvailabilities(nextBtnStartTime, nextBtnEndTime, id, query.get("Type")));
     setSize(5);
   }
 
@@ -62,7 +63,7 @@ const Appointments = ({ appointments }) => {
     // const start = new Date(e);
     const end = nextDays(new Date(e), 5);
     dispatch(selectedDataDisplayT(e));
-    dispatch(getAvailabilities(start, end, id));
+    dispatch(getAvailabilities(start, end, id, query.get("Type")));
     setSize(5);
   }
   
@@ -89,7 +90,11 @@ const Appointments = ({ appointments }) => {
               <button className="button-next" onClick={handleNext}><IoIosArrowForward className="next-button-svg"/></button>
             </div>
             <div>
-            <div><button className="view-calender" onClick={()=>setViewCalender(!viewCalender)}><FcCalendar className="view-calender-svg"/></button></div>
+            <div>
+              <button className="view-calender" onClick={()=>setViewCalender(!viewCalender)}><FcCalendar className="view-calender-svg"/></button>
+            </div>
+            {/* {selectedSlotDetails&&<div className="selected-time">{selectedSlotDetails?.date}</div>}
+            {selectedSlotDetails&&<div className="selected-time">Time: {selectedSlotDetails?.timing?.StartTimeText}</div>} */}
             {/* {viewCalender&&<Calendar onChange={setDate} value={value} />} */}
             {viewCalender&&<DatePicker  onChange={setDate} selected={value} />}
             </div>
@@ -99,9 +104,9 @@ const Appointments = ({ appointments }) => {
             <button className="show-more" onClick={() => setSize(maxValue)}>MORE</button>
             <button className="show-more" onClick={() => setSize(5)}>LESS</button>
           </div>}
-          <div className="actions-div">
+          {/* <div className="actions-div">
             <button className="book-slot" onClick={()=>handleBookNext()} disabled={!selectedSlotDetails}>Next</button>
-          </div>
+          </div> */}
     </ Container>
   );
 };

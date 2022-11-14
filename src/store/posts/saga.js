@@ -38,7 +38,7 @@ const months = [
   "Dec"
 ];
 
-function* onGetAvailabilities({payload: prevDateSelected, payload:nextDate, payload: id}) {
+function* onGetAvailabilities({payload: prevDateSelected, payload:nextDate, payload: id, payload: type}) {
   try {
     // console.log("prevDateSelected saga****", prevDateSelected.prevDateSelected, nextDate.nextDate)
 
@@ -51,7 +51,7 @@ function* onGetAvailabilities({payload: prevDateSelected, payload:nextDate, payl
     // console.log("moment***********",moment(prevDateSelected).utc().format('YYYY-MM-DD'));
     // console.log("dat******+++++++", dat)
     // console.log("dat-----",new Date(prevDateSelected).getFullYear()+''+new Date(prevDateSelected).getMonth()+''+new Date(prevDateSelected).getDay());
-    const response = yield call(getAvailabilities, formattedDate, formattedNextDate, id.id);
+    const response = yield call(getAvailabilities, formattedDate, formattedNextDate, id.id, type.type);
     yield put(getAvailabilitiesSuccess(response));
   } catch (error) {
     yield put(getAvailabilitiesFail(error.response));

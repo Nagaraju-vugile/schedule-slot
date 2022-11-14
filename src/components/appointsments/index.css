@@ -157,5 +157,14 @@
   margin-top: 20px;
 }
 
+.selected-time{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.back-button{
+  padding-right:50px;
+}
+
 
   

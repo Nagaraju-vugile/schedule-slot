@@ -1,15 +1,20 @@
 import React from "react";
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { selectedSlotDetails } from "../../store/posts/actions";
 import "./index.css";
 
 const AppointmentsWithDate = ({ date, timings, size }) => {
+  console.log("timings****", timings);
   let dispatch = useDispatch();
+  const navigate = useNavigate();
   const updatedDate = new Date(date);
-  
+  let { id } = useParams();
+  let query = new URLSearchParams(useLocation().search);
   const handleSelectedSlot = (timing)=>{
     const formedTiming = {...timing, pyselected: true};
     dispatch(selectedSlotDetails({timing: formedTiming, date}));
+    navigate("/scheduler/questions/"+id+"?Type="+query.get('Type'));
   }
   
   const days = [
@@ -48,9 +53,9 @@ const AppointmentsWithDate = ({ date, timings, size }) => {
         </div>
       </div>
       <div className="availabilities-slots">
-        {timings?.map((timing, index) => {
+        {timings.length>1 && timings?.map((timing, index) => {
           return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleSelectedSlot(timing)}>{timing?.StartTimeText}</button></div>;
-        })}
+        }) || <button className="timing">unavailable</button>}
       </div>
     </div>
   );
