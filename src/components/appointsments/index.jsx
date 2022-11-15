@@ -68,6 +68,7 @@ const Appointments = ({ appointments }) => {
                 timings={appointments[index].Slots}
                 size={size}
                 appontment={appointments[index]}
+                key={index}
               />
             )
           );
