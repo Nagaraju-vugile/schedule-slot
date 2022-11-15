@@ -24,3 +24,13 @@ export async function get(url, config) {
     })
     .then((response) => response.data);
 }
+
+export async function post(url, config, data) {
+  console.log("config************",config)
+  return await axiosApi
+    .post(url, {
+      body : data,
+      // ...config,
+    })
+    .then((response) => response.data);
+}

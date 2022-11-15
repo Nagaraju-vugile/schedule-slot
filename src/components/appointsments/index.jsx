@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-// import Calendar from 'react-calendar';
+import Calendar from 'react-calendar';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-// import 'react-calendar/dist/Calendar.css';
-// import moment from "moment";
+import 'react-calendar/dist/Calendar.css';
+import moment from "moment";
 import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,7 +82,8 @@ const Appointments = ({ appointments }) => {
               return (
                 appointments&&<AppointmentsWithDate
                   date={date}
-                  timings={appointments[index].Slots} size={size}/>
+                  timings={appointments[index].Slots} size={size}
+                  appontment = {appointments[index]} />
                   
               );
             })}
@@ -101,8 +102,8 @@ const Appointments = ({ appointments }) => {
           </div>
           {!appointments && <div className="no-availabilities-div">No schedules found</div>}
           {appointments && <div className="show-more-div">
-            <button className="show-more" onClick={() => setSize(maxValue)}>MORE</button>
-            <button className="show-more" onClick={() => setSize(5)}>LESS</button>
+            {size === 5&&<button className="show-more" onClick={() => setSize(maxValue)}>MORE</button>}
+            {size !==5&&<button className="show-more" onClick={() => setSize(5)}>LESS</button>}
           </div>}
           {/* <div className="actions-div">
             <button className="book-slot" onClick={()=>handleBookNext()} disabled={!selectedSlotDetails}>Next</button>

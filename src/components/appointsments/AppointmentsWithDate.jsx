@@ -4,15 +4,17 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { selectedSlotDetails } from "../../store/posts/actions";
 import "./index.css";
 
-const AppointmentsWithDate = ({ date, timings, size }) => {
-  console.log("timings****", timings);
+const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
+  console.log("appontment****", appontment);
   let dispatch = useDispatch();
   const navigate = useNavigate();
   const updatedDate = new Date(date);
   let { id } = useParams();
   let query = new URLSearchParams(useLocation().search);
   const handleSelectedSlot = (timing)=>{
-    const formedTiming = {...timing, pyselected: true};
+    // console.log("timing===========", timing)
+    const test = [{...timing, pySelected: "true"}];
+    const formedTiming = {...appontment,test};
     dispatch(selectedSlotDetails({timing: formedTiming, date}));
     navigate("/scheduler/questions/"+id+"?Type="+query.get('Type'));
   }

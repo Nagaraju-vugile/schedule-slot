@@ -11,6 +11,9 @@ import {
     GET_SCHEDULER_TYPES_FAIL,
     GET_SCHEDULER_TYPES_SUCCESS,
     SELECTED_SLOT_DETAILS,
+    BOOK_SLOT,
+    BOOK_SLOT_SUCCESS,
+    BOOK_SLOT_FAIL,
   } from "./actionTypes";
   
   export const getAvailabilities = (prevDateSelected, nextDate, id, type) => {
@@ -96,3 +99,25 @@ import {
       payload: data
     }
   }
+
+  export const bookSlot = (data) => {
+    console.log("action payload data***",data)
+    return {
+      type: BOOK_SLOT,
+      payload: {data}
+    };
+  };
+
+  export const bookSlotSuccess = (data) => {
+    return {
+      type: BOOK_SLOT_SUCCESS,
+      payload: data,
+    };
+  };
+  
+  export const bookSlotFail = (error) => {
+    return {
+      type: BOOK_SLOT_FAIL,
+      payload: error,
+    };
+  };

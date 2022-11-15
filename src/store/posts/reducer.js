@@ -10,7 +10,10 @@ import {
     GET_SCHEDULER_TYPES,
     GET_SCHEDULER_TYPES_SUCCESS,
     GET_SCHEDULER_TYPES_FAIL,
-    SELECTED_SLOT_DETAILS
+    SELECTED_SLOT_DETAILS,
+    BOOK_SLOT,
+    BOOK_SLOT_SUCCESS,
+    BOOK_SLOT_FAIL
   } from "./actionTypes";
   
   const initialState = {
@@ -26,6 +29,7 @@ import {
     loadingSchedulerTypes: false,
     schedulerTypes: [],
     selectedSlotDetails: null,
+    bookedSlot: null
   };
   
   const availabilitiesReducer = (state = initialState, action) => {
@@ -86,6 +90,21 @@ import {
           loadingPostDetails: false,
         };
         break;
+        case BOOK_SLOT:
+          state = { ...state, loadingBookSlot: true };
+          break;
+        case BOOK_SLOT_SUCCESS:
+          state = { ...state, bookedSlot: action.payload, loadingBookSlot: false };
+          break;
+          case BOOK_SLOT_FAIL:
+            state = {
+              ...state,
+              error: {
+                message: "Error",
+              },
+              loadingBookSlot: false,
+            };
+            break;
       default:
         state = { ...state };
         break;
