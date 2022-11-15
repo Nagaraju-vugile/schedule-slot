@@ -8,7 +8,13 @@ import { urls } from "../constants";
 const base64encodedData = Buffer.from(`Chandan_Palamakula:rules#123`).toString('base64');
 //`Basic Chandan_Palamakula:rules#123`
 
-export const getAvailabilities = (formattedDate, id, type) => get( urls(id, type, formattedDate, "getAvailabilities"), {headers: {'Content-Type': 'application/json',Authorization : `Basic ${base64encodedData}`}});
+export const getAvailabilities = (formattedDate, id, type) =>
+  get(urls(id, type, formattedDate, "getAvailabilities"), {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${base64encodedData}`,
+    },
+  });
 
 export const getSchedulerTypeDetails = () => get(urls(null, null, null, "getSchedulerTypes"), {headers: {'Content-Type': 'application/json',Authorization : `Basic ${base64encodedData}`}});
 

@@ -50,37 +50,63 @@ const Appointments = ({ appointments }) => {
   
   return (
     <Container>
-          <div className="appointments"><b>Make a schedule</b></div>
-          <div className="appointments">
-            <div>
-              <button className="button-prev" onClick={handlePrev}><IoIosArrowBack className="prev-button-svg"/></button>
-            </div>
-            {!appointments && <div className="empty-div"></div>}
-            {dates?.map((date, index) => {
-              return (
-                appointments&&<AppointmentsWithDate
-                  date={date}
-                  timings={appointments[index].Slots} size={size}
-                  appontment = {appointments[index]} />
-                  
-              );
-            })}
-            <div style={{ marginLeft: '20px' }}>
-              <button className="button-next" onClick={handleNext}><IoIosArrowForward className="next-button-svg"/></button>
-            </div>
-            <div>
-            <div>
-              <button className="view-calender" onClick={()=>setViewCalender(!viewCalender)}><FcCalendar className="view-calender-svg"/></button>
-            </div>
-            {viewCalender&&<DatePicker  onChange={setDate} selected={value} />}
-            </div>
+      <div className="appointments">
+        <b>Make a schedule</b>
+      </div>
+      <div className="appointments">
+        <div>
+          <button className="button-prev" onClick={handlePrev}>
+            <IoIosArrowBack className="prev-button-svg" />
+          </button>
+        </div>
+        {!appointments && <div className="empty-div"></div>}
+        {dates?.map((date, index) => {
+          return (
+            appointments && (
+              <AppointmentsWithDate
+                date={date}
+                timings={appointments[index].Slots}
+                size={size}
+                appontment={appointments[index]}
+              />
+            )
+          );
+        })}
+        <div style={{ marginLeft: "20px" }}>
+          <button className="button-next" onClick={handleNext}>
+            <IoIosArrowForward className="next-button-svg" />
+          </button>
+        </div>
+        <div>
+          <div>
+            <button
+              className="view-calender"
+              onClick={() => setViewCalender(!viewCalender)}
+            >
+              <FcCalendar className="view-calender-svg" />
+            </button>
           </div>
-          {!appointments && <div className="no-availabilities-div">No schedules found</div>}
-          {appointments && <div className="show-more-div">
-            {size === 5&&<button className="show-more" onClick={() => setSize(maxValue)}>MORE</button>}
-            {size !==5&&<button className="show-more" onClick={() => setSize(5)}>LESS</button>}
-          </div>}
-    </ Container>
+          {viewCalender && <DatePicker onChange={setDate} selected={value} />}
+        </div>
+      </div>
+      {!appointments && (
+        <div className="no-availabilities-div">No schedules found</div>
+      )}
+      {appointments && (
+        <div className="show-more-div">
+          {size === 5 && (
+            <button className="show-more" onClick={() => setSize(maxValue)}>
+              MORE
+            </button>
+          )}
+          {size !== 5 && (
+            <button className="show-more" onClick={() => setSize(5)}>
+              LESS
+            </button>
+          )}
+        </div>
+      )}
+    </Container>
   );
 };
 

@@ -34,14 +34,27 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
           <b>{days[updatedDate.getDay()]}</b>
         </div>
         <div className="availabilities-day-date">
-        {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
+          {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
         </div>
       </div>
       <div className="availabilities-slots">
-        {timings.length>1 && timings?.map((timing, index) => {
-          return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleSelectedSlot(timing)}>{timing?.StartTimeText}</button></div>;
-        })}
-        {timings.length<=1 &&<button className="timing">unavailable</button>}
+        {timings.length > 1 &&
+          timings?.map((timing, index) => {
+            return (
+              index < size &&
+              timing?.StartTimeText && (
+                <div className="availabilities-slot" key={index}>
+                  <button
+                    className="timing"
+                    onClick={() => handleSelectedSlot(timing)}
+                  >
+                    {timing?.StartTimeText}
+                  </button>
+                </div>
+              )
+            );
+          })}
+        {timings.length <= 1 && <button className="timing">unavailable</button>}
       </div>
     </div>
   );

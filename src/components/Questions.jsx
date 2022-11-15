@@ -38,21 +38,57 @@ const Questions = ()=>{
       return <div className="loader">Loading..</div>
     }
 
-    return  <div className="questions-div">
-              <div className="appointments"><b>Answer the question</b></div>
-              <div>{question} </div>
-              <div className="questions-section">
-                {type !== "radio" && <input type = {type} value={answer} onChange={(e)=>updateAnswer(e)}></input>}
-                {type === "radio" && <div onChange={(e)=>updateAnswer(e)}>
-                  <label><input type = {type} value="yes" name = "selectAns" checked={answer === "yes"} />Yes</label>
-                  <label><input type = {type} value="no" name = "selectAns" checked={answer === "no"} />No</label>
-                </div>}
-              </div>
-              <div className="actions-div">
-              <a href={"/scheduler/"+id+queryCheck} className="back-button">Back</a>
-              <button className="book-slot" onClick={()=>handleBook()} disabled={ answer === "" || !answer}>Book slot</button>
-              </div>
+    return (
+      <div className="questions-div">
+        <div className="appointments">
+          <b>Answer the question</b>
+        </div>
+        <div>{question} </div>
+        <div className="questions-section">
+          {type !== "radio" && (
+            <input
+              type={type}
+              value={answer}
+              onChange={(e) => updateAnswer(e)}
+            ></input>
+          )}
+          {type === "radio" && (
+            <div onChange={(e) => updateAnswer(e)}>
+              <label>
+                <input
+                  type={type}
+                  value="yes"
+                  name="selectAns"
+                  checked={answer === "yes"}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  type={type}
+                  value="no"
+                  name="selectAns"
+                  checked={answer === "no"}
+                />
+                No
+              </label>
             </div>
+          )}
+        </div>
+        <div className="actions-div">
+          <a href={"/scheduler/" + id + queryCheck} className="back-button">
+            Back
+          </a>
+          <button
+            className="book-slot"
+            onClick={() => handleBook()}
+            disabled={answer === "" || !answer}
+          >
+            Book slot
+          </button>
+        </div>
+      </div>
+    );
     
 }
 

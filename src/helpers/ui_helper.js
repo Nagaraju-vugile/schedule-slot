@@ -22,11 +22,11 @@ export const getPayloadBookSlot = (answer, question, type, selectedSlotDetails, 
     return payload;
 }
 
-export const getMaxLength = (appointments)=>{
-    return appointments?.reduce((acc, value) => {
-        return (acc = acc > value.Slots.length ? acc : value.Slots.length);
-      }, 0);
-}
+export const getMaxLength = (appointments) => {
+  return appointments?.reduce((acc, value) => {
+    return (acc = acc > value.Slots.length ? acc : value.Slots.length);
+  }, 0);
+};
 
 export const nextDays = (date, days)=>{
     return new Date(new Date(date).getTime()+days * 24*60*60*1000);
