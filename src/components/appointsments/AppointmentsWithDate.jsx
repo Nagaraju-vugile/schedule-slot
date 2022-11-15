@@ -1,41 +1,31 @@
 import React from "react";
-import {useDispatch} from "react-redux"
-import { selectedSlotDetails } from "../../store/posts/actions";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { days, months } from "../../constants";
+import { selectedSlotDetails } from "../../store/scheduler/actions";
 import "./index.css";
 
-const AppointmentsWithDate = ({ date, timings, size }) => {
-  let dispatch = useDispatch();
-  const updatedDate = new Date(date);
-  
-  const handleSelectedSlot = (timing)=>{
-    const formedTiming = {...timing, pyselected: true};
-    dispatch(selectedSlotDetails({timing: formedTiming, date}));
-  }
-  
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
+const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
 
-  const months = [
-    "Jan",
-    "Feb",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
+  let dispatch = useDispatch();
+  const navigate = useNavigate();
+  const updatedDate = new Date(date);
+  let { id } = useParams();
+  let query = new URLSearchParams(useLocation().search);
+
+  const handleSelectedSlot = (timing)=>{
+    let queryCheck;
+    if(query.get('Type')){
+      queryCheck = "?Type="+ query.get('Type');
+    } else{
+
+      queryCheck = "";
+    }
+    const test = [{...timing, pySelected: "true"}];
+    const formedTiming = {...appontment,test};
+    dispatch(selectedSlotDetails({timing: formedTiming, date}));
+    navigate("/scheduler/questions/"+id+queryCheck);
+  };
 
   return (
     <div className="availabilities-day">
@@ -44,13 +34,27 @@ const AppointmentsWithDate = ({ date, timings, size }) => {
           <b>{days[updatedDate.getDay()]}</b>
         </div>
         <div className="availabilities-day-date">
-        {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
+          {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
         </div>
       </div>
       <div className="availabilities-slots">
-        {timings?.map((timing, index) => {
-          return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleSelectedSlot(timing)}>{timing?.StartTimeText}</button></div>;
-        })}
+        {timings.length > 1 &&
+          timings?.map((timing, index) => {
+            return (
+              index < size &&
+              timing?.StartTimeText && (
+                <div className="availabilities-slot" key={index}>
+                  <button
+                    className="timing"
+                    onClick={() => handleSelectedSlot(timing)}
+                  >
+                    {timing?.StartTimeText}
+                  </button>
+                </div>
+              )
+            );
+          })}
+        {timings.length <= 1 && <button className="timing">unavailable</button>}
       </div>
     </div>
   );

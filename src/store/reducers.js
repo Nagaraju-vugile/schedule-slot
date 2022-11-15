@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import availabilitiesReducer from "./posts/reducer";
+import availabilitiesReducer from "./scheduler/reducer";
 
 const rootReducer = combineReducers({
   availabilitiesReducer,
