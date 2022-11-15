@@ -1,48 +1,31 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { selectedSlotDetails } from "../../store/posts/actions";
+import { days, months } from "../../constants";
+import { selectedSlotDetails } from "../../store/scheduler/actions";
 import "./index.css";
 
 const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
-  console.log("appontment****", appontment);
+
   let dispatch = useDispatch();
   const navigate = useNavigate();
   const updatedDate = new Date(date);
   let { id } = useParams();
   let query = new URLSearchParams(useLocation().search);
+
   const handleSelectedSlot = (timing)=>{
-    // console.log("timing===========", timing)
+    let queryCheck;
+    if(query.get('Type')){
+      queryCheck = "?Type="+ query.get('Type');
+    } else{
+
+      queryCheck = "";
+    }
     const test = [{...timing, pySelected: "true"}];
     const formedTiming = {...appontment,test};
     dispatch(selectedSlotDetails({timing: formedTiming, date}));
-    navigate("/scheduler/questions/"+id+"?Type="+query.get('Type'));
-  }
-  
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ];
-
-  const months = [
-    "Jan",
-    "Feb",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sept",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
+    navigate("/scheduler/questions/"+id+queryCheck);
+  };
 
   return (
     <div className="availabilities-day">
@@ -57,7 +40,8 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
       <div className="availabilities-slots">
         {timings.length>1 && timings?.map((timing, index) => {
           return index<size && timing?.StartTimeText&&<div className="availabilities-slot" key={index}><button className="timing" onClick={()=>handleSelectedSlot(timing)}>{timing?.StartTimeText}</button></div>;
-        }) || <button className="timing">unavailable</button>}
+        })}
+        {timings.length<=1 &&<button className="timing">unavailable</button>}
       </div>
     </div>
   );

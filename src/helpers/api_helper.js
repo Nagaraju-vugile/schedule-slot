@@ -17,7 +17,6 @@ axiosApi.interceptors.response.use(
 );
 
 export async function get(url, config) {
-  // console.log("dat************",formattedDate, formattedNextDate)
   return await axiosApi
     .get(url, {
       ...config,
@@ -26,11 +25,11 @@ export async function get(url, config) {
 }
 
 export async function post(url, config, data) {
-  console.log("config************",config)
+  console.log("body***************", data)
   return await axiosApi
     .post(url, {
       body : data,
-      // ...config,
+      ...config,
     })
     .then((response) => response.data);
 }
