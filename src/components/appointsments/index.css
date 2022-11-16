@@ -178,5 +178,41 @@
   font-weight: 700;
 }
 
+@media only screen and (max-width: 770px) {
+  .main-div  {
+    padding-left:100px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .main-div  {
+    padding-left:150px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .main-div  {
+    padding-left:260px;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .main-div  {
+    padding-left:280px;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .main-div  {
+    padding-left:300px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .main-div  {
+    padding-left:380px;
+  }
+}
+
 
   

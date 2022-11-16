@@ -49,7 +49,7 @@ const Appointments = ({ appointments }) => {
   }
   
   return (
-    <Container>
+    <div className="main-div">
       <div className="appointments">
         <b>Make a schedule</b>
       </div>
@@ -107,7 +107,7 @@ const Appointments = ({ appointments }) => {
           )}
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 
