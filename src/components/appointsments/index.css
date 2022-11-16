@@ -26,6 +26,18 @@
     font-weight: 700;
   }
 
+  .timing-disabled{
+    min-width: 70px;
+    min-height:35px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    border: 1px solid #ffffff;
+    background-color: #d4f4fe;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
   .timing:hover{
     background-color: #65b3cb;
     cursor: pointer;
@@ -212,6 +224,18 @@
   .main-div  {
     padding-left:380px;
   }
+}
+
+.react-datepicker__month-dropdown-container{
+  padding-right:15px;
+}
+
+.notification-success{
+  color: #28a745;
+}
+
+.notification-error{
+  color: #dc3545;
 }
 
 

@@ -54,7 +54,7 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
               )
             );
           })}
-        {timings.length <= 1 && <button className="timing">unavailable</button>}
+        {timings.length <= 1 && <button className="timing-disabled" disabled>unavailable</button>}
       </div>
     </div>
   );

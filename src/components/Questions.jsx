@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from 'react-router-dom';
 import { getPayloadBookSlot } from "../helpers/ui_helper";
@@ -20,7 +20,10 @@ const Questions = ()=>{
     const [answer, setAnswer] = useState(type.toLowerCase() === ("text") ? "" : type.toLowerCase() === ("radio")?"no":false);
     const selectedSlotDetails = useSelector(state => state?.availabilitiesReducer?.selectedSlotDetails);
     const loader = useSelector(state => state?.availabilitiesReducer?.loadingBookSlot);
-   
+    const pyStatusMessage = useSelector(state => state?.availabilitiesReducer?.bookedSlot?.pyStatusMessage);
+    const pyStatusValue = useSelector(state => state?.availabilitiesReducer?.bookedSlot?.pyStatusValue);
+
+    
     const updateAnswer =(e)=>{
       if(e.target.type === "text" || e.target.type === "radio" )
       setAnswer(e.target.value);
@@ -34,12 +37,24 @@ const Questions = ()=>{
       dispatch(bookSlot(payload));
     }
 
+    useEffect(() => {
+      setAnswer(type.toLowerCase() === ("text") ? "" : type.toLowerCase() === ("radio")?"no":false)
+    }, [pyStatusMessage]);
+
     if(loader){
       return <div className="loader">Loading..</div>
     }
 
     return (
       <div className="questions-div">
+        <div
+          className={
+            (pyStatusValue === "200" && "notification-success") ||
+            (pyStatusValue === "400" && "notification-error")
+          }
+        >
+          {pyStatusMessage && pyStatusMessage}
+        </div>
         <div className="appointments">
           <b>Answer the question</b>
         </div>
