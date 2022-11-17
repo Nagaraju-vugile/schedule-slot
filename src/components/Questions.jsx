@@ -47,18 +47,18 @@ const Questions = ()=>{
       <div className="main-questions-div">
         <div className="profile-info">
           <div className="info-value">
-            <b>Email: </b>{pyEmail}
+            <span className="info-sub-header">Email: </span>{pyEmail}
           </div>
           <div>
-            <b> FullName: </b>
+            <span className="info-sub-header"> FullName: </span>
             {pyFullName}
           </div>
           <div>
-            <b> Selected date: </b>
+            <span className="info-sub-header"> Selected date: </span>
             {dateSelected}
           </div>
           <div>
-            <b> Selected slot: </b>
+            <span className="info-sub-header"> Selected slot: </span>
             {slotSelected}
           </div>
         </div>
