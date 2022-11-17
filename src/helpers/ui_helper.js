@@ -4,12 +4,16 @@ export const getPayloadBookSlot = (answer, question, type, selectedSlotDetails, 
     questionsFormed.Answer = answer;
     questionsFormed.Question = question;
     questionsFormed.Type = type;
+    const formedSlots = {};
+    formedSlots.StartTimeText = selectedSlotDetails.timing.test[0].StartTimeText;
+    formedSlots.EndTimeText = selectedSlotDetails.timing.test[0].EndTimeText;
+    formedSlots.pySelected = selectedSlotDetails.timing.test[0].pySelected;
     const SchedulesFormed = {};
     SchedulesFormed.pyLabel = selectedSlotDetails.timing.pyLabel;
     SchedulesFormed.ScheduledDate = selectedSlotDetails.timing.ScheduledDate;
     SchedulesFormed.TemplateRefId = selectedSlotDetails.timing.TemplateRefId;
     SchedulesFormed.Type = selectedSlotDetails.timing.Type;
-    SchedulesFormed.Slots = selectedSlotDetails.timing.test;
+    SchedulesFormed.Slots = [formedSlots];
     const formedSchedulerDetails = {};
     formedSchedulerDetails.pyEmail = schedulerDetails.pyEmail;
     formedSchedulerDetails.pyFullName = schedulerDetails.pyFullName;
@@ -24,7 +28,7 @@ export const getPayloadBookSlot = (answer, question, type, selectedSlotDetails, 
 
 export const getMaxLength = (appointments) => {
   return appointments?.reduce((acc, value) => {
-    return (acc = acc > value.Slots.length ? acc : value.Slots.length);
+    return (acc = acc > value?.Slots?.length ? acc : value.Slots.length);
   }, 0);
 };
 

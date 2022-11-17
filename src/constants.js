@@ -25,7 +25,7 @@ export const days = [
 
   export const urls = (id, type, formattedDate, action)=>{
     if(action === "getAvailabilities"){
-        return `https://bluerosetech01.pegalabs.io/prweb/api/v1/data/D_GetSchedules?EmailID=${id}&ScheduleType=${type || ""}&StartDate=${formattedDate}&LimitRange=5`;
+        return `https://bluerosetech01.pegalabs.io/prweb/api/v1/data/D_GetSchedules?EmailID=${id||""}&ScheduleType=${type || ""}&StartDate=${formattedDate}&LimitRange=5`;
     } else if(action === "getSchedulerTypes"){
         return `https://bluerosetech01.pegalabs.io/prweb/api/v1/data/D_GetSchedulerTypeList`;
     } else if(action === "postBookSlot"){

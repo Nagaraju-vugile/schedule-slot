@@ -76,7 +76,7 @@ import {
         state = {
           ...state,
           error: {
-            message: "Error",
+            message: action.payload,
           },
           loadingBookSlot: false,
         };

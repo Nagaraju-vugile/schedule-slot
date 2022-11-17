@@ -5,7 +5,6 @@ import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from 'react-router-dom';
-import { Container } from 'reactstrap';
 import { getAvailabilities, selectedDataDisplay } from "../../store/scheduler/actions";
 import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
@@ -49,7 +48,7 @@ const Appointments = ({ appointments }) => {
   }
   
   return (
-    <Container>
+    <div className="main-div">
       <div className="appointments">
         <b>Make a schedule</b>
       </div>
@@ -87,7 +86,18 @@ const Appointments = ({ appointments }) => {
               <FcCalendar className="view-calender-svg" />
             </button>
           </div>
-          {viewCalender && <DatePicker onChange={setDate} selected={value} />}
+          {viewCalender && (
+            <DatePicker
+              onChange={setDate}
+              selected={value}
+              showMonthDropdown
+              useShortMonthInDropdown
+              showYearDropdown
+              dateFormatCalendar="MMMM"
+              yearDropdownItemNumber={15}
+              scrollableYearDropdown
+            />
+          )}
         </div>
       </div>
       {!appointments && (
@@ -107,7 +117,7 @@ const Appointments = ({ appointments }) => {
           )}
         </div>
       )}
-    </Container>
+    </div>
   );
 };
 

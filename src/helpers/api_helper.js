@@ -25,11 +25,15 @@ export async function get(url, config) {
 }
 
 export async function post(url, config, data) {
-  console.log("body***************", data)
   return await axiosApi
-    .post(url, {
-      body : data,
-      ...config,
-    })
+    .post(
+      url,
+      {
+        SchedulerList: data.SchedulerList,
+      },
+      {
+        ...config,
+      }
+    )
     .then((response) => response.data);
 }
