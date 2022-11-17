@@ -34,6 +34,14 @@ const DoctorsList = ()=>{
     ));
   };
 
+  const renderByTypes = (schedulerTypes) => {
+    return schedulerTypes?.map((item) => (
+      <li key={item.SchedulerRefID}>
+        <a href={"/scheduler/?Type=" + item.Type}>{item.Type}</a>
+      </li>
+    ));
+  };
+
   if (loader) {
     return <div className="loader">Loading..</div>;
   }
@@ -45,6 +53,8 @@ const DoctorsList = ()=>{
         {renderByIdTypes(schedulerTypes)}
         <div className="header-search-by">search by Id</div>
         {renderById(schedulerTypes)}
+        <div className="header-search-by">search by Type</div>
+        {renderByTypes(schedulerTypes)}
       </div>
     </>
   );
