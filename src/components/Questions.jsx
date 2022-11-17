@@ -14,6 +14,12 @@ const Questions = ()=>{
     } else{
       queryCheck = "";
     }
+    let idCheck;
+    if(id){
+      idCheck = id;
+    } else{
+      idCheck = "";
+    }
     const question = useSelector(state => state?.availabilitiesReducer?.availabilities?.SchedulerList[0]?.SchedulerDetails?.Questions[0]?.Question);
     const type = useSelector(state => state?.availabilitiesReducer?.availabilities?.SchedulerList[0]?.SchedulerDetails?.Questions[0]?.Type);
     const schedulerDetails = useSelector(state => state?.availabilitiesReducer?.availabilities?.SchedulerList[0]?.SchedulerDetails);
@@ -31,7 +37,6 @@ const Questions = ()=>{
     }
     const handleBook = ()=>{
       const payload = getPayloadBookSlot(answer, question, type, selectedSlotDetails, schedulerDetails )
-      console.log("payload***********", payload);
       dispatch(bookSlot(payload));
     }
 
@@ -109,7 +114,7 @@ const Questions = ()=>{
             )}
           </div>
           <div className="actions-div">
-            <a href={"/scheduler/" + id + queryCheck} className="back-button">
+            <a href={"/scheduler/" + idCheck + queryCheck} className="back-button">
               Back
             </a>
             <button

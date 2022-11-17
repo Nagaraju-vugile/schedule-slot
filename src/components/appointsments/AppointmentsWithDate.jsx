@@ -21,10 +21,16 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
 
       queryCheck = "";
     }
+    let idCheck;
+    if(id){
+      idCheck = id;
+    } else{
+      idCheck = "";
+    }
     const test = [{...timing, pySelected: "true"}];
     const formedTiming = {...appontment,test};
     dispatch(selectedSlotDetails({timing: formedTiming, date}));
-    navigate("/scheduler/questions/"+id+queryCheck);
+    navigate("/scheduler/questions/"+idCheck+queryCheck);
   };
 
   return (

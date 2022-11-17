@@ -46,6 +46,10 @@ const DoctorsList = ()=>{
     return <div className="loader">Loading..</div>;
   }
 
+  if(schedulerTypes?.length<1){
+    return <div className="no-availabilities-div">No scheduler types available</div>
+  }
+
   return (
     <>
       <div className="search-by-div">

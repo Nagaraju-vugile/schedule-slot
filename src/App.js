@@ -14,6 +14,7 @@ function App() {
         <Route exact path="/scheduler/:id" element={<Scheduler />} />
         <Route exact path="/scheduler/" element={<Scheduler />} />
         <Route exact path="/scheduler/questions/:id" element={<Questions />} />
+        <Route exact path="/scheduler/questions/" element={<Questions />} />
       </Routes>
     </BrowserRouter>
   );
