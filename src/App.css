@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+.content{
+  padding-top:20px;
+  padding-left: 20px;
+}
+
+/* @media (min-width: 992px){
+.container {
+    max-width: 960px;
+}
+} */

@@ -1,9 +1,11 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Button, Col } from "reactstrap";
 import { days, months } from "../../constants";
 import { selectedSlotDetails } from "../../store/scheduler/actions";
 import "./index.css";
+
 
 const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
 
@@ -34,16 +36,16 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
   };
 
   return (
-    <div className="availabilities-day">
-      <div className="availabilities-day-title">
-        <div className="availabilities-day-name">
-          <b>{days[updatedDate.getDay()]}</b>
+    <Col xs="1" className="min-width-day-column">
+      <div className="availabilities-day">
+        <div className="availabilities-day-title">
+          <div className="availabilities-day-name">
+            <b>{days[updatedDate.getDay()]}</b>
+          </div>
+          <div className="availabilities-day-date">
+            {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
+          </div>
         </div>
-        <div className="availabilities-day-date">
-          {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
-        </div>
-      </div>
-      <div className="availabilities-slots">
         {timings.length > 1 &&
           timings?.map((timing, index) => {
             return (
@@ -60,9 +62,13 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
               )
             );
           })}
-        {timings.length <= 1 && <button className="timing-disabled" disabled>unavailable</button>}
+        {timings.length <= 1 && (
+          <Button className="timing-disabled">
+            unavailable
+          </Button>
+        )}
       </div>
-    </div>
+    </Col>
   );
 };
 

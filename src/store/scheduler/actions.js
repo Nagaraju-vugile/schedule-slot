@@ -10,6 +10,9 @@ import {
     BOOK_SLOT,
     BOOK_SLOT_SUCCESS,
     BOOK_SLOT_FAIL,
+    SELECTED_TYPE_DETAILS,
+    CLEAR_AVAILABILITIES,
+    CLEAR_BOOKED_SLOTS,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -87,3 +90,22 @@ import {
       payload: error,
     };
   };
+
+  export const updateSelectedTypeDetails = (data)=>{
+    return {
+      type: SELECTED_TYPE_DETAILS,
+      payload: data
+    }
+  }
+
+  export const clearAvailabilities = ()=>{
+    return {
+      type: CLEAR_AVAILABILITIES,
+    }
+  }
+
+  export const clearBookedSlots = ()=>{
+    return {
+      type: CLEAR_BOOKED_SLOTS,
+    }
+  }

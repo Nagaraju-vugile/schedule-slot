@@ -9,7 +9,10 @@ import {
     SELECTED_SLOT_DETAILS,
     BOOK_SLOT,
     BOOK_SLOT_SUCCESS,
-    BOOK_SLOT_FAIL
+    BOOK_SLOT_FAIL,
+    SELECTED_TYPE_DETAILS,
+    CLEAR_AVAILABILITIES,
+    CLEAR_BOOKED_SLOTS
   } from "./actionTypes";
   
   const initialState = {
@@ -26,6 +29,7 @@ import {
     selectedSlotDetails: null,
     bookedSlot: null,
     loadingBookSlot: false,
+    selectedTypeDetails: null
   };
   
   const availabilitiesReducer = (state = initialState, action) => {
@@ -34,11 +38,15 @@ import {
         state = { ...state, loadingAvailabilities: true };
         break;
       case GET_AVAILABILITIES_SUCCESS:
-        state = { ...state, availabilities: action.payload, loadingAvailabilities: false };
+        state = {
+          ...state,
+          availabilities: action.payload,
+          loadingAvailabilities: false,
+        };
         break;
       case GET_AVAILABILITIES_FAIL:
         state = {
-           ...state,
+          ...state,
           error: {
             message: "Error",
           },
@@ -46,13 +54,17 @@ import {
         };
         break;
       case SELECTED_SLOT_DETAILS:
-          state = {...state, selectedSlotDetails: action.payload};
-          break;
+        state = { ...state, selectedSlotDetails: action.payload };
+        break;
       case GET_SCHEDULER_TYPES:
         state = { ...state, loadingSchedulerTypes: true };
         break;
       case GET_SCHEDULER_TYPES_SUCCESS:
-        state = { ...state, schedulerTypes: action.payload, loadingSchedulerTypes: false };
+        state = {
+          ...state,
+          schedulerTypes: action.payload,
+          loadingSchedulerTypes: false,
+        };
         break;
       case GET_SCHEDULER_TYPES_FAIL:
         state = {
@@ -64,13 +76,17 @@ import {
         };
         break;
       case PREV_DATE_SELECTED:
-        state = {...state, selectedStartDate: action.payload};
+        state = { ...state, selectedStartDate: action.payload };
         break;
       case BOOK_SLOT:
         state = { ...state, loadingBookSlot: true };
         break;
       case BOOK_SLOT_SUCCESS:
-        state = { ...state, bookedSlot: action.payload, loadingBookSlot: false };
+        state = {
+          ...state,
+          bookedSlot: action.payload,
+          loadingBookSlot: false,
+        };
         break;
       case BOOK_SLOT_FAIL:
         state = {
@@ -80,7 +96,25 @@ import {
           },
           loadingBookSlot: false,
         };
-        break;    
+        break;
+      case SELECTED_TYPE_DETAILS:
+        state = {
+          ...state,
+          selectedTypeDetails: action.payload,
+        };
+        break;
+      case CLEAR_AVAILABILITIES:
+        state = {
+          ...state,
+          availabilities: [],
+        };
+        break;
+        case CLEAR_BOOKED_SLOTS:
+          state = {
+            ...state,
+            bookedSlot: null,
+          };
+          break;
       default:
         state = { ...state };
         break;
