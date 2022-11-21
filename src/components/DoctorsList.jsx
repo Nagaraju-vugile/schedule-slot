@@ -12,6 +12,7 @@ import {
   Row,
   Spinner
 } from "reactstrap";
+import { getUnique } from '../helpers/ui_helper';
 import { clearAvailabilities, getSchedulerTypeDetails, updateSelectedTypeDetails } from "../store/scheduler/actions";
 
 const DoctorsList = ()=>{
@@ -69,7 +70,7 @@ const DoctorsList = ()=>{
         <DropdownToggle caret>{selectedId || "Select id"}</DropdownToggle>
         {openId && (
           <DropdownMenu>
-            {schedulerTypes?.map((item) => (
+            {getUnique(schedulerTypes, "SchedulerRefID")?.map((item) => (
               <DropdownItem
                 key={item.SchedulerRefID}
                 onClick={(e) => handleSearchType("id", item)}
@@ -93,7 +94,7 @@ const DoctorsList = ()=>{
         <DropdownToggle caret>{selectedType || "Select type"}</DropdownToggle>
         {openType && (
           <DropdownMenu>
-            {schedulerTypes?.map((item) => (
+            {getUnique(schedulerTypes, "Type")?.map((item) => (
               <DropdownItem
                 key={item.Type}
                 onClick={(e) => handleSearchType("type", item)}
@@ -118,7 +119,6 @@ const DoctorsList = ()=>{
   return (
     <>
       <div className="content">
-        {/* <Container> */}
           <Row>
             <Col xs="4">
               <div className="header-search-by">Select by Id</div>
@@ -137,7 +137,6 @@ const DoctorsList = ()=>{
             <Button color="danger" onClick = {()=>handleClear()} disabled={!selectedId && !selectedType}>Clear</Button>
             </Col>
           </Row>
-        {/* </Container> */}
       </div>
     </>
   );

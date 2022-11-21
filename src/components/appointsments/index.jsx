@@ -63,7 +63,7 @@ const Appointments = ({ appointments }) => {
             <div xs="9" className="border-main-div">
               <Row>
                 <div className="padding-bottom-row">
-                  <h5>scheduler</h5>
+                  <h5>Scheduler</h5>
                 </div>
               </Row>
               <Row>
