@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Alert, Button, Col, Container, Row, Spinner } from "reactstrap";
 import { getPayloadBookSlot } from "../helpers/ui_helper";
 import { bookSlot } from "../store/scheduler/actions";
-import { Container, Row, Col, Alert, Button, Spinner } from "reactstrap";
 import SuccessConfirmation from "./appointsments/SuccessConfirmation";
-import { useNavigate } from "react-router-dom";
 
 const Questions = () => {
   let dispatch = useDispatch();
@@ -81,7 +80,7 @@ const Questions = () => {
   }, [pyStatusMessage]);
 
   const handleBack = ()=>{
-    navigate("/scheduler/" + idCheck + queryCheck)
+    navigate("/scheduler/" + idCheck + queryCheck);
   }
 
   if (loader) {
@@ -96,14 +95,13 @@ const Questions = () => {
     <Container className="container-border">
       {!pyStatusMessage && (
         <Row>
-          <div className="main-questions-div">
+          <div className="question-div">
             <Col>
-              <div className="questions-div">
-                <div className="appointments">
+                <div className="question-div">
                   <b>Answer the question</b>
                 </div>
                 <div className="question-div">{question} </div>
-                <div className="questions-section">
+                <div className="question-div">
                   {type.toLowerCase() === "text" && (
                     <input
                       type={type}
@@ -147,7 +145,6 @@ const Questions = () => {
                     Book slot
                   </Button>
                 </div>
-              </div>
             </Col>
           </div>
         </Row>

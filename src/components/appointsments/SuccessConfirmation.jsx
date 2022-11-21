@@ -44,32 +44,32 @@ const SuccessConfirmation = () => {
   );
   return (
     <>
-      <div className="content-div-confirmation">
+      <div className="appointments">
         <Row>
           <Col className="confirmation-section-col">
-            <div>
+            <div className="padding-top-content">
               <span className="info-sub-header">Email: </span>
 
               {pyEmail}
             </div>
-            <div>
+            <div className="padding-top-content">
               <span className="info-sub-header"> Full name: </span>
               {pyFullName}
             </div>
-            <div>
-              <span className="info-sub-header"> Selected date: </span>
+            <div className="padding-top-content">
+              <span className="info-sub-header"> Booked date: </span>
               {dateSelected}
             </div>
-            <div>
-              <span className="info-sub-header"> Selected slot: </span>
+            <div className="padding-top-content">
+              <span className="info-sub-header"> Booked slot: </span>
               {slotSelected}
             </div>
           </Col>
         </Row>
       </div>
-      <div className="main-questions-div">
+      <div className="appointments">
         <span className="another-slot-hint">
-          Do you want to book for another slot?
+          Go back to book for another slot
         </span>
         <Button color="primary" onClick={() => handleBack()}>
           Back

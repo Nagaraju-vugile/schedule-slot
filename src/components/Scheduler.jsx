@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearBookedSlots, getAvailabilities } from "../store/scheduler/actions";
+import { clearAvailabilities, clearBookedSlots, getAvailabilities } from "../store/scheduler/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
 import { useLocation, useParams } from "react-router-dom";
@@ -21,6 +21,11 @@ export default function Scheduler() {
     (state) => state?.availabilitiesReducer?.loadingAvailabilities
   );
 
+  useEffect(() => {
+    dispatch(clearAvailabilities());
+    dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));
+  }, []);
+  
   useEffect(() => {
     !schedules &&
       dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));

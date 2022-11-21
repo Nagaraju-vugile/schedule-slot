@@ -1,55 +1,61 @@
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
-import { useLocation, useParams } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 
 
-const ProfileInfo = ({SchedulerList }) => {
-  let { id } = useParams();
-  let query = new URLSearchParams(useLocation().search);
+const ProfileInfo = ({ SchedulerList }) => {
+  const pyEmail = SchedulerList && SchedulerList[0]?.SchedulerDetails?.pyEmail;
+  const pyType =
+    (SchedulerList && SchedulerList[0]?.SchedulerDetails?.Schedules[0]?.Type) ||
+    "";
+  const addressType =
+    (SchedulerList && SchedulerList[0]?.SchedulerDetails?.Address?.Type) || "";
+  const virtualMedium =
+    (SchedulerList &&
+      SchedulerList[0]?.SchedulerDetails?.Address?.VirtualMedium) ||
+    "";
+
   return (
-    <div className="padding-top-div">
+    <div>
       <Row>
         <Col xs="2">
           <div className="avatar">
             <BsFillPersonFill className="avatar" />
           </div>
         </Col>
-        <Col xs="10">
-          <div
-            className={query && !query.get("Type") && "padding-top-fullname"}
-          >
+        <Col xs="10" className="padding-left-fullname">
+          <div className={!pyType && "padding-top-fullname"}>
             {SchedulerList && SchedulerList[0]?.SchedulerDetails?.pyFullName}
           </div>
-          <div>{(query && query.get("Type")) || ""}</div>
+          <div>{pyType}</div>
         </Col>
       </Row>
       <Row>
-        {id && (
-          <div>
-            <b>Id:</b> {id}
+        {pyEmail && (
+          <div className="flex-style">
+            <span className="padding-left-style">
+              <b>Id:</b> {pyEmail}
+            </span>
           </div>
         )}
       </Row>
       <Row>
         <div className="flex-style">
-          <span>
-            <b>Address-</b>
+          <span className="padding-left-style">
+            <b>Address- </b>
           </span>
           <div className="padding-left-style">
             <div>
               <span>
-                <b>Type:</b>
+                <b>Type: </b>
               </span>
-              {SchedulerList &&
-                SchedulerList[0]?.SchedulerDetails?.Address?.Type}
+              {addressType}
             </div>
             <div>
               <span>
-                <b>Virtual medium:</b>
+                <b>Virtual medium: </b>
               </span>
-              {SchedulerList &&
-                SchedulerList[0]?.SchedulerDetails?.Address?.VirtualMedium}
+              {virtualMedium}
             </div>
           </div>
         </div>

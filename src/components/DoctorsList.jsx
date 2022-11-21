@@ -21,7 +21,6 @@ const DoctorsList = ()=>{
   const [openType, setOpenType] = useState(false);
   const [selectedId, setSelectedId]= useState('');
   const [selectedType, setSelectedType] = useState('');
-
   const schedulerTypes = useSelector(
     (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
   );
