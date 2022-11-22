@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAvailabilities } from "../store/scheduler/actions";
+import { clearAvailabilities, clearBookedSlots, getAvailabilities } from "../store/scheduler/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from "react-router-dom";
+import { Spinner} from "reactstrap";
 
 export default function Scheduler() {
   let dispatch = useDispatch();
@@ -21,12 +22,24 @@ export default function Scheduler() {
   );
 
   useEffect(() => {
+    dispatch(clearAvailabilities());
+    dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));
+  }, []);
+  
+  useEffect(() => {
     !schedules &&
       dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));
+      dispatch(clearBookedSlots());
   }, [dispatch]);
 
   if (loader) {
-    return <div className="loader">Loading..</div>;
+    return (
+      <div className="loader">
+        <Spinner color="dark">
+          Loading...
+        </Spinner>
+      </div>
+    );
   }
 
   return <Appointments appointments={schedules} />;
