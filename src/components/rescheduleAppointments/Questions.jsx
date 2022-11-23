@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Alert, Button, Col, Container, Row, Spinner } from "reactstrap";
-import { getPayloadBookSlot } from "../helpers/ui_helper";
-import { bookSlot } from "../store/scheduler/actions";
-import SuccessConfirmation from "./appointsments/SuccessConfirmation";
-import Login from "./Login";
+import { getPayloadBookRescheduler } from "../../helpers/ui_helper";
+import { bookSlot } from "../../store/scheduler/actions";
+import SuccessConfirmation from "../appointsments/SuccessConfirmation";
+import Login from "../Login";
 
 const Questions = () => {
   let dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Questions = () => {
   );
 
   const handleBack = ()=>{
-    navigate("/scheduler/" + idCheck + queryCheck);
+    navigate("/scheduler/re-schedule/" + idCheck + queryCheck);
   }
 
   useEffect(() => {
@@ -43,38 +43,22 @@ const Questions = () => {
     }
   }, []);
 
-  const storedUser = sessionStorage.getItem('userProfile');
   useEffect(() => {
-    if (!userProfile && storedUser ==='null') {
+    if (!userProfile) {
       navigate("/login");
     }
-});
+}); 
 
-const availabilities = useSelector(
-  (state) =>
-  state?.availabilitiesReducer?.availabilities?.SchedulerList
-);
-const indexType = availabilities?.map((item) => item.SchedulerDetails.Schedules[0]?.Type);
-
-const selectedSlotDetails = useSelector(
-  (state) => state?.availabilitiesReducer?.selectedSlotDetails
-);
-const question = useSelector(
-  (state) => state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData?.SchedulerDetails?.Questions[0]?.Question
-);
-const type = useSelector(
-  (state) => state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData?.SchedulerDetails?.Questions[0]?.Type
-);
-  // const question = useSelector(
-  //   (state) =>
-  //   state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-  //       ?.SchedulerDetails?.Questions[0]?.Question
-  // );
-  // const type = useSelector(
-  //   (state) =>
-  //     state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-  //       ?.SchedulerDetails?.Questions[0]?.Type
-  // );
+  const question = useSelector(
+    (state) =>
+    state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
+        ?.SchedulerDetails?.Questions[0]?.Question
+  );
+  const type = useSelector(
+    (state) =>
+      state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
+        ?.SchedulerDetails?.Questions[0]?.Type
+  );
   const schedulerDetails = useSelector(
     (state) =>
       state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
@@ -87,7 +71,14 @@ const type = useSelector(
       ? "no"
       : "no"
   );
- 
+  const selectedSlotDetails = useSelector(
+    (state) => state?.availabilitiesReducer?.selectedSlotDetails
+  );
+
+  const reschedulerDataSelected = useSelector(
+    (state) => state?.availabilitiesReducer?.reschedulerDataSelected?.guid
+  );
+
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.loadingBookSlot
   );
@@ -99,14 +90,16 @@ const type = useSelector(
     setAnswer(e.target.value);
   };
   const handleBook = () => {
-    const payload = getPayloadBookSlot(
+    const payload = getPayloadBookRescheduler(
       answer,
       question,
       type,
       selectedSlotDetails,
-      schedulerDetails
+      schedulerDetails,
+      reschedulerDataSelected,
+      userProfile
     );
-    dispatch(bookSlot(payload,1));
+    dispatch(bookSlot(payload, 2));
   };
 
   useEffect(() => {
@@ -196,7 +189,9 @@ const type = useSelector(
                 </Alert>
               </div>
             </Row>
+            {/* <SuccessConfirmation /> */}
             <SuccessConfirmation />
+
           </>
         )}
       </Container>

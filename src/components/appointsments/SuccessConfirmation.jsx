@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -9,6 +7,8 @@ const SuccessConfirmation = () => {
   const navigate = useNavigate();
   let { id } = useParams();
   let query = new URLSearchParams(useLocation().search);
+  let checkPath = useLocation().pathname.indexOf("re-schedule");
+
   let queryCheck;
   if (query.get("Type")) {
     queryCheck = "?Type=" + query.get("Type");
@@ -22,24 +22,33 @@ const SuccessConfirmation = () => {
     idCheck = "";
   }
   const handleBack = () => {
-    navigate("/scheduler/" + idCheck + queryCheck);
+    if (checkPath < 0) navigate("/scheduler/" + idCheck + queryCheck);
+    else {
+      navigate("/scheduler/re-schedule/" + idCheck + queryCheck);
+    }
   };
-  const pyEmail = useSelector(
-    (state) =>
-      state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-        ?.SchedulerDetails?.pyEmail
+
+  const userProfile = useSelector(
+    (state) => state?.availabilitiesReducer?.userProfile
   );
-  const pyFullName = useSelector(
-    (state) =>
-      state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-        ?.SchedulerDetails?.pyFullName
-  );
+
+  // const pyEmail = useSelector(
+  //   (state) =>
+  //     state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
+  //       ?.SchedulerDetails?.pyEmail
+  // );
+  // const pyFullName = useSelector(
+  //   (state) =>
+  //     state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
+  //       ?.SchedulerDetails?.pyFullName
+  // );
+  
   const dateSelected = useSelector(
     (state) => state?.availabilitiesReducer?.selectedSlotDetails?.date
   );
   const slotSelected = useSelector(
     (state) =>
-      state?.availabilitiesReducer?.selectedSlotDetails?.timing?.test[0]
+      state?.availabilitiesReducer?.selectedSlotDetails?.timing?.updatePySelected[0]
         .StartTimeText
   );
   return (
@@ -50,11 +59,11 @@ const SuccessConfirmation = () => {
             <div className="padding-top-content">
               <span className="info-sub-header">Email: </span>
 
-              {pyEmail}
+              {userProfile.email}
             </div>
             <div className="padding-top-content">
               <span className="info-sub-header"> Full name: </span>
-              {pyFullName}
+              {userProfile.name}
             </div>
             <div className="padding-top-content">
               <span className="info-sub-header"> Booked date: </span>

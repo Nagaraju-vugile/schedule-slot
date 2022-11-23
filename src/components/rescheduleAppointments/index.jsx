@@ -4,17 +4,20 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { Button, Col, Container, Row } from "reactstrap";
 import { getMaxLength, nextDays, prevDays } from "../../helpers/ui_helper";
 import { getAvailabilities, selectedDataDisplay } from "../../store/scheduler/actions";
 import ProfileInfo from "../ProfileInfo";
 import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
+import { useNavigate } from "react-router-dom";
+import Login from "../Login";
 
-const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerListData }) => {
+const Appointments = ({ appointments, indexAppointment }) => {
   let dispatch = useDispatch();
   let { id } = useParams();
+  const navigate = useNavigate();
   let query = new URLSearchParams(useLocation().search);
   const [viewCalender, setViewCalender] = useState(false);
   const selectedStartDate = useSelector(state => state?.availabilitiesReducer?.selectedStartDate);
@@ -49,12 +52,13 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
     setSize(5);
   }
 
-  // const handleBack = ()=>{
-  //   navigate("/doctors-list");
-  // }
+  const handleBack = ()=>{
+    navigate("/doctors-list");
+  }
 
   return (
     <div>
+      {/* <Login /> */}
       <Container className="container-scheduler">
         <Row>
           <Col xs="9" className="">
@@ -78,12 +82,10 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
                         appointments && (
                           <AppointmentsWithDate
                             date={date}
-                            timings={appointments[index]?.Slots}
+                            timings={appointments[index].Slots}
                             size={size}
                             appontment={appointments[index]}
                             key={index}
-                            navigateLink={navigateLink}
-                            schedulerListData={schedulerListData}
                           />
                         )
                       );

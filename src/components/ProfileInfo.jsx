@@ -3,16 +3,16 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { Col, Row } from "reactstrap";
 
 
-const ProfileInfo = ({ SchedulerList }) => {
-  const pyEmail = SchedulerList && SchedulerList[0]?.SchedulerDetails?.pyEmail;
+const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
+  const pyEmail = SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyEmail;
   const pyType =
-    (SchedulerList && SchedulerList[0]?.SchedulerDetails?.Schedules[0]?.Type) ||
+    (SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.Schedules[indexAppointment]?.Type) ||
     "";
   const addressType =
-    (SchedulerList && SchedulerList[0]?.SchedulerDetails?.Address?.Type) || "";
+    (SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.Address?.Type) || "";
   const virtualMedium =
     (SchedulerList &&
-      SchedulerList[0]?.SchedulerDetails?.Address?.VirtualMedium) ||
+      SchedulerList[indexAppointment]?.SchedulerDetails?.Address?.VirtualMedium) ||
     "";
 
   return (
@@ -25,7 +25,7 @@ const ProfileInfo = ({ SchedulerList }) => {
         </Col>
         <Col xs="10" className="padding-left-fullname">
           <div className={!pyType && "padding-top-fullname"}>
-            {SchedulerList && SchedulerList[0]?.SchedulerDetails?.pyFullName}
+            {SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyFullName}
           </div>
           <div>{pyType}</div>
         </Col>

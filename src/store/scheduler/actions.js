@@ -13,6 +13,15 @@ import {
     SELECTED_TYPE_DETAILS,
     CLEAR_AVAILABILITIES,
     CLEAR_BOOKED_SLOTS,
+    SET_USER_SESSION_DETAILS,
+    CLEAR_USER_SESSION_DETAILS,
+    MY_BOOKINGS,
+    MY_BOOKINGS_SUCCESS,
+    MY_BOOKINGS_FAIL,
+    SELECTED_RESCHEDULER_DETAILS,
+    CANCEL_SLOT,
+    CANCEL_SLOT_SUCCESS,
+    CANCEL_SLOT_FAIL,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -70,10 +79,10 @@ import {
     }
   }
 
-  export const bookSlot = (data) => {
+  export const bookSlot = (data, typeCheck) => {
     return {
       type: BOOK_SLOT,
-      payload: {data}
+      payload: {data, typeCheck}
     };
   };
 
@@ -109,3 +118,66 @@ import {
       type: CLEAR_BOOKED_SLOTS,
     }
   }
+
+  export const setUserSeesionDetails = (data)=>{
+    return {
+      type: SET_USER_SESSION_DETAILS,
+      payload: data
+    }
+  }
+
+  export const clearUserSessionDetails = ()=>{
+    return {
+      type: CLEAR_USER_SESSION_DETAILS,
+    }
+  }
+
+  export const myBookings = (data) => {
+    return {
+      type: MY_BOOKINGS,
+      payload: data,
+    };
+  };
+
+  export const myBookingsSuccess = (data) => {
+    return {
+      type: MY_BOOKINGS_SUCCESS,
+      payload: data,
+    };
+  };
+  
+  export const myBookingsFail = (error) => {
+    return {
+      type: MY_BOOKINGS_FAIL,
+      payload: error,
+    };
+  };
+
+  export const selectedReschedulerDetails = (data)=>{
+    return {
+      type: SELECTED_RESCHEDULER_DETAILS,
+      payload: data
+    }
+  }
+
+  export const cancelSlot = (data) => {
+    return {
+      type: CANCEL_SLOT,
+      payload: {data}
+    };
+  };
+
+  export const cancelSlotSuccess = (data) => {
+    return {
+      type: CANCEL_SLOT_SUCCESS,
+      payload: data,
+    };
+  };
+
+  export const cancelSlotFail = (error) => {
+    return {
+      type: CANCEL_SLOT_FAIL,
+      payload: error,
+    };
+  };
+
