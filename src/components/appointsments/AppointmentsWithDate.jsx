@@ -15,7 +15,7 @@ const AppointmentsWithDate = ({ date, timings, appontment, size, navigateLink, s
   let query = new URLSearchParams(useLocation().search);
   const handleSelectedSlot = (timing) => {
     let queryCheck;
-
+    console.log("timing***", timing)
     if (query.get("Type")) {
       queryCheck = "?Type=" + query.get("Type");
     } else {

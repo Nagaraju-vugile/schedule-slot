@@ -22,6 +22,7 @@ import {
     CANCEL_SLOT,
     CANCEL_SLOT_SUCCESS,
     CANCEL_SLOT_FAIL,
+    SET_ACTIVE_TAB,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -178,6 +179,13 @@ import {
     return {
       type: CANCEL_SLOT_FAIL,
       payload: error,
+    };
+  };
+
+  export const setActiveTab = (data) => {
+    return {
+      type: SET_ACTIVE_TAB,
+      payload: data
     };
   };
 

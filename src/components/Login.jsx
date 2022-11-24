@@ -1,10 +1,10 @@
 import { gapi } from 'gapi-script';
 import React, { useEffect, useState } from "react";
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { clearUserSessionDetails, setUserSeesionDetails } from '../store/scheduler/actions';
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Col, Row, Container } from "reactstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button, Container } from "reactstrap";
+import { clearUserSessionDetails, setUserSeesionDetails } from '../store/scheduler/actions';
 
 
 const Login = () => {
@@ -33,11 +33,11 @@ const onSuccess = (res) => {
   sessionStorage.setItem('userProfile', res.profileObj.email);
   dispatch(setUserSeesionDetails(res.profileObj));
   if(path === '/login')
-  navigate("/");
+  navigate("/schedulers-list");
 };
 
 const handleHome=()=>{
-  navigate("/");
+  navigate("/schedulers-list");
 }
 
 const onFailure = (err) => {

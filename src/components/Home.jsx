@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Col, Row, Container } from "reactstrap";
+import { setActiveTab } from "../store/scheduler/actions";
 import Login from "./Login";
+import NavBar from "./NavBar";
 
 const Home = () => {
   const navigate = useNavigate();
+  let dispatch = useDispatch();
   const handleDoctorsList = () => {
-    navigate("/doctors-list");
+    navigate("/schedulers-list");
   };
 
   const handleMyBookings = () => {
@@ -24,9 +27,14 @@ const Home = () => {
       navigate("/login");
     }
 });
+
+useEffect(() => {
+  dispatch(setActiveTab("1"))
+}, [dispatch]);
   return (
     <Container className="container-scheduler">
       <Login />
+      <NavBar />
       <Row>
         <Col>
           <h3>Select category</h3>

@@ -1,9 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Button, Col, Container, Row, Spinner, Alert } from "reactstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  Spinner,
+  Alert,
+  CardHeader,
+  CardBody,
+  CardTitle,
+  Card,
+  CardText,
+  CardFooter,
+} from "reactstrap";
 import { cancelSlot } from "../store/scheduler/actions";
 import Login from "./Login";
+import NavBar from "./NavBar";
 
 
 
@@ -70,11 +84,49 @@ if (loader) {
   return (
     <>
       <Login />
-      <Container className="container-border">
+      {/* <NavBar /> */}
+      {/* <Container className="container-border"> */}
         {!pyStatusMessage && (
-          <Row>
-            <div className="question-div">
-              <Col>
+          <Row  style={{ display: "flex", justifyContent: "center" }}>
+            {/* <div className="question-div"> */}
+              <Card
+                className="my-2"
+                style={{
+                  width: "700px",
+                }}
+              >
+                <CardHeader
+                  style={{ display: "flex", justifyContent: "center", backgroundColor:"white", borderBottom: "none" }}
+                >
+                  Answer the question
+                </CardHeader>
+                <CardBody>
+                  <CardTitle tag="h5"  style={{ display: "flex", justifyContent: "center" }}>
+                    Why would you like to cancel the slot?
+                  </CardTitle>
+                  <CardText  style={{ display: "flex", justifyContent: "center" }}>
+                    <input
+                      type="text"
+                      value={answer}
+                      onChange={(e) => updateAnswer(e)}
+                    ></input>
+                  </CardText>
+                </CardBody>
+                <CardFooter  style={{ display: "flex", justifyContent: "center",  backgroundColor:"white", borderTop: "none" }}>
+                  <Button color="primary" onClick={() => handleBack()}>
+                    Back
+                  </Button>
+                  <Button
+                    color="success"
+                    className="book-slot"
+                    onClick={() => handleCancel()}
+                    disabled={answer === ""}
+                  >
+                    Cancel slot
+                  </Button>
+                </CardFooter>
+              </Card>
+              {/* <Col>
                 <div className="question-div">
                   <b>Answer the question</b>
                 </div>
@@ -101,8 +153,8 @@ if (loader) {
                     Cancel slot
                   </Button>
                 </div>
-              </Col>
-            </div>
+              </Col> */}
+            {/* </div> */}
           </Row>
         )}
         {pyStatusMessage && (
@@ -123,7 +175,7 @@ if (loader) {
             </Row>
           </>
         )}
-      </Container>
+      {/* </Container> */}
     </>
   );
 };

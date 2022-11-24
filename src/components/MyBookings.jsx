@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Col, Row, Spinner } from "reactstrap";
-import { myBookings, selectedDataDisplay, selectedReschedulerDetails } from "../store/scheduler/actions";
+import { myBookings, selectedDataDisplay, selectedReschedulerDetails, setActiveTab } from "../store/scheduler/actions";
 import Login from "./Login";
 import { useDispatch } from "react-redux";
 import { Table, Container } from "reactstrap";
 import { BiTrash, BiPencil } from "react-icons/bi";
+import NavBar from "./NavBar";
 
 
 const MyBookings = () => {
@@ -35,9 +36,10 @@ const MyBookings = () => {
       dispatch(selectedReschedulerDetails({id, date, type, guid, pxObjClass}))
       navigate("/scheduler/cancel/"+id);
     }
-
+    
   useEffect(() => {
     dispatch(myBookings("chandan_palamakula"));
+    dispatch(setActiveTab("2"))
   }, [dispatch]);
 
   const storedUser = sessionStorage.getItem('userProfile');
@@ -60,9 +62,10 @@ if (loader) {
   return (
     <Container className="container-scheduler">
       <Login />
+      <NavBar />
       <Row>
         <Col>
-          <h3>My bookings</h3>
+          <h4>My bookings</h4>
         </Col>
       </Row>
       <Row>
@@ -84,12 +87,12 @@ if (loader) {
                 <td>{index + 1}</td>
                 <td>{item.SchedulerType}</td>
                 <td>{item.ScheduledDate}</td>
-                <td>{item.StartTime}</td>
-                <td>{item.EndTime}</td>
+                <td>{item.StartTime.split(":")[0]}:{item.StartTime.split(":")[1]}</td>
+                <td>{item.EndTime.split(":")[0]}:{item.EndTime.split(":")[1]}</td>
                 <td>
                   {/* <Button color="info" onClick={()=>handleReschedule(item.SchedulerEmailID, item.ScheduledDate, item.SchedulerType, item.pyGUID, item.pxObjClass )}>Reschedule</Button> */}
                   <Button color="info" onClick={()=>handleReschedule(item.SchedulerEmailID, item.ScheduledDate, item.SchedulerType, item.pyGUID, item.pxObjClass )} style={{marginRight: "5px"}} >Reschedule <BiPencil /></Button>
-                  <Button color="danger" onClick={()=>handleCancel(item.SchedulerEmailID, item.ScheduledDate, item.SchedulerType, item.pyGUID, item.pxObjClass )} >Cancel <BiTrash /></Button>
+                  <Button color="danger" disabled onClick={()=>handleCancel(item.SchedulerEmailID, item.ScheduledDate, item.SchedulerType, item.pyGUID, item.pxObjClass )} >Cancel <BiTrash /></Button>
                 </td>
                 {/* <td>
                   <Button color="danger" onClick={()=>handleCancel(item.SchedulerEmailID, item.ScheduledDate, item.SchedulerType, item.pyGUID, item.pxObjClass )}>Cancel</Button>

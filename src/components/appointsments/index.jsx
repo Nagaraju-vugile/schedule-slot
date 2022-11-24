@@ -8,6 +8,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Col, Container, Row } from "reactstrap";
 import { getMaxLength, nextDays, prevDays } from "../../helpers/ui_helper";
 import { getAvailabilities, selectedDataDisplay } from "../../store/scheduler/actions";
+import NavBar from "../NavBar";
 import ProfileInfo from "../ProfileInfo";
 import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
@@ -50,14 +51,15 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
   }
 
   // const handleBack = ()=>{
-  //   navigate("/doctors-list");
+  //   navigate("/schedulers-list");
   // }
 
   return (
     <div>
       <Container className="container-scheduler">
+      
         <Row>
-          <Col xs="9" className="">
+          <Col xs="9" className="" style={{paddingLeft:"0px"}}>
             <div xs="9" className="border-main-div">
               {/* <Row>
                 <div className="padding-bottom-row">

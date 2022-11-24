@@ -14,8 +14,9 @@ import {
   Container
 } from "reactstrap";
 import { getUnique } from '../helpers/ui_helper';
-import { clearAvailabilities, getSchedulerTypeDetails, updateSelectedTypeDetails } from "../store/scheduler/actions";
+import { clearAvailabilities, getSchedulerTypeDetails, setActiveTab, updateSelectedTypeDetails } from "../store/scheduler/actions";
 import Login from './Login';
+import NavBar from './NavBar';
 
 const DoctorsList = ()=>{
   let dispatch = useDispatch();
@@ -70,6 +71,7 @@ const DoctorsList = ()=>{
   useEffect(() => {
     dispatch(getSchedulerTypeDetails());
     dispatch(clearAvailabilities());
+    dispatch(setActiveTab("1"))
   }, [dispatch]);
 
   const renderById = (schedulerTypes) => {
@@ -132,6 +134,7 @@ const DoctorsList = ()=>{
     <>
       <Container className="container-scheduler">
       <Login />
+      <NavBar />
           <Row>
             <Col xs="4">
               <div className="header-search-by">Select by Id</div>

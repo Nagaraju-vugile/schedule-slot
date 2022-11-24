@@ -22,6 +22,7 @@ import {
   CANCEL_SLOT,
   CANCEL_SLOT_SUCCESS,
   CANCEL_SLOT_FAIL,
+  SET_ACTIVE_TAB,
 } from "./actionTypes";
 
 const initialState = {
@@ -43,8 +44,9 @@ const initialState = {
   myBookings: null,
   myBookingsLoader: false,
   reschedulerDataSelected: null,
-  cancelSlot:null,
-  cancelSlotLoader: false
+  cancelSlot: null,
+  cancelSlotLoader: false,
+  activeTab: "1",
 };
 
 const availabilitiesReducer = (state = initialState, action) => {
@@ -161,31 +163,37 @@ const availabilitiesReducer = (state = initialState, action) => {
         myBookingsLoader: false,
       };
       break;
-      case SELECTED_RESCHEDULER_DETAILS:
+    case SELECTED_RESCHEDULER_DETAILS:
       state = {
         ...state,
         reschedulerDataSelected: action.payload,
       };
       break;
-      case CANCEL_SLOT:
-        state = { ...state,  cancelSlotLoader: true, };
-        break;
-      case CANCEL_SLOT_SUCCESS:
-        state = {
-          ...state,
-          cancelSlot: action.payload,
-          cancelSlotLoader: false,
-        };
-        break;
-      case CANCEL_SLOT_FAIL:
-        state = {
-          ...state,
-          error: {
-            message: "Error",
-          },
-          cancelSlotLoader: false,
-        };
-        break;
+    case CANCEL_SLOT:
+      state = { ...state, cancelSlotLoader: true };
+      break;
+    case CANCEL_SLOT_SUCCESS:
+      state = {
+        ...state,
+        cancelSlot: action.payload,
+        cancelSlotLoader: false,
+      };
+      break;
+    case CANCEL_SLOT_FAIL:
+      state = {
+        ...state,
+        error: {
+          message: "Error",
+        },
+        cancelSlotLoader: false,
+      };
+      break;
+    case SET_ACTIVE_TAB:
+      state = {
+        ...state,
+        activeTab: action.payload,
+      };
+      break;
     default:
       state = { ...state };
       break;
