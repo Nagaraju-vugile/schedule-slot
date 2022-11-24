@@ -4,19 +4,18 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Col, Container, Row } from "reactstrap";
 import { getMaxLength, nextDays, prevDays } from "../../helpers/ui_helper";
 import { getAvailabilities, selectedDataDisplay } from "../../store/scheduler/actions";
+import NavBar from "../NavBar";
 import ProfileInfo from "../ProfileInfo";
 import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
-import { useNavigate } from "react-router-dom";
 
-const Appointments = ({ appointments }) => {
+const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerListData }) => {
   let dispatch = useDispatch();
   let { id } = useParams();
-  const navigate = useNavigate();
   let query = new URLSearchParams(useLocation().search);
   const [viewCalender, setViewCalender] = useState(false);
   const selectedStartDate = useSelector(state => state?.availabilitiesReducer?.selectedStartDate);
@@ -51,21 +50,22 @@ const Appointments = ({ appointments }) => {
     setSize(5);
   }
 
-  const handleBack = ()=>{
-    navigate("/doctors-list");
-  }
+  // const handleBack = ()=>{
+  //   navigate("/schedulers-list");
+  // }
 
   return (
-    <div className="content">
+    <div>
       <Container className="container-scheduler">
+      
         <Row>
-          <Col xs="9" className="">
+          <Col xs="9" className="" style={{paddingLeft:"0px"}}>
             <div xs="9" className="border-main-div">
-              <Row>
+              {/* <Row>
                 <div className="padding-bottom-row">
                   <h5>Scheduler</h5>
                 </div>
-              </Row>
+              </Row> */}
               <Row>
                 <Col xs="1">
                   <Button className="button-next" onClick={() => handlePrev()}>
@@ -80,10 +80,12 @@ const Appointments = ({ appointments }) => {
                         appointments && (
                           <AppointmentsWithDate
                             date={date}
-                            timings={appointments[index].Slots}
+                            timings={appointments[index]?.Slots}
                             size={size}
                             appontment={appointments[index]}
                             key={index}
+                            navigateLink={navigateLink}
+                            schedulerListData={schedulerListData}
                           />
                         )
                       );
@@ -150,16 +152,16 @@ const Appointments = ({ appointments }) => {
                 </>
               )}
             </div>
-            <Row className="padding-top-content">
+            {/* <Row className="padding-top-content">
               <div className="appointments">
                 <Button color="primary" onClick={() => handleBack()}>
                   Back
                 </Button>
               </div>
-            </Row>
+            </Row> */}
           </Col>
           <Col xs="3">
-            <ProfileInfo SchedulerList={SchedulerList} />
+            <ProfileInfo SchedulerList={SchedulerList} indexAppointment={indexAppointment}/>
           </Col>
         </Row>
       </Container>

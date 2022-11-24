@@ -7,32 +7,30 @@ import { selectedSlotDetails } from "../../store/scheduler/actions";
 import "./index.css";
 
 
-const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
-
+const AppointmentsWithDate = ({ date, timings, appontment, size, navigateLink, schedulerListData }) => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
   const updatedDate = new Date(date);
   let { id } = useParams();
   let query = new URLSearchParams(useLocation().search);
-
-  const handleSelectedSlot = (timing)=>{
+  const handleSelectedSlot = (timing) => {
     let queryCheck;
-    if(query.get('Type')){
-      queryCheck = "?Type="+ query.get('Type');
-    } else{
-
+    console.log("timing***", timing)
+    if (query.get("Type")) {
+      queryCheck = "?Type=" + query.get("Type");
+    } else {
       queryCheck = "";
     }
     let idCheck;
-    if(id){
+    if (id) {
       idCheck = id;
-    } else{
+    } else {
       idCheck = "";
     }
-    const test = [{...timing, pySelected: "true"}];
-    const formedTiming = {...appontment,test};
-    dispatch(selectedSlotDetails({timing: formedTiming, date}));
-    navigate("/scheduler/questions/"+idCheck+queryCheck);
+    const updatePySelected = [{ ...timing, pySelected: "true" }];
+    const formedTiming = { ...appontment, updatePySelected };
+    dispatch(selectedSlotDetails({ timing: formedTiming, date,schedulerListData }));
+    navigate(navigateLink + idCheck + queryCheck);
   };
 
   return (
@@ -63,9 +61,7 @@ const AppointmentsWithDate = ({ date, timings,appontment, size }) => {
             );
           })}
         {timings.length <= 1 && (
-          <Button className="timing-disabled">
-            unavailable
-          </Button>
+          <Button className="timing-disabled">unavailable</Button>
         )}
       </div>
     </Col>

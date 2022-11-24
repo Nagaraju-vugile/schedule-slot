@@ -10,14 +10,18 @@ import {
   DropdownMenu,
   DropdownToggle,
   Row,
-  Spinner
+  Spinner,
+  Container
 } from "reactstrap";
 import { getUnique } from '../helpers/ui_helper';
-import { clearAvailabilities, getSchedulerTypeDetails, updateSelectedTypeDetails } from "../store/scheduler/actions";
+import { clearAvailabilities, getSchedulerTypeDetails, setActiveTab, updateSelectedTypeDetails } from "../store/scheduler/actions";
+import Login from './Login';
+import NavBar from './NavBar';
 
 const DoctorsList = ()=>{
   let dispatch = useDispatch();
   const navigate = useNavigate();
+  const storedUser = sessionStorage.getItem('userProfile');
   const [openId, setOpenId] = useState(false);
   const [openType, setOpenType] = useState(false);
   const [selectedId, setSelectedId]= useState('');
@@ -28,6 +32,15 @@ const DoctorsList = ()=>{
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.loadingSchedulerTypes
   );
+  
+  const userProfile = useSelector(
+    (state) => state?.availabilitiesReducer?.userProfile
+  );
+  useEffect(() => {
+    if (!userProfile && storedUser ==='null') {
+      navigate("/login");
+    }
+});
 
   const handleSearchType = (type,item)=>{
     if(type === "id"){
@@ -58,6 +71,7 @@ const DoctorsList = ()=>{
   useEffect(() => {
     dispatch(getSchedulerTypeDetails());
     dispatch(clearAvailabilities());
+    dispatch(setActiveTab("1"))
   }, [dispatch]);
 
   const renderById = (schedulerTypes) => {
@@ -118,7 +132,9 @@ const DoctorsList = ()=>{
 
   return (
     <>
-      <div className="content">
+      <Container className="container-scheduler">
+      <Login />
+      <NavBar />
           <Row>
             <Col xs="4">
               <div className="header-search-by">Select by Id</div>
@@ -137,7 +153,7 @@ const DoctorsList = ()=>{
             <Button color="danger" onClick = {()=>handleClear()} disabled={!selectedId && !selectedType}>Clear</Button>
             </Col>
           </Row>
-      </div>
+      </Container>
     </>
   );
 }

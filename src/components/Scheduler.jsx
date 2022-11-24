@@ -1,26 +1,39 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Spinner } from "reactstrap";
 import { clearAvailabilities, clearBookedSlots, getAvailabilities } from "../store/scheduler/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
-import { useLocation, useParams } from "react-router-dom";
-import { Spinner} from "reactstrap";
+import Login from "./Login";
+import NavBar from "./NavBar";
 
 export default function Scheduler() {
   let dispatch = useDispatch();
   let { id } = useParams();
   let query = new URLSearchParams(useLocation().search);
-  const stat = useSelector(
+  const testPath = useLocation().pathname.indexOf("re-schedule");
+  const schedulerList = useSelector(
     (state) => state?.availabilitiesReducer?.availabilities?.SchedulerList
   );
   const selectedStartDate = useSelector(
     (state) => state?.availabilitiesReducer?.selectedStartDate
   );
-  const schedules = stat && stat[0]?.SchedulerDetails?.Schedules;
+  const schedules = schedulerList && schedulerList[0]?.SchedulerDetails?.Schedules;
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.loadingAvailabilities
   );
+  const navigate = useNavigate();
+  const userProfile = useSelector(
+    (state) => state?.availabilitiesReducer?.userProfile
+  );
 
+  const storedUser = sessionStorage.getItem('userProfile');
+  useEffect(() => {
+    if (!userProfile && storedUser ==='null') {
+      navigate("/login");
+    }
+});
   useEffect(() => {
     dispatch(clearAvailabilities());
     dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));
@@ -29,7 +42,7 @@ export default function Scheduler() {
   useEffect(() => {
     !schedules &&
       dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));
-      dispatch(clearBookedSlots());
+    dispatch(clearBookedSlots());
   }, [dispatch]);
 
   if (loader) {
@@ -42,5 +55,23 @@ export default function Scheduler() {
     );
   }
 
-  return <Appointments appointments={schedules} />;
+  return (
+    <>
+      <Login />
+      <NavBar />
+      {schedulerList?.map((item, index) => (
+        <Appointments
+          appointments={item?.SchedulerDetails?.Schedules}
+          indexAppointment={index}
+          navigateLink={
+            testPath < 0
+              ? "/scheduler/questions/"
+              : "/scheduler/re-schedule/questions/"
+          }
+          schedulerListData={item}
+        />
+      ))}
+      ;
+    </>
+  ); 
 }

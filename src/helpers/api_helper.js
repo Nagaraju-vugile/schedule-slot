@@ -37,3 +37,15 @@ export async function post(url, config, data) {
     )
     .then((response) => response.data);
 }
+
+export async function postCancelSlot(url, config, data) {
+  return await axiosApi
+    .post(
+      url,
+     data,
+      {
+        ...config,
+      }
+    )
+    .then((response) => response.data);
+}
