@@ -109,8 +109,18 @@ if (loader) {
                   style={{ marginRight: "5px" }}
                   className="action-button-table"
                 >
-                  Reschedule <BiPencil />
+                  Reschedule 
                 </Button>
+                <BiPencil className="edit-pencil"  onClick={() =>
+                    handleReschedule(
+                      item.SchedulerEmailID,
+                      item.ScheduledDate,
+                      item.SchedulerType,
+                      item.pyGUID,
+                      item.pxObjClass,
+                      item.StartTime
+                    )
+                  }/>
                 <Button
                   color="danger"
                   onClick={() =>
@@ -125,8 +135,18 @@ if (loader) {
                   }
                   className="action-button-table"
                 >
-                  Cancel <BiTrash />
+                  Cancel 
                 </Button>
+                <BiTrash className="cancel-trash" onClick={() =>
+                    handleCancel(
+                      item.SchedulerEmailID,
+                      item.ScheduledDate,
+                      item.SchedulerType,
+                      item.pyGUID,
+                      item.pxObjClass,
+                      item.StartTime
+                    )
+                  }/>
               </Col>
             </Row>
           ))}

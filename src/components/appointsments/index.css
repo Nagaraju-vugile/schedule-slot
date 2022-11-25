@@ -316,13 +316,34 @@ padding-top: 15px;
     display: flex;
     justify-content: center;
   }
-}
-
-@media screen and (max-width: 450px) {
-.action-button-table{
-  display: flex;
-    flex-direction: row;
+  .edit-pencil{
+    display:block;
+    cursor: pointer;
+    fill: blue
+  }
+  .cancel-trash{
+    display:block;
+    cursor: pointer;
+    fill: red
+  }
+  .action-button-table{
+    display: none;
   }
 }
+
+@media screen and (min-width: 501px) {
+  .edit-pencil{
+    display:none;
+  }
+  .cancel-trash{
+    display:none;
+  }
+  .action-button-table{
+    min-width: 106px;
+    margin-bottom: 2px;
+  }
+}
+
+
 
   
