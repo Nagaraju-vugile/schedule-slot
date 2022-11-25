@@ -267,7 +267,8 @@ padding-top: 15px;
 }
 
 .padding-top-content{
-  padding-top: 10px
+  padding-top: 10px;
+  word-break: break-word;
 }
 
 .loginButton{
@@ -280,5 +281,48 @@ padding-top: 15px;
   padding-bottom: 10px;
 }
 
+.display-end{
+  display: flex;
+  justify-content: end;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 500px) {
+  .table-row-style{
+    display: flex;
+    flex-direction: column;
+  }
+  .scheduler-types-buttons{
+    flex-direction: column;
+  }
+  .btn-scheduler-type{
+    width:100%
+  }
+  .header-search-by{
+    display: flex;
+    justify-content: center;
+  }
+  .nav-tabs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .nav-item{
+    display: flex;
+    justify-content: center;
+  }
+  .nav-link{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+.action-button-table{
+  display: flex;
+    flex-direction: row;
+  }
+}
 
   

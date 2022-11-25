@@ -80,8 +80,9 @@ const DoctorsList = ()=>{
         isOpen={openId}
         toggle={() => toggleId()}
         direction={(!openId && "down") || "up"}
+        className="btn-scheduler-type"
       >
-        <DropdownToggle caret>{selectedId || "Select id"}</DropdownToggle>
+        <DropdownToggle  caret>{selectedId || "Select id"}</DropdownToggle>
         {openId && (
           <DropdownMenu>
             {getUnique(schedulerTypes, "SchedulerRefID")?.map((item) => (
@@ -104,6 +105,7 @@ const DoctorsList = ()=>{
         isOpen={openType}
         toggle={() => toggleType()}
         direction={(!openType && "down") || "up"}
+        className="btn-scheduler-type"
       >
         <DropdownToggle caret>{selectedType || "Select type"}</DropdownToggle>
         {openType && (
@@ -135,22 +137,22 @@ const DoctorsList = ()=>{
       <Container className="container-scheduler">
       <Login />
       <NavBar />
-          <Row>
-            <Col xs="4">
+          <Row className='scheduler-types-buttons'>
+            <Col>
               <div className="header-search-by">Select by Id</div>
               {renderById(schedulerTypes)}
             </Col>
-            <Col xs="3">
+            <Col>
               <div className="header-search-by">Select by Type</div>
               {renderByType(schedulerTypes)}
             </Col>
-            <Col xs="2">
+            <Col>
             <div className="header-search-by">Search</div>
-            <Button color="primary" onClick = {()=>handleGoSearch()} disabled={!selectedId && !selectedType}>Search</Button>
+            <Button className="btn-scheduler-type" color="primary" onClick = {()=>handleGoSearch()} disabled={!selectedId && !selectedType}>Search</Button>
             </Col>
-            <Col xs="2">
+            <Col>
             <div className="header-search-by">Clear</div>
-            <Button color="danger" onClick = {()=>handleClear()} disabled={!selectedId && !selectedType}>Clear</Button>
+            <Button className="btn-scheduler-type" color="danger" onClick = {()=>handleClear()} disabled={!selectedId && !selectedType}>Clear</Button>
             </Col>
           </Row>
       </Container>
