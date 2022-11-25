@@ -32,9 +32,8 @@ const onSuccess = (res) => {
   setProfile(res.profileObj);
   sessionStorage.setItem('userProfile', res.profileObj.email);
   dispatch(setUserSeesionDetails(res.profileObj));
-  // if(path === '/login')
-  // navigate("/schedulers-list");
-  navigate("/")
+  if(path === '/login')
+  navigate("/schedulers-list");
 };
 
 const handleHome=()=>{
