@@ -57,9 +57,8 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
   return (
     <div>
       <Container className="container-scheduler">
-      
         <Row>
-          <Col xs="9" className="" style={{paddingLeft:"0px"}}>
+          <Col xs="9" className="" style={{ paddingLeft: "0px" }}>
             <div xs="9" className="border-main-div">
               {/* <Row>
                 <div className="padding-bottom-row">
@@ -72,8 +71,8 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
                     <IoIosArrowBack className="next-button-svg" />
                   </Button>
                 </Col>
-                <Col xs="9">
-                  <Row>
+                <Col xs="9" className="slots-div">
+                  <Row className="flex-style-resp">
                     {!appointments && <div className="empty-div"></div>}
                     {dates?.map((date, index) => {
                       return (
@@ -92,12 +91,12 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
                     })}
                   </Row>
                 </Col>
-                <Col xs="1">
+                <Col xs="1" className="padding-left-style-resp">
                   <Button className="button-next" onClick={handleNext}>
                     <IoIosArrowForward className="next-button-svg" />
                   </Button>
                 </Col>
-                <Col xs="1">
+                <Col xs="1" className="padding-left-style-resp">
                   <button
                     className="view-calender"
                     onClick={() => setViewCalender(!viewCalender)}
@@ -161,7 +160,10 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
             </Row> */}
           </Col>
           <Col xs="3">
-            <ProfileInfo SchedulerList={SchedulerList} indexAppointment={indexAppointment}/>
+            <ProfileInfo
+              SchedulerList={SchedulerList}
+              indexAppointment={indexAppointment}
+            />
           </Col>
         </Row>
       </Container>

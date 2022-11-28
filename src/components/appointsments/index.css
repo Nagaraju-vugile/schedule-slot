@@ -211,6 +211,7 @@
 
 .flex-style{
   display: flex;
+  word-break: break-word;
 }
 
 .avatar{
@@ -356,6 +357,24 @@ padding-top: 15px;
   }
   .page-item{
     padding: 4px;
+  }
+  .slots-div{
+    width: 30%;
+  }
+  .flex-style-resp{
+    flex-direction: "column"; display: "flex" 
+  }
+  .padding-left-style-resp{
+    padding-left:0px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  /* .padding-left-style-resp{
+    padding-left:0px;
+  } */
+  .slots-div{
+    width:50%
   }
 }
 
