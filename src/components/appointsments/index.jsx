@@ -58,7 +58,7 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
     <div>
       <Container className="container-scheduler">
         <Row>
-          <Col xs="9" className="" style={{ paddingLeft: "0px" }}>
+          <Col xs="9" className="container-padding" >
             <div xs="9" className="border-main-div">
               {/* <Row>
                 <div className="padding-bottom-row">

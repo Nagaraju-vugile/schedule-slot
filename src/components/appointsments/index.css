@@ -362,17 +362,19 @@ padding-top: 15px;
     width: 30%;
   }
   .flex-style-resp{
-    flex-direction: "column"; display: "flex" 
+    flex-direction: "column"; display: "flex";
+    justify-content: center;
   }
   .padding-left-style-resp{
     padding-left:0px;
+    width:10%;
   }
 }
 
 @media screen and (max-width: 900px) {
-  /* .padding-left-style-resp{
+  .padding-left-style-resp{
     padding-left:0px;
-  } */
+  }
   .slots-div{
     width:50%
   }
@@ -389,11 +391,26 @@ padding-top: 15px;
     min-width: 106px;
     margin-bottom: 2px;
   }
+  .container-padding{
+    padding-left: 0px ;
+  }
+  .flex-style-resp{
+     display: "flex";
+    justify-content: center;
+  }
+  
 }
 
 .page-navigation{
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width: 420px) {
+  .padding-left-style-resp{
+    padding-left:0px;
+    width:15%;
+  }
 }
 
 
