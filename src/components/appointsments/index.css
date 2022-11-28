@@ -329,6 +329,11 @@ padding-top: 15px;
   .action-button-table{
     display: none;
   }
+
+  .pagination{
+    flex-direction: column;
+    width:100%
+  }
 }
 
 @media screen and (min-width: 501px) {
@@ -342,6 +347,11 @@ padding-top: 15px;
     min-width: 106px;
     margin-bottom: 2px;
   }
+}
+
+.page-navigation{
+  display: flex;
+  justify-content: center;
 }
 
 
