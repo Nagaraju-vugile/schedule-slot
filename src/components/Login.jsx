@@ -33,7 +33,7 @@ const onSuccess = (res) => {
   sessionStorage.setItem('userProfile', res.profileObj.email);
   dispatch(setUserSeesionDetails(res.profileObj));
   if(path === '/login')
-  navigate("/schedulers-list");
+  navigate("/");
 };
 
 const handleHome=()=>{
