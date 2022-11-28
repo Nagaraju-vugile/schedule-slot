@@ -16,7 +16,7 @@ const Login = () => {
     (state) => state?.availabilitiesReducer?.userProfile
   );
   const [ profile, setProfile ] = useState(userProfile);
-  const clientId = '192710840478-4f5tcib9pgk07s8slcgu6c4i2km65ae4.apps.googleusercontent.com';
+  const clientId = '192710840478-c1g1e51uv068erlttvl9o91fcku82d6u.apps.googleusercontent.com';
 
   useEffect(() => {
     const initClient = () => {
