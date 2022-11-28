@@ -212,6 +212,7 @@
 .flex-style{
   display: flex;
   word-break: break-word;
+  flex-direction: column;
 }
 
 .avatar{
