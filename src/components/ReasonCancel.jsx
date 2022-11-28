@@ -107,6 +107,9 @@ const ReasonCancel = () => {
               {reschedulerDataSelected && (
                 <Row>
                   <Row className="appointments info-sub-header">
+                    <div className="appointments">
+                      <h5>Are you sure you want to cancel the slot? </h5>{" "}
+                    </div>
                     Please confirm the details and proceed.
                   </Row>
                   <Row>
@@ -176,7 +179,7 @@ const ReasonCancel = () => {
                 Back
               </Button>
               <Button
-                color="success"
+                color="danger"
                 className="book-slot"
                 onClick={() => handleCancel()}
                 disabled={answer === ""}

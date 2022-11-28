@@ -24,7 +24,8 @@ const SuccessConfirmation = () => {
   const handleBack = () => {
     if (checkPath < 0) navigate("/scheduler/" + idCheck + queryCheck);
     else {
-      navigate("/scheduler/re-schedule/" + idCheck + queryCheck);
+         navigate("/my-bookings");
+      // navigate("/scheduler/re-schedule/" + idCheck + queryCheck);
     }
   };
 
