@@ -26,6 +26,9 @@ const DoctorsList = ()=>{
   const [openType, setOpenType] = useState(false);
   const [selectedId, setSelectedId]= useState('');
   const [selectedType, setSelectedType] = useState('');
+  // const schedulerTypes = useSelector(
+  //   (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
+  // );
   const schedulerTypes = useSelector(
     (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
   );
@@ -135,9 +138,10 @@ const DoctorsList = ()=>{
   return (
     <>
       <Container className="container-scheduler">
-      <Login />
-      <NavBar />
-          <Row className='scheduler-types-buttons'>
+        <Login />
+        <NavBar />
+        {schedulerTypes && schedulerTypes.length > 0 && (
+          <Row className="scheduler-types-buttons">
             <Col>
               <div className="header-search-by">Select by Id</div>
               {renderById(schedulerTypes)}
@@ -147,14 +151,32 @@ const DoctorsList = ()=>{
               {renderByType(schedulerTypes)}
             </Col>
             <Col>
-            <div className="header-search-by">Search</div>
-            <Button className="btn-scheduler-type" color="primary" onClick = {()=>handleGoSearch()} disabled={!selectedId && !selectedType}>Search</Button>
+              <div className="header-search-by">Search</div>
+              <Button
+                className="btn-scheduler-type"
+                color="primary"
+                onClick={() => handleGoSearch()}
+                disabled={!selectedId && !selectedType}
+              >
+                Search
+              </Button>
             </Col>
             <Col>
-            <div className="header-search-by">Clear</div>
-            <Button className="btn-scheduler-type" color="danger" onClick = {()=>handleClear()} disabled={!selectedId && !selectedType}>Clear</Button>
+              <div className="header-search-by">Clear</div>
+              <Button
+                className="btn-scheduler-type"
+                color="danger"
+                onClick={() => handleClear()}
+                disabled={!selectedId && !selectedType}
+              >
+                Clear
+              </Button>
             </Col>
           </Row>
+        )}
+        {(!schedulerTypes || schedulerTypes.length < 1) && (
+          <div className="no-availabilities-div">No scheduler types found</div>
+        )}
       </Container>
     </>
   );

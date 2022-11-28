@@ -133,7 +133,7 @@ const MyBookings = () => {
       <Login />
       <NavBar />
       <Row>
-        <Col>
+        <Col className="booking-header">
           <h4>My bookings</h4>
         </Col>
       </Row>
@@ -156,16 +156,16 @@ const MyBookings = () => {
                 style={{ paddingBottom: "5px" }}
                 className="table-row-style"
               >
-                <Col>{index + 1}</Col>
-                <Col>{item.SchedulerType}</Col>
-                <Col>{item.ScheduledDate}</Col>
-                <Col>
+                <Col className="booking-value">{index + 1}</Col>
+                <Col  className="booking-value">{item.SchedulerType}</Col>
+                <Col  className="booking-value">{item.ScheduledDate}</Col>
+                <Col  className="booking-value">
                   {item.StartTime.split(":")[0]}:{item.StartTime.split(":")[1]}
                 </Col>
-                <Col>
+                <Col  className="booking-value">
                   {item.EndTime.split(":")[0]}:{item.EndTime.split(":")[1]}
                 </Col>
-                <Col style={{ minWidth: "21%" }}>
+                <Col className="booking-value" style={{ minWidth: "21%" }}>
                   <Button
                     color="info"
                     onClick={() =>
@@ -232,7 +232,7 @@ const MyBookings = () => {
           <Row>
             <Pagination aria-label="page-navigation" className="page-navigation">
               <PaginationItem disabled={currentPage <= 0}>
-                <PaginationLink previous onClick={e => handlePageClick(e, currentPage - 1)} href="#" />
+                <PaginationLink onClick={e => handlePageClick(e, currentPage - 1)} href="#" >Prev</PaginationLink>
               </PaginationItem>
               {[...Array(pagesCount)].map((page, i) => (
                 <PaginationItem active={i === currentPage} key={i}>
@@ -245,7 +245,7 @@ const MyBookings = () => {
                 </PaginationItem>
               ))}
               <PaginationItem disabled={currentPage >= pagesCount - 1}>
-                <PaginationLink next  onClick={e => handlePageClick(e, currentPage + 1)} href="#" />
+                <PaginationLink onClick={e => handlePageClick(e, currentPage + 1)} href="#" > Next</PaginationLink>
               </PaginationItem>
             </Pagination>
           </Row>

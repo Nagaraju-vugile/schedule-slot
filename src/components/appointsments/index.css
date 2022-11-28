@@ -319,7 +319,8 @@ padding-top: 15px;
   .edit-pencil{
     display:block;
     cursor: pointer;
-    fill: blue
+    fill: blue;
+    margin-right:10px;
   }
   .cancel-trash{
     display:block;
@@ -333,6 +334,28 @@ padding-top: 15px;
   .pagination{
     flex-direction: column;
     width:100%
+  }
+  .info-sub-header{
+    display: flex;
+    justify-content: center;
+    /* background-color: #e9f4ff; */
+  }
+  .booking-value{
+    display: flex;
+    justify-content: center;
+    /* background-color: #e9f4ff; */
+  }
+  .page-link{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+  }
+  .booking-header{
+    display: flex;
+    justify-content: center;
+  }
+  .page-item{
+    padding: 4px;
   }
 }
 
