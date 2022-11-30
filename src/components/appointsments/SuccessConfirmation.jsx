@@ -58,6 +58,7 @@ const SuccessConfirmation = () => {
         className="my-2"
         style={{
           width: "700px",
+          boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
         }}
       >
         <CardBody style={{ paddingTop: "0px" }}>

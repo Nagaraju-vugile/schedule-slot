@@ -56,8 +56,15 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
 
   return (
     <div>
+    
       <Container className="container-scheduler">
-        <Row>
+        <Row className="profile-style">
+        {/* <Col xs="3" className="profile-style">
+            <ProfileInfo
+              SchedulerList={SchedulerList}
+              indexAppointment={indexAppointment}
+            />
+          </Col> */}
           <Col xs="9" className="container-padding" >
             <div xs="9" className="border-main-div">
               {/* <Row>
@@ -159,7 +166,7 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
               </div>
             </Row> */}
           </Col>
-          <Col xs="3">
+          <Col xs="3" className="styled-profile">
             <ProfileInfo
               SchedulerList={SchedulerList}
               indexAppointment={indexAppointment}

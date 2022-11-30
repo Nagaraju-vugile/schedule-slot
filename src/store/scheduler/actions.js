@@ -23,6 +23,7 @@ import {
     CANCEL_SLOT_SUCCESS,
     CANCEL_SLOT_FAIL,
     SET_ACTIVE_TAB,
+    CLEAR_CANCEL_SLOTS,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -188,4 +189,10 @@ import {
       payload: data
     };
   };
+
+  export const clearCancelSlots = ()=>{
+    return {
+      type: CLEAR_CANCEL_SLOTS,
+    }
+  }
 

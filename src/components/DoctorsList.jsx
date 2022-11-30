@@ -15,6 +15,8 @@ import {
 } from "reactstrap";
 import { getUnique } from '../helpers/ui_helper';
 import { clearAvailabilities, getSchedulerTypeDetails, setActiveTab, updateSelectedTypeDetails } from "../store/scheduler/actions";
+import Footer from './Footer';
+import Header from './Header';
 import Login from './Login';
 import NavBar from './NavBar';
 
@@ -40,7 +42,8 @@ const DoctorsList = ()=>{
     (state) => state?.availabilitiesReducer?.userProfile
   );
   useEffect(() => {
-    if (!userProfile && storedUser ==='null') {
+    console.log("storedUser*******", storedUser)
+    if (storedUser ==='null' || storedUser ===null) {
       navigate("/login");
     }
 });
@@ -137,9 +140,12 @@ const DoctorsList = ()=>{
 
   return (
     <>
+      <Header />
       <Container className="container-scheduler">
-        <Login />
+        {/* <Login /> */}
+      
         <NavBar />
+        <h4>Scheduler</h4>
         {schedulerTypes && schedulerTypes.length > 0 && (
           <Row className="scheduler-types-buttons">
             <Col>
@@ -178,6 +184,7 @@ const DoctorsList = ()=>{
           <div className="no-availabilities-div">No scheduler types found</div>
         )}
       </Container>
+      {/* <Footer /> */}
     </>
   );
 }

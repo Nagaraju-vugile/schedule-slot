@@ -16,7 +16,7 @@ const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
     "";
 
   return (
-    <div>
+    <div className="flex-style">
       <Row>
         <Col xs="2">
           <div className="avatar">

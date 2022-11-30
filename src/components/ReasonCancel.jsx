@@ -16,6 +16,8 @@ import {
   Spinner,
 } from "reactstrap";
 import { cancelSlot } from "../store/scheduler/actions";
+import ConfirmationModal from "./ConfirmationModal";
+import Header from "./Header";
 import Login from "./Login";
 
 const ReasonCancel = () => {
@@ -36,6 +38,7 @@ const ReasonCancel = () => {
   //   idCheck = "";
   // }
   const [answer, setAnswer] = useState("");
+  const [modal, setModal] = useState(false);
 
   const updateAnswer = (e) => {
     setAnswer(e.target.value);
@@ -58,6 +61,10 @@ const ReasonCancel = () => {
   const pyStatusMessage = useSelector(
     (state) => state?.availabilitiesReducer?.cancelSlot?.pyStatusMessage
   );
+
+const toggle =() => {
+  setModal(!modal);
+}
 
   const handleCancel = () => {
     const payload = {
@@ -84,7 +91,8 @@ const ReasonCancel = () => {
 
   return (
     <>
-      <Login />
+     <Header />
+      {/* <Login /> */}
       {/* <NavBar /> */}
       {/* <Container className="container-border"> */}
       {!pyStatusMessage && (
@@ -94,6 +102,7 @@ const ReasonCancel = () => {
             className="my-2"
             style={{
               width: "700px",
+              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
             }}
           >
             <CardHeader
@@ -106,12 +115,12 @@ const ReasonCancel = () => {
             >
               {reschedulerDataSelected && (
                 <Row>
-                  <Row className="appointments info-sub-header">
-                    <div className="appointments">
+                  {/* <Row className="appointments info-sub-header"> */}
+                    {/* <div className="appointments">
                       <h5>Are you sure you want to cancel the slot? </h5>{" "}
-                    </div>
-                    Please confirm the details and proceed.
-                  </Row>
+                    </div> */}
+                    {/* Please confirm the details and proceed.
+                  </Row> */}
                   <Row>
                     <Col xs="6" className="display-end">
                       <b>Date:</b>
@@ -181,12 +190,13 @@ const ReasonCancel = () => {
               <Button
                 color="danger"
                 className="book-slot"
-                onClick={() => handleCancel()}
+                onClick={() => toggle()}
                 disabled={answer === ""}
               >
                 Cancel slot
               </Button>
             </CardFooter>
+           
           </Card>
           {/* <Col>
                 <div className="question-div">
@@ -231,6 +241,7 @@ const ReasonCancel = () => {
               className="my-2"
               style={{
                 width: "700px",
+                boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
               }}
             >
               {/* <div className="notification-success">
@@ -259,6 +270,7 @@ const ReasonCancel = () => {
           </div>
         </>
       )}
+       {modal&&<ConfirmationModal modal={modal} toggle={toggle} handleCancel={handleCancel}/>}
       {/* </Container> */}
     </>
   );

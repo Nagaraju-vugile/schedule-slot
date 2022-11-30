@@ -8,6 +8,7 @@ import {
 } from "../helpers/ui_helper";
 import { bookSlot } from "../store/scheduler/actions";
 import SuccessConfirmation from "./appointsments/SuccessConfirmation";
+import Header from "./Header";
 import Login from "./Login";
 
 const Questions = () => {
@@ -52,9 +53,10 @@ const Questions = () => {
 
   const storedUser = sessionStorage.getItem("userProfile");
   useEffect(() => {
-    if (!userProfile && storedUser === "null") {
-      navigate("/login");
-    }
+    // if (!userProfile && storedUser === "null") {
+    //   console.log("---------")
+    //   navigate("/login");
+    // }
   });
 
   // const availabilities = useSelector(
@@ -161,7 +163,8 @@ const Questions = () => {
 
   return (
     <>
-      <Login />
+     <Header />
+      {/* <Login /> */}
       {/* <Container className="container-border"> */}
       {!pyStatusMessage && (
         <Row className="appointments">
@@ -169,6 +172,7 @@ const Questions = () => {
             className="my-2"
             style={{
               width: "700px",
+              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
             }}
           >
             <CardHeader

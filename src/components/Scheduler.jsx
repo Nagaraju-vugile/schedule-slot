@@ -9,6 +9,7 @@ import {
 } from "../store/scheduler/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
+import Header from "./Header";
 import Login from "./Login";
 import NavBar from "./NavBar";
 
@@ -34,7 +35,7 @@ export default function Scheduler() {
   );
   const storedUser = sessionStorage.getItem("userProfile");
   useEffect(() => {
-    if (!userProfile && storedUser === "null") {
+    if ( storedUser === "null" || storedUser === null) {
       navigate("/login");
     }
   });
@@ -59,8 +60,10 @@ export default function Scheduler() {
 
   return (
     <>
-      <Login />
+     <Header />
+      {/* <Login /> */}
       <NavBar />
+     
       {schedulerList?.map((item, index) => (
         <Appointments
           appointments={item?.SchedulerDetails?.Schedules}

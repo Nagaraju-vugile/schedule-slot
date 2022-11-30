@@ -30,9 +30,9 @@ const Login = () => {
 
 const onSuccess = (res) => {
   setProfile(res.profileObj);
-  sessionStorage.setItem('userProfile', res.profileObj.email);
+  sessionStorage.setItem('userProfile', res.profileObj.email || sessionStorage.getItem('userProfile'));
   dispatch(setUserSeesionDetails(res.profileObj));
-  if(path === '/login')
+  if(path === '/login' && sessionStorage.getItem('userProfile') !== null)
   navigate("/");
 };
 
@@ -54,23 +54,73 @@ const logOut = () => {
 
   return (
     <Container className="container-scheduler padding-login">
-    <div className='loginButton'>
-      {profile ? (
-        <><Button color="link" className='home-button' onClick={()=>handleHome()}>Home</Button><GoogleLogout
-          clientId={clientId}
-          buttonText="Log out"
-          onLogoutSuccess={logOut} /></>
-      ) : (
-        <GoogleLogin
-          clientId={clientId}
-          buttonText="Sign in with Google"
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy={"single_host_origin"}
-          isSignedIn={true}
-        />
-      )}
+      <div className="loginButton">
+      <div className="Auth-form-container">
+      <form className="Auth-form">
+        <div className="Auth-form-content">
+          <h3 className="Auth-form-title">Sign in</h3>
+          {/* <div className="form-group mt-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control mt-1"
+              placeholder="Enter email"
+            />
+          </div> */}
+          {/* <div className="form-group mt-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control mt-1"
+              placeholder="Enter password"
+            />
+          </div> */}
+          <div className="d-grid gap-2 mt-3">
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Sign in with Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_origin"}
+            isSignedIn={true}
+            className="login-btn"
+          />
+            {/* <button type="submit" className="btn btn-primary">
+              Submit
+            </button> */}
+          </div>
+          {/* <p className="forgot-password text-right mt-2">
+            Forgot <a href="#">password?</a>
+          </p> */}
+        </div>
+      </form>
     </div>
+        {/* {profile ? (
+          <>
+            <Button
+              color="link"
+              className="home-button"
+              onClick={() => handleHome()}
+            >
+              Home
+            </Button>
+            <GoogleLogout
+              clientId={clientId}
+              buttonText="Log out"
+              onLogoutSuccess={logOut}
+            />
+          </>
+        ) : (
+          <GoogleLogin
+            clientId={clientId}
+            buttonText="Sign in with Google"
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={"single_host_origin"}
+            isSignedIn={true}
+          />
+        )} */}
+      </div>
     </Container>
   );
 };

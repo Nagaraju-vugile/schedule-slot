@@ -23,6 +23,7 @@ import {
   CANCEL_SLOT_SUCCESS,
   CANCEL_SLOT_FAIL,
   SET_ACTIVE_TAB,
+  CLEAR_CANCEL_SLOTS,
 } from "./actionTypes";
 
 const initialState = {
@@ -194,6 +195,12 @@ const availabilitiesReducer = (state = initialState, action) => {
         activeTab: action.payload,
       };
       break;
+      case CLEAR_CANCEL_SLOTS:
+        state = {
+          ...state,
+          cancelSlot: null,
+        };
+        break;
     default:
       state = { ...state };
       break;

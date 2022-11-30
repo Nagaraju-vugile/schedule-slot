@@ -7,10 +7,12 @@ import MyBookings from "./components/MyBookings";
 import Questions from "./components/Questions";
 import Scheduler from './components/Scheduler';
 import ReasonCancel from "./components/ReasonCancel";
+import Header from "./components/Header";
 
 function App() {
   return (
     <BrowserRouter>
+    {/* <Header /> */}
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/" element={<DoctorsList />} />
