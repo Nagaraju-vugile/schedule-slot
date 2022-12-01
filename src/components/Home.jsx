@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Button, Col, Row, Container } from "reactstrap";
+import { Button, Col, Container, Row } from "reactstrap";
 import { setActiveTab } from "../store/scheduler/actions";
-import Login from "./Login";
+import Header from "./Header";
 import NavBar from "./NavBar";
 
 const Home = () => {
@@ -13,46 +13,35 @@ const Home = () => {
     navigate("/schedulers-list");
   };
 
-  const handleMyBookings = () => {
-    navigate("/my-bookings");
-  };
-  
-  const userProfile = useSelector(
-    (state) => state?.availabilitiesReducer?.userProfile
-  );
-
-  const storedUser = sessionStorage.getItem('userProfile');
+  const storedUser = sessionStorage.getItem("userProfile");
   useEffect(() => {
-    if (!userProfile && storedUser ==='null') {
+    if (storedUser === "null" || storedUser === null) {
       navigate("/login");
     }
-});
+  });
 
-useEffect(() => {
-  dispatch(setActiveTab("1"))
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(setActiveTab("1"));
+  }, [dispatch]);
   return (
-    <Container className="container-scheduler">
-      <Login />
-      <NavBar />
-      <Row>
-        <Col>
-          <h3>Select category</h3>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs="4">
-          <Button color="primary" onClick={() => handleDoctorsList()}>
-            Scheduler types
-          </Button>
-        </Col>
-        <Col xs="4">
-          <Button color="primary" onClick={() => handleMyBookings()}>
-            My bookings
-          </Button>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Header />
+      <Container className="container-scheduler">
+        <NavBar />
+        <Row>
+          <Col>
+            <h4>Scheduler</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="4" className="make-an-appointment">
+            <Button color="primary" onClick={() => handleDoctorsList()}>
+              Make an appointment
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

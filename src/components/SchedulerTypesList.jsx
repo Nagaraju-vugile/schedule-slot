@@ -1,83 +1,80 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Button,
   ButtonDropdown,
   Col,
+  Container,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
   Row,
   Spinner,
-  Container
 } from "reactstrap";
-import { getUnique } from '../helpers/ui_helper';
-import { clearAvailabilities, getSchedulerTypeDetails, setActiveTab, updateSelectedTypeDetails } from "../store/scheduler/actions";
-import Footer from './Footer';
-import Header from './Header';
-import Login from './Login';
-import NavBar from './NavBar';
+import { getUnique } from "../helpers/ui_helper";
+import {
+  clearAvailabilities,
+  getSchedulerTypeDetails,
+  setActiveTab,
+  updateSelectedTypeDetails,
+} from "../store/scheduler/actions";
+import Header from "./Header";
+import NavBar from "./NavBar";
 
-const DoctorsList = ()=>{
+const SchedulerTypesList = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
-  const storedUser = sessionStorage.getItem('userProfile');
+  const storedUser = sessionStorage.getItem("userProfile");
+  let path = useLocation().pathname;
+  sessionStorage.setItem('prevLocation', path);
   const [openId, setOpenId] = useState(false);
   const [openType, setOpenType] = useState(false);
-  const [selectedId, setSelectedId]= useState('');
-  const [selectedType, setSelectedType] = useState('');
-  // const schedulerTypes = useSelector(
-  //   (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
-  // );
+  const [selectedId, setSelectedId] = useState("");
+  const [selectedType, setSelectedType] = useState("");
   const schedulerTypes = useSelector(
     (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
   );
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.loadingSchedulerTypes
   );
-  
-  const userProfile = useSelector(
-    (state) => state?.availabilitiesReducer?.userProfile
-  );
+
   useEffect(() => {
-    console.log("storedUser*******", storedUser)
-    if (storedUser ==='null' || storedUser ===null) {
+    if (storedUser === "null" || storedUser === null) {
       navigate("/login");
     }
-});
+  });
 
-  const handleSearchType = (type,item)=>{
-    if(type === "id"){
+  const handleSearchType = (type, item) => {
+    if (type === "id") {
       setSelectedId(item.SchedulerRefID);
-    } else if(type === "type"){
-      setSelectedType(item.Type)
+    } else if (type === "type") {
+      setSelectedType(item.Type);
     }
     dispatch(updateSelectedTypeDetails(item));
-  }
+  };
 
-  const toggleId = ()=>{
-    setOpenId(!openId)
-  }
+  const toggleId = () => {
+    setOpenId(!openId);
+  };
 
-  const toggleType = ()=>{
-    setOpenType(!openType)
-  }
+  const toggleType = () => {
+    setOpenType(!openType);
+  };
 
-  const handleGoSearch = ()=>{
-    navigate("/scheduler/" + selectedId  + "?Type=" + selectedType);
-  }
-  const handleClear = ()=>{
-      setSelectedId('');
-      setSelectedType('');
-    }
-  
+  const handleGoSearch = () => {
+    navigate("/scheduler" + (selectedId?`/${selectedId}`:"") + "?Type=" + selectedType);
+  };
+  const handleClear = () => {
+    setSelectedId("");
+    setSelectedType("");
+  };
 
   useEffect(() => {
     dispatch(getSchedulerTypeDetails());
     dispatch(clearAvailabilities());
-    dispatch(setActiveTab("1"))
+    dispatch(setActiveTab("1"));
   }, [dispatch]);
 
   const renderById = (schedulerTypes) => {
@@ -88,7 +85,7 @@ const DoctorsList = ()=>{
         direction={(!openId && "down") || "up"}
         className="btn-scheduler-type"
       >
-        <DropdownToggle  caret>{selectedId || "Select id"}</DropdownToggle>
+        <DropdownToggle caret>{selectedId || "Select id"}</DropdownToggle>
         {openId && (
           <DropdownMenu>
             {getUnique(schedulerTypes, "SchedulerRefID")?.map((item) => (
@@ -131,21 +128,19 @@ const DoctorsList = ()=>{
   };
 
   if (loader) {
-    return <div className="loader">
-    <Spinner color="dark">
-      Loading...
-    </Spinner>
-  </div>
+    return (
+      <div className="loader">
+        <Spinner color="dark">Loading...</Spinner>
+      </div>
+    );
   }
 
   return (
     <>
       <Header />
       <Container className="container-scheduler">
-        {/* <Login /> */}
-      
         <NavBar />
-        <h4>Scheduler</h4>
+        <h4>Scheduler types</h4>
         {schedulerTypes && schedulerTypes.length > 0 && (
           <Row className="scheduler-types-buttons">
             <Col>
@@ -184,9 +179,8 @@ const DoctorsList = ()=>{
           <div className="no-availabilities-div">No scheduler types found</div>
         )}
       </Container>
-      {/* <Footer /> */}
     </>
   );
-}
+};
 
-export default DoctorsList;
+export default SchedulerTypesList;

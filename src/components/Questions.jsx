@@ -9,7 +9,6 @@ import {
 import { bookSlot } from "../store/scheduler/actions";
 import SuccessConfirmation from "./appointsments/SuccessConfirmation";
 import Header from "./Header";
-import Login from "./Login";
 
 const Questions = () => {
   let dispatch = useDispatch();
@@ -52,19 +51,6 @@ const Questions = () => {
   }, []);
 
   const storedUser = sessionStorage.getItem("userProfile");
-  useEffect(() => {
-    // if (!userProfile && storedUser === "null") {
-    //   console.log("---------")
-    //   navigate("/login");
-    // }
-  });
-
-  // const availabilities = useSelector(
-  //   (state) => state?.availabilitiesReducer?.availabilities?.SchedulerList
-  // );
-  // const indexType = availabilities?.map(
-  //   (item) => item.SchedulerDetails.Schedules[0]?.Type
-  // );
 
   const selectedSlotDetails = useSelector(
     (state) => state?.availabilitiesReducer?.selectedSlotDetails
@@ -80,16 +66,7 @@ const Questions = () => {
       state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData
         ?.SchedulerDetails?.Questions[0]?.Type
   );
-  // const question = useSelector(
-  //   (state) =>
-  //   state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-  //       ?.SchedulerDetails?.Questions[0]?.Question
-  // );
-  // const type = useSelector(
-  //   (state) =>
-  //     state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-  //       ?.SchedulerDetails?.Questions[0]?.Type
-  // );
+  
   const schedulerDetails = useSelector(
     (state) =>
       state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
@@ -163,16 +140,14 @@ const Questions = () => {
 
   return (
     <>
-     <Header />
-      {/* <Login /> */}
-      {/* <Container className="container-border"> */}
+      <Header />
       {!pyStatusMessage && (
         <Row className="appointments">
           <Card
             className="my-2"
             style={{
               width: "700px",
-              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
+              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
             }}
           >
             <CardHeader
@@ -250,57 +225,33 @@ const Questions = () => {
               )}
             </CardHeader>
             <CardBody style={{ paddingTop: "0px" }}>
-              <div className="appointments" style={{wordBreak: "break-word"}}>{question} </div>
+              <div className="appointments" style={{ wordBreak: "break-word" }}>
+                {question}{" "}
+              </div>
               <div className="appointments">
                 {type?.toLowerCase() === "text" && (
-                  // <input
-                  //   type={type}
-                  //   value={answer}
-                  //   onChange={(e) => updateAnswer(e)}
-                  // ></input>
                   <div className="padding-top-content">
-                     <Input  rows="4"
-                      cols="50"
-                      value={answer}
-                      onChange={(e) => updateAnswer(e)} type="textarea" name="text" id="exampleText" />
-                    {/* <textarea
+                    <Input
                       rows="4"
                       cols="50"
                       value={answer}
                       onChange={(e) => updateAnswer(e)}
-                    >
-                      Hello there, this is some text in a text area
-                    </textarea> */}
+                      type="textarea"
+                      name="text"
+                      id="exampleText"
+                    />
                   </div>
                 )}
                 {type?.toLowerCase() === "boolean" && (
                   <div onChange={(e) => updateAnswer(e)}>
-                    {/* <label>
-                      <input
-                        type="radio"
-                        value="yes"
-                        name="selectAns"
-                        checked={answer === "yes"}
-                      />
+                    <Label>
+                      <Input type="radio" name="selectAns" value="yes" />
                       Yes
-                    </label> */}
-                     <Label>
-              <Input type="radio" name="selectAns" value="yes"/>
-              Yes
-            </Label>
-            <Label >
-              <Input type="radio" name="selectAns" value="no"/>
-              No
-            </Label>
-                    {/* <label>
-                      <input
-                        type="radio"
-                        value="no"
-                        name="selectAns"
-                        checked={answer === "no"}
-                      />
+                    </Label>
+                    <Label>
+                      <Input type="radio" name="selectAns" value="no" />
                       No
-                    </label> */}
+                    </Label>
                   </div>
                 )}
               </div>
@@ -313,7 +264,6 @@ const Questions = () => {
                 borderTop: "none",
               }}
             >
-              {/* <div className="actions-div"> */}
               <Button color="primary" onClick={() => handleBack()}>
                 Back
               </Button>
@@ -325,26 +275,20 @@ const Questions = () => {
               >
                 {(testPath < 0 && "Book") || "Reschedule"}
               </Button>
-              {/* </div> */}
             </CardFooter>
           </Card>
-          {/* </Col> */}
-          {/* </div> */}
         </Row>
       )}
       {pyStatusMessage && (
         <>
-          {/* <Row> */}
           <div className="notification-success">
             <Alert color="success" className="min-width-notification">
               {pyStatusMessage}
             </Alert>
           </div>
-          {/* </Row> */}
           <SuccessConfirmation />
         </>
       )}
-      {/* </Container> */}
     </>
   );
 };

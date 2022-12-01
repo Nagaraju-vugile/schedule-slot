@@ -33,16 +33,7 @@ const SuccessConfirmation = () => {
     (state) => state?.availabilitiesReducer?.userProfile
   );
 
-  // const pyEmail = useSelector(
-  //   (state) =>
-  //     state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-  //       ?.SchedulerDetails?.pyEmail
-  // );
-  // const pyFullName = useSelector(
-  //   (state) =>
-  //     state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
-  //       ?.SchedulerDetails?.pyFullName
-  // );
+  
 
   const dateSelected = useSelector(
     (state) => state?.availabilitiesReducer?.selectedSlotDetails?.date

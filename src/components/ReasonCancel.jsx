@@ -18,25 +18,11 @@ import {
 import { cancelSlot } from "../store/scheduler/actions";
 import ConfirmationModal from "./ConfirmationModal";
 import Header from "./Header";
-import Login from "./Login";
 
 const ReasonCancel = () => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
-  // let { id } = useParams();
-  // let query = new URLSearchParams(useLocation().search);
-  // let queryCheck;
-  // if (query.get("Type")) {
-  //   queryCheck = "?Type=" + query.get("Type");
-  // } else {
-  //   queryCheck = "";
-  // }
-  // let idCheck;
-  // if (id) {
-  //   idCheck = id;
-  // } else {
-  //   idCheck = "";
-  // }
+
   const [answer, setAnswer] = useState("");
   const [modal, setModal] = useState(false);
 
@@ -62,9 +48,9 @@ const ReasonCancel = () => {
     (state) => state?.availabilitiesReducer?.cancelSlot?.pyStatusMessage
   );
 
-const toggle =() => {
-  setModal(!modal);
-}
+  const toggle = () => {
+    setModal(!modal);
+  };
 
   const handleCancel = () => {
     const payload = {
@@ -89,20 +75,21 @@ const toggle =() => {
     );
   }
 
+  if (!reschedulerDataSelected) {
+    handleBack();
+  }
+  
   return (
     <>
-     <Header />
-      {/* <Login /> */}
-      {/* <NavBar /> */}
-      {/* <Container className="container-border"> */}
+      <Header />
+
       {!pyStatusMessage && (
         <Row className="appointments">
-          {/* <div className="question-div"> */}
           <Card
             className="my-2"
             style={{
               width: "700px",
-              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
+              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
             }}
           >
             <CardHeader
@@ -115,12 +102,6 @@ const toggle =() => {
             >
               {reschedulerDataSelected && (
                 <Row>
-                  {/* <Row className="appointments info-sub-header"> */}
-                    {/* <div className="appointments">
-                      <h5>Are you sure you want to cancel the slot? </h5>{" "}
-                    </div> */}
-                    {/* Please confirm the details and proceed.
-                  </Row> */}
                   <Row>
                     <Col xs="6" className="display-end">
                       <b>Date:</b>
@@ -150,11 +131,6 @@ const toggle =() => {
                 Why would you like to cancel the slot?
               </CardTitle>
               <CardText className="appointments">
-                {/* <input
-                  type="text"
-                  value={answer}
-                  onChange={(e) => updateAnswer(e)}
-                ></input> */}
                 <div className="padding-top-content">
                   <Input
                     rows="4"
@@ -165,14 +141,6 @@ const toggle =() => {
                     name="text"
                     id="exampleText"
                   />
-                  {/* <textarea
-                    rows="4"
-                    cols="50"
-                    value={answer}
-                    onChange={(e) => updateAnswer(e)}
-                  >
-                    Hello there, this is some text in a text area
-                  </textarea> */}
                 </div>
               </CardText>
             </CardBody>
@@ -196,37 +164,7 @@ const toggle =() => {
                 Cancel slot
               </Button>
             </CardFooter>
-           
           </Card>
-          {/* <Col>
-                <div className="question-div">
-                  <b>Answer the question</b>
-                </div>
-                <div className="question-div">
-                  Why would you like to cancel the slot?
-                </div>
-                <div className="question-div">
-                  <input
-                    type="text"
-                    value={answer}
-                    onChange={(e) => updateAnswer(e)}
-                  ></input>
-                </div>
-                <div className="actions-div">
-                  <Button color="primary" onClick={() => handleBack()}>
-                    Back
-                  </Button>
-                  <Button
-                    color="success"
-                    className="book-slot"
-                    onClick={() => handleCancel()}
-                    disabled={answer === ""}
-                  >
-                    Cancel slot
-                  </Button>
-                </div>
-              </Col> */}
-          {/* </div> */}
         </Row>
       )}
       {pyStatusMessage && (
@@ -241,14 +179,9 @@ const toggle =() => {
               className="my-2"
               style={{
                 width: "700px",
-                boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
+                boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
               }}
             >
-              {/* <div className="notification-success">
-      <Alert color="success" className="min-width-notification">
-        {pyStatusMessage}
-      </Alert>
-    </div> */}
               <CardFooter
                 style={{
                   display: "flex",
@@ -270,8 +203,13 @@ const toggle =() => {
           </div>
         </>
       )}
-       {modal&&<ConfirmationModal modal={modal} toggle={toggle} handleCancel={handleCancel}/>}
-      {/* </Container> */}
+      {modal && (
+        <ConfirmationModal
+          modal={modal}
+          toggle={toggle}
+          handleCancel={handleCancel}
+        />
+      )}
     </>
   );
 };

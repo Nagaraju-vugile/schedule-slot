@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import DoctorsList from './components/DoctorsList';
+import TypesList from './components/SchedulerTypesList';
 import Home from './components/Home';
 import Login from "./components/Login";
 import MyBookings from "./components/MyBookings";
 import Questions from "./components/Questions";
 import Scheduler from './components/Scheduler';
 import ReasonCancel from "./components/ReasonCancel";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
     {/* <Header /> */}
       <Routes>
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/" element={<DoctorsList />} />
-        <Route exact path="/schedulers-list" element={<DoctorsList />} />
+        <Route exact path="/" element={<TypesList />} />
+        <Route exact path="/schedulers-list" element={<TypesList />} />
         <Route exact path="/scheduler/:id" element={<Scheduler />} />
         <Route exact path="/scheduler/" element={<Scheduler />} />
         <Route exact path="/scheduler/questions/:id" element={<Questions />} />

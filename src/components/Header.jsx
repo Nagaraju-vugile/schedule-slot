@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Container } from "reactstrap";
-import { clearUserSessionDetails, setUserSeesionDetails } from '../store/scheduler/actions';
+import { Button } from "reactstrap";
+import { clearUserSessionDetails, setActiveTab, setUserSeesionDetails } from '../store/scheduler/actions';
 
 export default function Header() {
     const navigate = useNavigate();
@@ -37,6 +37,7 @@ export default function Header() {
   };
   
   const handleHome=()=>{
+    dispatch(setActiveTab("1"));
     navigate("/schedulers-list");
   }
   
