@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineFieldTime } from "react-icons/ai";
 import { BiTrash } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   Col,
@@ -30,7 +30,7 @@ const MyBookings = () => {
   let path = useLocation().pathname;
   const [displayData, setDisplayData] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  sessionStorage.setItem('prevLocation', path);
+  sessionStorage.setItem("prevLocation", path);
   const myBookingsData = useSelector(
     (state) => state?.availabilitiesReducer?.myBookings?.pxResults
   );
@@ -90,13 +90,11 @@ const MyBookings = () => {
 
   const storedUser = sessionStorage.getItem("userProfile");
   useEffect(() => {
-    console.log("path**********", path, storedUser);
     if (storedUser === "null" || storedUser === null) {
       navigate("/login");
     }
   });
 
-  
   const handlePageClick = (e, index) => {
     e.preventDefault();
     setCurrentPage(index);
@@ -124,7 +122,6 @@ const MyBookings = () => {
           <>
             <Row>
               <Row
-                style={{ paddingBottom: "20px" }}
                 className="table-row-style"
               >
                 <Col className="info-sub-header">S.no</Col>
@@ -132,14 +129,13 @@ const MyBookings = () => {
                 <Col className="info-sub-header">Scheduled date</Col>
                 <Col className="info-sub-header">Start time</Col>
                 <Col className="info-sub-header">End time</Col>
-                <Col className="info-sub-header" style={{ minWidth: "21%" }}>
+                <Col className="info-sub-header action-column-min-width">
                   Action
                 </Col>
               </Row>
               {displayData?.map((item, index) => (
                 <Row
                   key={index}
-                  style={{ paddingBottom: "5px" }}
                   className="table-row-style"
                 >
                   <Col className="booking-value">{index + 1}</Col>
@@ -152,7 +148,7 @@ const MyBookings = () => {
                   <Col className="booking-value">
                     {item.EndTime.split(":")[0]}:{item.EndTime.split(":")[1]}
                   </Col>
-                  <Col className="booking-value" style={{ minWidth: "21%" }}>
+                  <Col className="booking-value action-column-min-width" >
                     <Button
                       color="info"
                       onClick={() =>
@@ -165,7 +161,6 @@ const MyBookings = () => {
                           item.StartTime
                         )
                       }
-                      style={{ marginRight: "5px" }}
                       className="action-button-table"
                     >
                       Reschedule

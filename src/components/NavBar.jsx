@@ -16,7 +16,7 @@ const NavBar = () => {
   const [currentActiveTab, setCurrentActiveTab] = useState(activeTab);
   return (
     <Container className="container-scheduler">
-      <Row style={{ paddingBottom: "20px" }}>
+      <Row className="style-padding-bottom">
         <Nav tabs>
           {/* <NavItem>
             <NavLink

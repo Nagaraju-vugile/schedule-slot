@@ -5,7 +5,7 @@ import { Spinner } from "reactstrap";
 import {
   clearAvailabilities,
   clearBookedSlots,
-  getAvailabilities
+  getAvailabilities,
 } from "../store/scheduler/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
@@ -24,15 +24,8 @@ export default function Scheduler() {
     queryCheck = "";
   }
 
-  // let idCheck;
-  // if (id) {
-  //   idCheck = id;
-  // } else {
-  //   idCheck = "";
-  // }
-
-  let path = useLocation().pathname+queryCheck;
-  sessionStorage.setItem('prevLocation', path);
+  let path = useLocation().pathname + queryCheck;
+  sessionStorage.setItem("prevLocation", path);
 
   const testPath = useLocation().pathname.indexOf("re-schedule");
   const schedulerList = useSelector(
@@ -49,7 +42,7 @@ export default function Scheduler() {
   const navigate = useNavigate();
   const storedUser = sessionStorage.getItem("userProfile");
   useEffect(() => {
-    if ( storedUser === "null" || storedUser === null) {
+    if (storedUser === "null" || storedUser === null) {
       navigate("/login");
     }
   });
@@ -74,9 +67,8 @@ export default function Scheduler() {
 
   return (
     <>
-     <Header />
+      <Header />
       <NavBar />
-     
       {schedulerList?.map((item, index) => (
         <Appointments
           appointments={item?.SchedulerDetails?.Schedules}

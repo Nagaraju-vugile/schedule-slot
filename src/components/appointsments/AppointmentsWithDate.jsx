@@ -1,13 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button, Col } from "reactstrap";
 import { days, months } from "../../constants";
 import { selectedSlotDetails } from "../../store/scheduler/actions";
 import "./index.css";
 
-
-const AppointmentsWithDate = ({ date, timings, appontment, size, navigateLink, schedulerListData }) => {
+const AppointmentsWithDate = ({
+  date,
+  timings,
+  appontment,
+  size,
+  navigateLink,
+  schedulerListData,
+}) => {
   let dispatch = useDispatch();
   const navigate = useNavigate();
   const updatedDate = new Date(date);
@@ -28,7 +34,9 @@ const AppointmentsWithDate = ({ date, timings, appontment, size, navigateLink, s
     }
     const updatePySelected = [{ ...timing, pySelected: "true" }];
     const formedTiming = { ...appontment, updatePySelected };
-    dispatch(selectedSlotDetails({ timing: formedTiming, date,schedulerListData }));
+    dispatch(
+      selectedSlotDetails({ timing: formedTiming, date, schedulerListData })
+    );
     navigate(navigateLink + idCheck + queryCheck);
   };
 

@@ -308,6 +308,10 @@ padding-top: 15px;
   word-break: break-word;
 }
 
+.table-row-style{
+  padding-bottom: 5px;
+}
+
 @media screen and (max-width: 500px) {
   .table-row-style{
     display: flex;
@@ -435,6 +439,7 @@ padding-top: 15px;
   .action-button-table{
     min-width: 106px;
     margin-bottom: 2px;
+    margin-right: 5px;
   }
   .container-padding{
     padding-left: 0px ;
@@ -512,6 +517,47 @@ label {
 .login-btn{
   justify-content: center;
 }
+
+.padding-bottom-style{
+  padding-bottom: 5px;
+}
+
+.action-column-min-width{
+  min-width: 21%;
+}
+
+.card-border{
+  width: 700px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+}
+
+.card-header{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-bottom: none;
+}
+
+.word-break-style{
+  word-break: break-word;
+}
+
+.padding-top-style{
+  padding-top: 0px;
+}
+
+.style-padding-bottom{
+  padding-bottom: 20px;
+}
+
+.card-footer{
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-top: none;
+}
+
+
 
 
 

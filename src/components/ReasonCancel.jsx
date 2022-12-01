@@ -86,19 +86,9 @@ const ReasonCancel = () => {
       {!pyStatusMessage && (
         <Row className="appointments">
           <Card
-            className="my-2"
-            style={{
-              width: "700px",
-              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
-            }}
+            className="my-2 card-border"
           >
-            <CardHeader
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                backgroundColor: "white",
-                borderBottom: "none",
-              }}
+            <CardHeader className="card-header"
             >
               {reschedulerDataSelected && (
                 <Row>
@@ -126,7 +116,7 @@ const ReasonCancel = () => {
                 </Row>
               )}
             </CardHeader>
-            <CardBody style={{ paddingTop: "0px" }}>
+            <CardBody className="padding-top-style">
               <CardTitle tag="h6" className="appointments">
                 Why would you like to cancel the slot?
               </CardTitle>
@@ -144,13 +134,7 @@ const ReasonCancel = () => {
                 </div>
               </CardText>
             </CardBody>
-            <CardFooter
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                backgroundColor: "white",
-                borderTop: "none",
-              }}
+            <CardFooter className="card-header"
             >
               <Button color="primary" onClick={() => handleBack()}>
                 Back
@@ -176,19 +160,9 @@ const ReasonCancel = () => {
           </div>
           <div className="appointments">
             <Card
-              className="my-2"
-              style={{
-                width: "700px",
-                boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
-              }}
+              className="my-2 card-border"
             >
-              <CardFooter
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  backgroundColor: "white",
-                  borderTop: "none",
-                }}
+              <CardFooter className="card-header"
               >
                 <div>
                   <span className="another-slot-hint">

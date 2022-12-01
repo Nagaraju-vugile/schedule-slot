@@ -46,13 +46,9 @@ const SuccessConfirmation = () => {
   return (
     <div className="appointments">
       <Card
-        className="my-2"
-        style={{
-          width: "700px",
-          boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px"
-        }}
+        className="my-2 card-border"
       >
-        <CardBody style={{ paddingTop: "0px" }}>
+        <CardBody className="padding-top-style">
           <div className="appointments">
             <Row>
               <Col>
@@ -77,13 +73,8 @@ const SuccessConfirmation = () => {
             </Row>
           </div>
         </CardBody>
-        <CardFooter
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            backgroundColor: "white",
-            borderTop: "none",
-          }}
+        <CardFooter className="card-footer"
+          
         >
           <div>
             <span className="another-slot-hint">

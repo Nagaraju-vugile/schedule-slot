@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Alert, Button, Card, CardBody, CardFooter, CardHeader, Col, Input, Label, Row, Spinner } from "reactstrap";
+import {
+  Alert,
+  Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Col,
+  Input,
+  Label,
+  Row,
+  Spinner,
+} from "reactstrap";
 import {
   getPayloadBookRescheduler,
-  getPayloadBookSlot
+  getPayloadBookSlot,
 } from "../helpers/ui_helper";
 import { bookSlot } from "../store/scheduler/actions";
 import SuccessConfirmation from "./appointsments/SuccessConfirmation";
@@ -50,8 +62,6 @@ const Questions = () => {
     }
   }, []);
 
-  const storedUser = sessionStorage.getItem("userProfile");
-
   const selectedSlotDetails = useSelector(
     (state) => state?.availabilitiesReducer?.selectedSlotDetails
   );
@@ -66,7 +76,7 @@ const Questions = () => {
       state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData
         ?.SchedulerDetails?.Questions[0]?.Type
   );
-  
+
   const schedulerDetails = useSelector(
     (state) =>
       state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
@@ -138,25 +148,17 @@ const Questions = () => {
     );
   }
 
+  
   return (
     <>
       <Header />
       {!pyStatusMessage && (
         <Row className="appointments">
           <Card
-            className="my-2"
-            style={{
-              width: "700px",
-              boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
-            }}
+            className="my-2 card-border"
+           
           >
-            <CardHeader
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                backgroundColor: "white",
-                borderBottom: "none",
-              }}
+            <CardHeader className="card-header"
             >
               {selectedSlotDetails && testPath < 0 && (
                 <Row>
@@ -224,9 +226,9 @@ const Questions = () => {
                 </Row>
               )}
             </CardHeader>
-            <CardBody style={{ paddingTop: "0px" }}>
-              <div className="appointments" style={{ wordBreak: "break-word" }}>
-                {question}{" "}
+            <CardBody className="padding-top-style">
+              <div className="appointments word-break-style" >
+                {question}
               </div>
               <div className="appointments">
                 {type?.toLowerCase() === "text" && (
@@ -256,13 +258,9 @@ const Questions = () => {
                 )}
               </div>
             </CardBody>
-            <CardFooter
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                backgroundColor: "white",
-                borderTop: "none",
-              }}
+            <CardFooter  className="card-footer"
+                
+              
             >
               <Button color="primary" onClick={() => handleBack()}>
                 Back

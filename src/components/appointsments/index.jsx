@@ -1,25 +1,37 @@
 import React, { useState } from "react";
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { FcCalendar } from "react-icons/fc";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from "react-router-dom";
 import { Button, Col, Container, Row } from "reactstrap";
 import { getMaxLength, nextDays, prevDays } from "../../helpers/ui_helper";
-import { getAvailabilities, selectedDataDisplay } from "../../store/scheduler/actions";
+import {
+  getAvailabilities,
+  selectedDataDisplay,
+} from "../../store/scheduler/actions";
 import ProfileInfo from "../ProfileInfo";
 import AppointmentsWithDate from "./AppointmentsWithDate";
 import "./index.css";
 
-const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerListData }) => {
+const Appointments = ({
+  appointments,
+  indexAppointment,
+  navigateLink,
+  schedulerListData,
+}) => {
   let dispatch = useDispatch();
   let { id } = useParams();
   let query = new URLSearchParams(useLocation().search);
   const [viewCalender, setViewCalender] = useState(false);
-  const selectedStartDate = useSelector(state => state?.availabilitiesReducer?.selectedStartDate);
-  const dates = appointments && appointments?.map(item=>item.ScheduledDate);
-  const SchedulerList = useSelector(state => state?.availabilitiesReducer?.availabilities?.SchedulerList);
+  const selectedStartDate = useSelector(
+    (state) => state?.availabilitiesReducer?.selectedStartDate
+  );
+  const dates = appointments && appointments?.map((item) => item.ScheduledDate);
+  const SchedulerList = useSelector(
+    (state) => state?.availabilitiesReducer?.availabilities?.SchedulerList
+  );
 
   const [value, onChange] = useState(selectedStartDate);
   const [size, setSize] = useState(5);
@@ -27,39 +39,34 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
   const nextBtnStartTime = nextDays(new Date(selectedStartDate), 6);
   const prevBtnStartTime = prevDays(new Date(selectedStartDate), 6);
 
-  const handlePrev = ()=>{
+  const handlePrev = () => {
     dispatch(selectedDataDisplay(prevBtnStartTime));
     setViewCalender(false);
     dispatch(getAvailabilities(prevBtnStartTime, id, query.get("Type")));
     setSize(5);
-  }
-  const handleNext = ()=>{
+  };
+  const handleNext = () => {
     dispatch(selectedDataDisplay(nextBtnStartTime));
     setViewCalender(false);
     dispatch(getAvailabilities(nextBtnStartTime, id, query.get("Type")));
     setSize(5);
-  }
+  };
 
-  const setDate = (e)=>{
+  const setDate = (e) => {
     onChange(e);
     setViewCalender(!viewCalender);
     const start = nextDays(new Date(e), 0);
     dispatch(selectedDataDisplay(e));
     dispatch(getAvailabilities(start, id, query.get("Type")));
     setSize(5);
-  }
-
- 
+  };
 
   return (
     <div>
-    
       <Container className="container-scheduler">
         <Row className="profile-style">
-        
-          <Col xs="9" className="container-padding" >
+          <Col xs="9" className="container-padding">
             <div xs="9" className="border-main-div">
-           
               <Row>
                 <Col xs="1">
                   <Button className="button-next" onClick={() => handlePrev()}>
@@ -146,7 +153,6 @@ const Appointments = ({ appointments, indexAppointment, navigateLink, schedulerL
                 </>
               )}
             </div>
-           
           </Col>
           <Col xs="3" className="styled-profile">
             <ProfileInfo

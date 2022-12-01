@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   ButtonDropdown,
@@ -28,7 +28,7 @@ const SchedulerTypesList = () => {
   const navigate = useNavigate();
   const storedUser = sessionStorage.getItem("userProfile");
   let path = useLocation().pathname;
-  sessionStorage.setItem('prevLocation', path);
+  sessionStorage.setItem("prevLocation", path);
   const [openId, setOpenId] = useState(false);
   const [openType, setOpenType] = useState(false);
   const [selectedId, setSelectedId] = useState("");
@@ -64,7 +64,12 @@ const SchedulerTypesList = () => {
   };
 
   const handleGoSearch = () => {
-    navigate("/scheduler" + (selectedId?`/${selectedId}`:"") + "?Type=" + selectedType);
+    navigate(
+      "/scheduler" +
+        (selectedId ? `/${selectedId}` : "") +
+        "?Type=" +
+        selectedType
+    );
   };
   const handleClear = () => {
     setSelectedId("");
