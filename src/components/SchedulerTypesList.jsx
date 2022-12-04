@@ -17,6 +17,7 @@ import { getUnique } from "../helpers/ui_helper";
 import {
   clearAvailabilities,
   getSchedulerTypeDetails,
+  selectedProfileOption,
   setActiveTab,
   updateSelectedTypeDetails,
 } from "../store/scheduler/actions";
@@ -81,6 +82,7 @@ const SchedulerTypesList = () => {
     dispatch(getSchedulerTypeDetails());
     dispatch(clearAvailabilities());
     dispatch(setActiveTab("1"));
+    dispatch(selectedProfileOption("Settings"));
   }, [dispatch]);
 
   const renderById = (schedulerTypes) => {
@@ -142,15 +144,7 @@ const SchedulerTypesList = () => {
   }
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        display: "block",
-        position: "relative",
-        paddingBottom: "100px",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="layout-main">
       <Header />
       <Container className="container-scheduler">
         <NavBar />

@@ -150,15 +150,7 @@ const Questions = () => {
   }
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        display: "block",
-        position: "relative",
-        paddingBottom: "100px",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="layout-main">
       <Header />
       {!pyStatusMessage && (
         <Row

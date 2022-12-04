@@ -24,6 +24,7 @@ import {
   CANCEL_SLOT_FAIL,
   SET_ACTIVE_TAB,
   CLEAR_CANCEL_SLOTS,
+  SELECTED_PROFILE_OPTION,
 } from "./actionTypes";
 
 const initialState = {
@@ -48,6 +49,7 @@ const initialState = {
   cancelSlot: null,
   cancelSlotLoader: false,
   activeTab: "1",
+  selectedProfileOption: "Settings"
 };
 
 const availabilitiesReducer = (state = initialState, action) => {
@@ -201,6 +203,12 @@ const availabilitiesReducer = (state = initialState, action) => {
           cancelSlot: null,
         };
         break;
+        case SELECTED_PROFILE_OPTION:
+          state = {
+            ...state,
+            selectedProfileOption: action.payload,
+          };
+          break;
     default:
       state = { ...state };
       break;

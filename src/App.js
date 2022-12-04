@@ -6,6 +6,7 @@ import MyBookings from "./components/MyBookings";
 import Questions from "./components/Questions";
 import Scheduler from "./components/Scheduler";
 import ReasonCancel from "./components/ReasonCancel";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           path="/scheduler/re-schedule/questions/"
           element={<Questions />}
         />
+         <Route exact path="/scheduler/profile/" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

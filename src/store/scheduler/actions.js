@@ -24,6 +24,7 @@ import {
     CANCEL_SLOT_FAIL,
     SET_ACTIVE_TAB,
     CLEAR_CANCEL_SLOTS,
+    SELECTED_PROFILE_OPTION,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -195,4 +196,11 @@ import {
       type: CLEAR_CANCEL_SLOTS,
     }
   }
+
+  export const selectedProfileOption = (data) => {
+    return {
+      type: SELECTED_PROFILE_OPTION,
+      payload: data
+    };
+  };
 

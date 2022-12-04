@@ -67,15 +67,7 @@ export default function Scheduler() {
   }
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        display: "block",
-        position: "relative",
-        paddingBottom: "100px",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="layout-main">
       <Header />
       <NavBar />
       {schedulerList?.map((item, index) => (

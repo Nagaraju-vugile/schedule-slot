@@ -18,6 +18,7 @@ import {
   clearCancelSlots,
   myBookings,
   selectedDataDisplay,
+  selectedProfileOption,
   selectedReschedulerDetails,
   setActiveTab,
 } from "../store/scheduler/actions";
@@ -83,6 +84,7 @@ const MyBookings = () => {
     dispatch(myBookings("chandan_palamakula"));
     dispatch(setActiveTab("2"));
     dispatch(clearCancelSlots());
+    dispatch(selectedProfileOption("Settings"));
   }, [dispatch]);
 
   useEffect(() => {
@@ -110,15 +112,7 @@ const MyBookings = () => {
   }
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        display: "block",
-        position: "relative",
-        paddingBottom: "100px",
-        minHeight: "100vh",
-      }}
-    >
+    <div className="layout-main">
       <Header />
       <Container className="container-scheduler">
         <NavBar />
@@ -141,7 +135,11 @@ const MyBookings = () => {
                 </Col>
               </Row>
               {displayData?.map((item, index) => (
-                <Row key={index} className="table-row-style">
+                <Row
+                  key={index}
+                  className="table-row-style"
+                  style={{ backgroundColor: index % 2 === 0 ? "rgb(243 240 240 / 80%)" : "white" }}
+                >
                   <Col className="booking-value">{index + 1}</Col>
                   <Col className="booking-value">{item.SchedulerType}</Col>
                   <Col className="booking-value">{item.ScheduledDate}</Col>
