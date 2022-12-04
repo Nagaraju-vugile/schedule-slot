@@ -154,8 +154,7 @@ const Questions = () => {
       <Header />
       {!pyStatusMessage && (
         <Row
-          className="appointments"
-          style={{ width: "100%", paddingLeft: "2px" }}
+          className="question-section-card"
         >
           <Card className="my-2 card-border">
             <CardHeader className="card-header">

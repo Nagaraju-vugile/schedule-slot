@@ -422,7 +422,7 @@ padding-top: 15px;
     justify-content: start;
     display: flex;
     width: 100%;
-    margin-left:66px;
+    margin-left:50px;
   }
 
   .make-an-appointment{
@@ -529,7 +529,6 @@ padding-top: 15px;
   padding-bottom: 20px;
   border-radius: 8px;
   background-color: white;
-  margin-left: 28px;
 }
 
 .Auth-form-content {
@@ -712,6 +711,13 @@ label {
 /* .btn-secondary{
   border-radius: 0px !important;
 } */
+
+.question-section-card{
+  display: flex;
+  justify-content: center;
+  padding-left: 22px;
+  width: 100%;
+}
 
 
 
