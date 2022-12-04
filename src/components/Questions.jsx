@@ -20,6 +20,7 @@ import {
 } from "../helpers/ui_helper";
 import { bookSlot } from "../store/scheduler/actions";
 import SuccessConfirmation from "./appointsments/SuccessConfirmation";
+import Footer from "./Footer";
 import Header from "./Header";
 
 const Questions = () => {
@@ -148,18 +149,24 @@ const Questions = () => {
     );
   }
 
-  
   return (
-    <>
+    <div
+      style={{
+        overflow: "hidden",
+        display: "block",
+        position: "relative",
+        paddingBottom: "100px",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
       {!pyStatusMessage && (
-        <Row className="appointments">
-          <Card
-            className="my-2 card-border"
-           
-          >
-            <CardHeader className="card-header"
-            >
+        <Row
+          className="appointments"
+          style={{ width: "100%", paddingLeft: "2px" }}
+        >
+          <Card className="my-2 card-border">
+            <CardHeader className="card-header">
               {selectedSlotDetails && testPath < 0 && (
                 <Row>
                   <Row className="appointments info-sub-header">
@@ -227,9 +234,7 @@ const Questions = () => {
               )}
             </CardHeader>
             <CardBody className="padding-top-style">
-              <div className="appointments word-break-style" >
-                {question}
-              </div>
+              <div className="appointments word-break-style">{question}</div>
               <div className="appointments">
                 {type?.toLowerCase() === "text" && (
                   <div className="padding-top-content">
@@ -258,10 +263,7 @@ const Questions = () => {
                 )}
               </div>
             </CardBody>
-            <CardFooter  className="card-footer"
-                
-              
-            >
+            <CardFooter className="card-footer">
               <Button color="primary" onClick={() => handleBack()}>
                 Back
               </Button>
@@ -287,7 +289,8 @@ const Questions = () => {
           <SuccessConfirmation />
         </>
       )}
-    </>
+      <Footer />
+    </div>
   );
 };
 

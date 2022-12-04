@@ -20,13 +20,13 @@ export default function Header() {
   
     useEffect(() => {
       const initClient = () => {
-          gapi.client.init({
-            clientId: clientId,
-            scope: "",
-          });
+        gapi.client.init({
+          clientId: clientId,
+          scope: "",
+        });
       };
-      gapi.load('client:auth2', initClient);
-  });
+      gapi.load("client:auth2", initClient);
+    });
   
   const onSuccess = (res) => {
     setProfile(res.profileObj);
@@ -56,7 +56,7 @@ export default function Header() {
     <div className="header">
       <div className="loginButton">
         {profile ? (
-          <>
+          <>        
             <Button
               color="link"
               className="home-button"

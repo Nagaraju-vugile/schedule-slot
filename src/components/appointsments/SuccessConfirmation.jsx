@@ -45,9 +45,7 @@ const SuccessConfirmation = () => {
   );
   return (
     <div className="appointments">
-      <Card
-        className="my-2 card-border"
-      >
+      <Card className="my-2 card-border">
         <CardBody className="padding-top-style">
           <div className="appointments">
             <Row>
@@ -55,27 +53,29 @@ const SuccessConfirmation = () => {
                 <div className="padding-top-content">
                   <span className="info-sub-header">Email: </span>
 
-                  {userProfile.email}
+                  <span className="success-confrm-value">
+                    {userProfile.email}
+                  </span>
                 </div>
                 <div className="padding-top-content">
                   <span className="info-sub-header"> Full name: </span>
-                  {userProfile.name}
+                  <span className="success-confrm-value">
+                    {userProfile.name}
+                  </span>
                 </div>
                 <div className="padding-top-content">
                   <span className="info-sub-header"> Booked date: </span>
-                  {dateSelected}
+                  <span className="success-confrm-value">{dateSelected}</span>
                 </div>
                 <div className="padding-top-content">
                   <span className="info-sub-header"> Booked slot: </span>
-                  {slotSelected}
+                  <span className="success-confrm-value">{slotSelected}</span>
                 </div>
               </Col>
             </Row>
           </div>
         </CardBody>
-        <CardFooter className="card-footer"
-          
-        >
+        <CardFooter className="card-footer">
           <div>
             <span className="another-slot-hint">
               Go back to book for another slot

@@ -20,6 +20,7 @@ import {
   setActiveTab,
   updateSelectedTypeDetails,
 } from "../store/scheduler/actions";
+import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
 
@@ -141,7 +142,15 @@ const SchedulerTypesList = () => {
   }
 
   return (
-    <>
+    <div
+      style={{
+        overflow: "hidden",
+        display: "block",
+        position: "relative",
+        paddingBottom: "100px",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
       <Container className="container-scheduler">
         <NavBar />
@@ -184,7 +193,8 @@ const SchedulerTypesList = () => {
           <div className="no-availabilities-div">No scheduler types found</div>
         )}
       </Container>
-    </>
+      <Footer />
+    </div>
   );
 };
 

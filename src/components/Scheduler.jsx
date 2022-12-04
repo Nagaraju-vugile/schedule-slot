@@ -9,6 +9,7 @@ import {
 } from "../store/scheduler/actions";
 import "../styles.css";
 import Appointments from "./appointsments";
+import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
 
@@ -66,7 +67,15 @@ export default function Scheduler() {
   }
 
   return (
-    <>
+    <div
+      style={{
+        overflow: "hidden",
+        display: "block",
+        position: "relative",
+        paddingBottom: "100px",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
       <NavBar />
       {schedulerList?.map((item, index) => (
@@ -84,7 +93,7 @@ export default function Scheduler() {
       {(!schedulerList || schedulerList?.length === 0) && (
         <div className="no-availabilities-div">No schedules found</div>
       )}
-      ;
-    </>
+      <Footer />
+    </div>
   );
 }

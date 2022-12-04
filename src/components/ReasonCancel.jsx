@@ -17,6 +17,7 @@ import {
 } from "reactstrap";
 import { cancelSlot } from "../store/scheduler/actions";
 import ConfirmationModal from "./ConfirmationModal";
+import Footer from "./Footer";
 import Header from "./Header";
 
 const ReasonCancel = () => {
@@ -80,16 +81,24 @@ const ReasonCancel = () => {
   }
   
   return (
-    <>
+    <div
+      style={{
+        overflow: "hidden",
+        display: "block",
+        position: "relative",
+        paddingBottom: "100px",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
 
       {!pyStatusMessage && (
-        <Row className="appointments">
+        <Row className="appointments" style={{ minHeight: "150px" }}>
           <Card
             className="my-2 card-border"
+            style={{ justifyContent: "center" }}
           >
-            <CardHeader className="card-header"
-            >
+            <CardHeader className="card-header">
               {reschedulerDataSelected && (
                 <Row>
                   <Row>
@@ -134,8 +143,7 @@ const ReasonCancel = () => {
                 </div>
               </CardText>
             </CardBody>
-            <CardFooter className="card-header"
-            >
+            <CardFooter className="card-header">
               <Button color="primary" onClick={() => handleBack()}>
                 Back
               </Button>
@@ -158,12 +166,12 @@ const ReasonCancel = () => {
               {pyStatusMessage}
             </Alert>
           </div>
-          <div className="appointments">
+          <div className="appointments" style={{ minHeight: "150px" }}>
             <Card
               className="my-2 card-border"
+              style={{ justifyContent: "center" }}
             >
-              <CardFooter className="card-header"
-              >
+              <CardFooter className="card-header">
                 <div>
                   <span className="another-slot-hint">
                     Please go back to cancel another slot
@@ -184,7 +192,8 @@ const ReasonCancel = () => {
           handleCancel={handleCancel}
         />
       )}
-    </>
+      <Footer />
+    </div>
   );
 };
 

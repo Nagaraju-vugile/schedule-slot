@@ -21,6 +21,7 @@ import {
   selectedReschedulerDetails,
   setActiveTab,
 } from "../store/scheduler/actions";
+import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
 
@@ -109,7 +110,15 @@ const MyBookings = () => {
   }
 
   return (
-    <>
+    <div
+      style={{
+        overflow: "hidden",
+        display: "block",
+        position: "relative",
+        paddingBottom: "100px",
+        minHeight: "100vh",
+      }}
+    >
       <Header />
       <Container className="container-scheduler">
         <NavBar />
@@ -121,9 +130,7 @@ const MyBookings = () => {
         {myBookingsData && (
           <>
             <Row>
-              <Row
-                className="table-row-style"
-              >
+              <Row className="table-row-style">
                 <Col className="info-sub-header">S.no</Col>
                 <Col className="info-sub-header">Type</Col>
                 <Col className="info-sub-header">Scheduled date</Col>
@@ -134,10 +141,7 @@ const MyBookings = () => {
                 </Col>
               </Row>
               {displayData?.map((item, index) => (
-                <Row
-                  key={index}
-                  className="table-row-style"
-                >
+                <Row key={index} className="table-row-style">
                   <Col className="booking-value">{index + 1}</Col>
                   <Col className="booking-value">{item.SchedulerType}</Col>
                   <Col className="booking-value">{item.ScheduledDate}</Col>
@@ -148,7 +152,7 @@ const MyBookings = () => {
                   <Col className="booking-value">
                     {item.EndTime.split(":")[0]}:{item.EndTime.split(":")[1]}
                   </Col>
-                  <Col className="booking-value action-column-min-width" >
+                  <Col className="booking-value action-column-min-width">
                     <Button
                       color="info"
                       onClick={() =>
@@ -248,9 +252,12 @@ const MyBookings = () => {
             </Row>
           </>
         )}
-        {!myBookingsData && <div>No bookins found</div>}
+        {!myBookingsData && (
+          <div className="no-availabilities-div">No bookings found</div>
+        )}
       </Container>
-    </>
+      <Footer />
+    </div>
   );
 };
 
