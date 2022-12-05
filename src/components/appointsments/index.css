@@ -286,7 +286,7 @@ padding-top: 15px;
 .loginButton{
   display: flex;
   justify-content: end;
-  padding: 2px;
+  /* padding: 2px; */
 }
 
 .logout-btn{
