@@ -669,6 +669,10 @@ label {
   width: 100px;
 }
 
+.react-datepicker__input-container {
+ left: -95px;
+}
+
 .react-datepicker{
   position:absolute !important;
   left: -180px !important;
