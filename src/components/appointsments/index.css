@@ -548,6 +548,7 @@ padding-top: 15px;
   padding-bottom: 20px;
   border-radius: 8px;
   background-color: white;
+  margin:10px;
 }
 
 .Auth-form-content {
@@ -645,10 +646,11 @@ label {
 }
 
 .question-section-card{
+  margin:10px;
   display: flex;
   justify-content: center;
-  padding-left: 22px;
-  width: 100%;
+  /* padding-left: 22px;
+  width: 100%; */
 }
 
 @media screen and (max-width: 800px) {

@@ -44,7 +44,7 @@ const SuccessConfirmation = () => {
         ?.updatePySelected[0].StartTimeText
   );
   return (
-    <div className="appointments">
+    <div className="appointments" style={{margin: "10px"}}>
       <Card className="my-2 card-border">
         <CardBody className="padding-top-style">
           <div className="appointments">
