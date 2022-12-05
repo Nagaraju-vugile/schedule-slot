@@ -29,7 +29,7 @@ const Profile = () => {
     <div className="layout-main">
       <Header />
       <NavBar />
-      <Row className="appointments" style={{ minHeight: "150px" }}>
+      <Row className="appointments" style={{ minHeight: "150px", margin: "10px" }}>
         <Card className="my-2 card-border" style={{ justifyContent: "center" }}>
           <CardHeader className="card-header"></CardHeader>
           <CardBody className="padding-top-style">
