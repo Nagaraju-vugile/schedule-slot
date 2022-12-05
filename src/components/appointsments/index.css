@@ -458,6 +458,19 @@ padding-top: 15px;
   .calender-margin{
     margin-left:3px;
   }
+  .react-datepicker__input-container input {
+    width: 105px;
+  }
+  
+  .react-datepicker__input-container {
+   left: -75px;
+  }
+  
+  .react-datepicker{
+    position:absolute !important;
+    left: -180px !important;
+    /* right: -290px !important; */
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -663,20 +676,6 @@ label {
   /* .padding-left-style-resp{
     width:10%;
   } */
-}
-
-.react-datepicker__input-container input {
-  width: 100px;
-}
-
-.react-datepicker__input-container {
- left: -95px;
-}
-
-.react-datepicker{
-  position:absolute !important;
-  left: -180px !important;
-  /* right: -290px !important; */
 }
 
 
