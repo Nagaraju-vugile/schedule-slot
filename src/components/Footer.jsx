@@ -14,7 +14,7 @@ export default function Footer() {
           style={{ backgroundColor: "#5c636a", color: "white" }}
         >
           &copy; {new Date().getFullYear()} Copyright:{" "}
-          <a className="text-dark" href="https://mdbootstrap.com/">
+          <a className="link-color-footer" href="https://mdbootstrap.com/">
             Bluerose technologies.
           </a>
         </div>
