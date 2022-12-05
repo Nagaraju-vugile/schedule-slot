@@ -669,6 +669,12 @@ label {
   width: 100px;
 }
 
+.react-datepicker{
+  position:absolute !important;
+  left: -180px !important;
+  /* right: -290px !important; */
+}
+
 
 
 
