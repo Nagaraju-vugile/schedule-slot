@@ -1,41 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { Col, Row,  Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardText,
-    CardTitle, } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader, Row
+} from "reactstrap";
+
 import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
 
-
 const Profile = () => {
-    const userProfile = useSelector(
-        (state) => state?.availabilitiesReducer?.userProfile
-      );  
+  const navigate = useNavigate();
+  const userProfile = useSelector(
+    (state) => state?.availabilitiesReducer?.userProfile
+  );
+
+  const storedUser = sessionStorage.getItem("userProfile");
+  useEffect(() => {
+    if (storedUser === "null" || storedUser === null) {
+      navigate("/login");
+    }
+  });
   return (
-    // <div className="flex-style">
-    //   <Row>
-    //     <Col xs="12">
-    //       <div className="avatar">
-    //         <BsFillPersonFill className="avatar" />
-    //       </div>
-    //     </Col>
-    //   </Row>
-    //   <Row>
-    //     <Col xs="12">
-    //       <div>
-    //         <div>{userProfile.name}</div>
-    //         <div>{userProfile.email}</div>
-    //         <div>{userProfile.givenName}</div>
-    //         <div>{userProfile.familyName}</div>
-    //       </div>
-    //     </Col>
-    //   </Row>
-    // </div>
     <div className="layout-main">
       <Header />
       <NavBar />
@@ -46,10 +36,10 @@ const Profile = () => {
             <div className="avatar appointments">
               <BsFillPersonFill className="avatar" />
             </div>
-            <div className="appointments">{userProfile.name}</div>
-            <div className="appointments">{userProfile.email}</div>
-            <div className="appointments">{userProfile.givenName}</div>
-            <div className="appointments">{userProfile.familyName}</div>
+            <div className="appointments">{userProfile?.name}</div>
+            <div className="appointments">{userProfile?.email}</div>
+            <div className="appointments">{userProfile?.givenName}</div>
+            <div className="appointments">{userProfile?.familyName}</div>
           </CardBody>
           <CardFooter className="card-header"></CardFooter>
         </Card>

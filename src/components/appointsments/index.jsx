@@ -68,7 +68,7 @@ const Appointments = ({
           <Col xs="9" className="container-padding">
             <div xs="9" className="border-main-div">
               <Row>
-                <Col xs="1">
+                <Col xs="1" className="prev-btn-padding">
                   <Button className="button-next" onClick={() => handlePrev()}>
                     <IoIosArrowBack className="next-button-svg" />
                   </Button>
@@ -98,7 +98,7 @@ const Appointments = ({
                     <IoIosArrowForward className="next-button-svg" />
                   </Button>
                 </Col>
-                <Col xs="1" className="padding-left-style-resp">
+                <Col xs="1" className="padding-left-style-resp calender-margin">
                   <button
                     className="view-calender"
                     onClick={() => setViewCalender(!viewCalender)}
