@@ -2,12 +2,7 @@ import React, { useEffect } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader, Row
-} from "reactstrap";
+import { Card, CardBody, CardFooter, CardHeader, Row } from "reactstrap";
 
 import Footer from "./Footer";
 import Header from "./Header";
@@ -29,7 +24,13 @@ const Profile = () => {
     <div className="layout-main">
       <Header />
       <NavBar />
-      <Row className="appointments" style={{ minHeight: "150px", margin: "10px" }}>
+      <Row>
+        <h4 className="appointments"> Personal information </h4>
+      </Row>
+      <Row
+        className="appointments"
+        style={{ minHeight: "150px", margin: "10px" }}
+      >
         <Card className="my-2 card-border" style={{ justifyContent: "center" }}>
           <CardHeader className="card-header"></CardHeader>
           <CardBody className="padding-top-style">

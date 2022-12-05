@@ -27,7 +27,7 @@ export const days = [
     if (action === "getAvailabilities") {
       return `https://bluerosetech01.pegalabs.io/prweb/api/v1/data/D_GetSchedules?EmailID=${
         id || ""
-      }&ScheduleType=${type || ""}&StartDate=${formattedDate}&LimitRange=5`;
+      }&ScheduleType=${type || ""}&StartDate=${formattedDate}&LimitRange=5&GuestTimeZone=IST`;
     } else if (action === "getSchedulerTypes") {
       return `https://bluerosetech01.pegalabs.io/prweb/api/v1/data/D_GetSchedulerTypeList`;
     } else if (action === 1) {
