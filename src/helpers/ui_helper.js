@@ -27,11 +27,11 @@ export const getPayloadBookSlot = (answer, question, type, selectedSlotDetails, 
     return payload;
 }
 
-export const getPayloadBookRescheduler = (answer, question, type, selectedSlotDetails, schedulerDetails, guid, user)=>{
-  const questionsFormed = {};
-  questionsFormed.Answer = answer;
-  questionsFormed.Question = question;
-  questionsFormed.Type = type;
+export const getPayloadBookRescheduler = (questionsDataUpdate, selectedSlotDetails, schedulerDetails, guid, user)=>{
+  // const questionsFormed = {};
+  // questionsFormed.Answer = answer;
+  // questionsFormed.Question = question;
+  // questionsFormed.Type = type;
   const formedSlots = {};
   formedSlots.StartTimeText = selectedSlotDetails.timing.updatePySelected[0].StartTimeText;
   formedSlots.EndTimeText = selectedSlotDetails.timing.updatePySelected[0].EndTimeText;
@@ -50,7 +50,7 @@ export const getPayloadBookRescheduler = (answer, question, type, selectedSlotDe
   formedSchedulerDetails.pyGUID = schedulerDetails.pyGUID;
   formedSchedulerDetails.Address = schedulerDetails.Address;
   formedSchedulerDetails.Credentials = schedulerDetails.Credentials;
-  formedSchedulerDetails.Questions = [questionsFormed];
+  formedSchedulerDetails.Questions = questionsDataUpdate;
   formedSchedulerDetails.Schedules = [SchedulesFormed];
   const payload = {SchedulerList: [{SchedulerDetails:formedSchedulerDetails}]};
   return payload;

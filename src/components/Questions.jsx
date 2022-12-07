@@ -47,14 +47,11 @@ const Questions = () => {
   );
 
   const bookedSlotEmail = useSelector(
-    (state) => state?.availabilitiesReducer?.bookedSlot?.SchedulerList[0]?.SchedulerDetails?.pyEmail
+    (state) =>
+      state?.availabilitiesReducer?.bookedSlot?.SchedulerList[0]
+        ?.SchedulerDetails?.pyEmail
   );
 
-  const SchedulerDetailsQuestions = useSelector(
-    (state) => state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData
-    ?.SchedulerDetails?.Questions
-  );
-    console.log("SchedulerDetailsQuestions****", SchedulerDetailsQuestions)
   const checkAvailabilities = useSelector(
     (state) => state?.availabilitiesReducer?.availabilities
   );
@@ -76,28 +73,18 @@ const Questions = () => {
     (state) => state?.availabilitiesReducer?.selectedSlotDetails
   );
 
-  const question = useSelector(
+  const questionsData = useSelector(
     (state) =>
       state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData
-        ?.SchedulerDetails?.Questions[0]?.Question
+        ?.SchedulerDetails?.Questions
   );
-  const type = useSelector(
-    (state) =>
-      state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData
-        ?.SchedulerDetails?.Questions[0]?.Type
-  );
+
+  const [questionsDataUpdate, setQuestionsDataUpdate] = useState(questionsData);
 
   const schedulerDetails = useSelector(
     (state) =>
       state?.availabilitiesReducer?.availabilities?.SchedulerList[0]
         ?.SchedulerDetails
-  );
-  const [answer, setAnswer] = useState(
-    type?.toLowerCase() === "text"
-      ? ""
-      : type?.toLowerCase() === "boolean"
-      ? "no"
-      : "no"
   );
 
   const reschedulerDataSelected = useSelector(
@@ -113,15 +100,19 @@ const Questions = () => {
     (state) => state?.availabilitiesReducer?.bookedSlot?.pyStatusMessage
   );
 
-  const updateAnswer = (e) => {
-    setAnswer(e.target.value);
+  const updateAnswer = (e, indexVal) => {
+    const updateData = questionsDataUpdate.map((item, index)=>{
+      if(index === indexVal){
+        return {...item, Answer:e.target.value}
+      }
+      return item;
+    });
+    setQuestionsDataUpdate(updateData)
   };
   const handleBook = () => {
     if (testPath >= 0) {
       const payload = getPayloadBookRescheduler(
-        answer,
-        question,
-        type,
+        questionsDataUpdate,
         selectedSlotDetails,
         schedulerDetails,
         reschedulerDataSelected,
@@ -130,25 +121,13 @@ const Questions = () => {
       dispatch(bookSlot(payload, 2));
     } else {
       const payload = getPayloadBookSlot(
-        answer,
-        question,
-        type,
+        questionsDataUpdate,
         selectedSlotDetails,
         schedulerDetails
       );
       dispatch(bookSlot(payload, 1));
     }
   };
-
-  useEffect(() => {
-    setAnswer(
-      type?.toLowerCase() === "text"
-        ? ""
-        : type?.toLowerCase() === "radio"
-        ? "no"
-        : false
-    );
-  }, [pyStatusMessage]);
 
   if (loader) {
     return (
@@ -162,19 +141,20 @@ const Questions = () => {
     <div className="layout-main">
       <Header />
       {!pyStatusMessage && (
-        <Row
-          className="question-section-card"
-        >
+        <Row className="question-section-card">
           <Card className="my-2 card-border">
-          <Row>
-          <Col xs="3">
-            <Button onClick={() => handleBack()} className="back-button">
-              Back
-            </Button>
-          </Col>
-          <Col xs="9" style={{paddingTop: "12px"}}>
-            <div><h5>Please confirm the details</h5></div></Col>
-        </Row>
+            <Row>
+              <Col xs="3">
+                <Button onClick={() => handleBack()} className="back-button">
+                  Back
+                </Button>
+              </Col>
+              <Col xs="9" style={{ paddingTop: "12px" }}>
+                <div>
+                  <h5>Please confirm the details</h5>
+                </div>
+              </Col>
+            </Row>
             <CardHeader className="card-header">
               {selectedSlotDetails && testPath < 0 && (
                 <Row>
@@ -186,7 +166,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected  time:</b>
+                      <b>Selected time:</b>
                     </Col>
                     <Col>
                       {
@@ -204,7 +184,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected  type:</b>
+                      <b>Selected type:</b>
                     </Col>
                     <Col>{selectedSlotDetails?.timing?.Type}</Col>
                   </Row>
@@ -237,49 +217,55 @@ const Questions = () => {
               )}
             </CardHeader>
             <CardBody className="padding-top-style">
-            <div
+              <div
                 style={{
                   borderBottom: "1px solid rgb(237 205 237)",
                   marginTop: "4px",
                   marginBottom: "4px",
                 }}
               />
-              <div className="appointments word-break-style">{SchedulerDetailsQuestions&&question}</div>
-              <div className="appointments">
-                {type?.toLowerCase() === "text" && (
-                  <div className="padding-top-content">
-                    <Input
-                      rows="4"
-                      cols="50"
-                      value={answer}
-                      onChange={(e) => updateAnswer(e)}
-                      type="textarea"
-                      name="text"
-                      id="answer"
-                      placeholder="Provide you answer.."
-                    />
+
+              {questionsDataUpdate?.map((item, index) => (
+                <>
+                  <div className="appointments word-break-style">
+                    {item?.Question}
                   </div>
-                )}
-                {type?.toLowerCase() === "boolean" && (
-                  <div onChange={(e) => updateAnswer(e)}>
-                    <Label>
-                      <Input type="radio" name="selectAns" value="yes" />
-                      Yes
-                    </Label>
-                    <Label>
-                      <Input type="radio" name="selectAns" value="no" />
-                      No
-                    </Label>
+                  <div className="appointments">
+                    {item.Type?.toLowerCase() === "text" && (
+                      <div className="padding-top-content">
+                        <Input
+                          rows="4"
+                          cols="50"
+                          value={item.Answer}
+                          onChange={(e) => updateAnswer(e, index)}
+                          type="textarea"
+                          name="text"
+                          id="answer"
+                          placeholder="Provide you answer.."
+                        />
+                      </div>
+                    )}
+                    {item.Type?.toLowerCase() === "boolean" && (
+                      <div onChange={(e) => updateAnswer(e, index)}>
+                        <Label>
+                          <Input type="radio" name="selectAns" value="yes" />
+                          Yes
+                        </Label>
+                        <Label>
+                          <Input type="radio" name="selectAns" value="no" />
+                          No
+                        </Label>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </>
+              ))}
             </CardBody>
             <CardFooter className="card-footer">
               <Button
                 color="success"
                 className="book-slot"
                 onClick={() => handleBook()}
-                disabled={answer === ""}
               >
                 {(testPath < 0 && "Book") || "Reschedule"}
               </Button>
@@ -289,7 +275,7 @@ const Questions = () => {
       )}
       {pyStatusMessage && (
         <>
-        <Row>
+          <Row>
             <div className="appointments">
               <h4>Confirmed! </h4>
             </div>
