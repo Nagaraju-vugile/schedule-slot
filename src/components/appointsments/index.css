@@ -443,6 +443,12 @@ padding-top: 15px;
     display: flex;
     justify-content: center;
   }
+  .react-autosuggest__input{
+    width:100% !important;
+  }
+  .scheduler-types-col{
+    padding-top:10px !important;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -724,6 +730,10 @@ label {
 
 .dropdown-item:hover{
   background-color: white !important; 
+}
+
+.scheduler-types-col{
+  padding-top:10px !important;
 }
 
 

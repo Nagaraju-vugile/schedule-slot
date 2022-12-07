@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Spinner } from "reactstrap";
+import { Spinner, Button, Row, Col, Container } from "reactstrap";
 import {
   clearAvailabilities,
   clearBookedSlots,
@@ -42,6 +42,11 @@ export default function Scheduler() {
   );
   const navigate = useNavigate();
   const storedUser = sessionStorage.getItem("userProfile");
+
+  const handleBack = () => {
+    navigate((testPath < 0 && "/schedulers-list") || "/my-bookings");
+  };
+
   useEffect(() => {
     if (storedUser === "null" || storedUser === null) {
       navigate("/login");
@@ -70,6 +75,20 @@ export default function Scheduler() {
     <div className="layout-main">
       <Header />
       <NavBar />
+      <Container className="container-scheduler">
+      <Row>
+        <Col xs="3">
+          <Button onClick={() => handleBack()} className="back-button">
+            Back
+          </Button>
+        </Col>
+        {/* <Col xs="9" style={{ paddingTop: "12px" }}>
+          <div>
+            <h5>Book an appointment</h5>
+          </div>
+        </Col> */}
+      </Row>
+      </Container>
       {schedulerList?.map((item, index) => (
         <Appointments
           appointments={item?.SchedulerDetails?.Schedules}
@@ -83,7 +102,7 @@ export default function Scheduler() {
         />
       ))}
       {(!schedulerList || schedulerList?.length === 0) && (
-        <div className="no-availabilities-div">No schedules found</div>
+        <div className="no-availabilities-div">No slots found</div>
       )}
       <Footer />
     </div>

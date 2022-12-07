@@ -154,7 +154,7 @@ const SchedulerTypesList = () => {
         {schedulerTypes && schedulerTypes.length > 0 && (
           <>
             <Row className="scheduler-types-buttons">
-              <Col>
+              <Col className="scheduler-types-col">
                 <Autosuggest
                   suggestions={suggestions}
                   onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -165,7 +165,7 @@ const SchedulerTypesList = () => {
                   shouldRenderSuggestions={shouldRenderSuggestions}
                 />
               </Col>
-              <Col>
+              <Col className="scheduler-types-col">
                 <Autosuggest
                   suggestions={suggestionsType}
                   onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
@@ -176,7 +176,7 @@ const SchedulerTypesList = () => {
                   shouldRenderSuggestions={shouldRenderSuggestionsType}
                 />
               </Col>
-              <Col>
+              <Col className="scheduler-types-col">
                 <Button
                   className="btn-scheduler-type"
                   color="primary"
@@ -186,7 +186,7 @@ const SchedulerTypesList = () => {
                   Find slots
                 </Button>
               </Col>
-              <Col>
+              <Col className="scheduler-types-col">
                 <Button
                   className="btn-scheduler-type"
                   color="danger"
