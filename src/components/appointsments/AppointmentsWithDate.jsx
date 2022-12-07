@@ -51,7 +51,7 @@ const AppointmentsWithDate = ({
             {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
           </div>
         </div>
-        {timings.length > 1 &&
+        {timings?.length > 1 &&
           timings?.map((timing, index) => {
             return (
               index < size &&
@@ -67,7 +67,7 @@ const AppointmentsWithDate = ({
               )
             );
           })}
-        {timings.length <= 1 && (
+        {timings?.length <= 1 && (
           <Button className="timing-disabled">unavailable</Button>
         )}
       </div>

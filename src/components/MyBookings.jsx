@@ -12,6 +12,7 @@ import {
   PaginationLink,
   Row,
   Spinner,
+  Input
 } from "reactstrap";
 
 import {
@@ -30,15 +31,17 @@ const MyBookings = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
   let path = useLocation().pathname;
-  const [displayData, setDisplayData] = useState(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  sessionStorage.setItem("prevLocation", path);
   const myBookingsData = useSelector(
     (state) => state?.availabilitiesReducer?.myBookings?.pxResults
   );
+  const [displayData, setDisplayData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const pageSize = 5;
+  const [pagesCount, setPagesCount] = useState(Math.ceil(myBookingsData?.length / pageSize) || 0);
+  console.log("pagesCount---------------", pagesCount)
+  const [search, setSearch] = useState('');
 
-  const pageSize = 10;
-  const pagesCount = Math.ceil(myBookingsData?.length / pageSize);
+  sessionStorage.setItem("prevLocation", path);
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.myBookingsLoader
   );
@@ -73,7 +76,7 @@ const MyBookings = () => {
   };
 
   const updateDisplay = () => {
-    setDisplayData(
+    if(search === '')setDisplayData(
       myBookingsData
         ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
         .map((data, i) => data)
@@ -81,7 +84,7 @@ const MyBookings = () => {
   };
 
   useEffect(() => {
-    dispatch(myBookings("chandan_palamakula"));
+    dispatch(myBookings("chandan_palamakula@bluerose-tech.com"));
     dispatch(setActiveTab("2"));
     dispatch(clearCancelSlots());
     dispatch(selectedProfileOption("Settings"));
@@ -89,7 +92,22 @@ const MyBookings = () => {
 
   useEffect(() => {
     updateDisplay();
+    setPagesCount(Math.ceil(myBookingsData?.length / pageSize)||0);
   }, [myBookingsData, currentPage]);
+
+  useEffect(() => {
+    const filteredSearch =   myBookingsData?.filter(item=>item?.SchedulerType?.toLowerCase()?.includes(search?.toLowerCase()));
+    setDisplayData(
+      filteredSearch
+        ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+        .map((data, i) => data)
+    );
+    filteredSearch&&setPagesCount(Math.ceil(filteredSearch?.length / pageSize));
+  }, [search, currentPage]);
+
+  useEffect(() => {
+    if(displayData?.length<1)setCurrentPage(1);
+  }, [displayData]);
 
   const storedUser = sessionStorage.getItem("userProfile");
   useEffect(() => {
@@ -101,6 +119,10 @@ const MyBookings = () => {
   const handlePageClick = (e, index) => {
     e.preventDefault();
     setCurrentPage(index);
+  };
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
   };
 
   if (loader) {
@@ -121,7 +143,13 @@ const MyBookings = () => {
             <h4>My bookings</h4>
           </Col>
         </Row>
-        {myBookingsData && (
+        {/* <Row className="search-by-type-input">
+          <Col xs="4">
+          <Input type="text" name="search" id="search" value = {search}placeholder="Search by type" onChange={(e)=>handleSearch(e)}/>
+
+          </Col>
+        </Row> */}
+        {myBookingsData?.length>0 && (
           <>
             <Row>
               <Row className="table-row-style">
@@ -250,7 +278,7 @@ const MyBookings = () => {
             </Row>
           </>
         )}
-        {!myBookingsData && (
+        {(!myBookingsData||myBookingsData?.length<1) && (
           <div className="no-availabilities-div">No bookings found</div>
         )}
       </Container>

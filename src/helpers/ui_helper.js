@@ -58,7 +58,7 @@ export const getPayloadBookRescheduler = (answer, question, type, selectedSlotDe
 
 export const getMaxLength = (appointments) => {
   return appointments?.reduce((acc, value) => {
-    return (acc = acc > value?.Slots?.length ? acc : value.Slots.length);
+    return (acc = acc > value?.Slots?.length ? acc : value?.Slots?.length);
   }, 0);
 };
 
@@ -73,14 +73,14 @@ export const nextDays = (date, days)=>{
   export const getUnique = (arr, comp) => {
     // store the comparison  values in array
     const unique = arr
-      .map((e) => e[comp])
+    ?.map((e) => e[comp])
 
       // store the indexes of the unique objects
-      .map((e, i, final) => final.indexOf(e) === i && i)
+      ?.map((e, i, final) => final.indexOf(e) === i && i)
 
       // eliminate the false indexes & return unique objects
-      .filter((e) => arr[e])
-      .map((e) => arr[e]);
+      ?.filter((e) => arr[e])
+      ?.map((e) => arr[e]);
 
     return unique;
   };
