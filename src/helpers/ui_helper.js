@@ -84,3 +84,7 @@ export const nextDays = (date, days)=>{
 
     return unique;
   };
+
+  export const escapeRegexCharacters=(str)=> {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }

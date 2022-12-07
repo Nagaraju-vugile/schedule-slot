@@ -115,6 +115,7 @@ const Appointments = ({
                       dateFormatCalendar="MMMM"
                       yearDropdownItemNumber={15}
                       scrollableYearDropdown
+                      open
                     />
                   )}
                 </Col>
@@ -128,7 +129,7 @@ const Appointments = ({
               </Row>
               {appointments && (
                 <>
-                  <Row>
+                  <Row className="appointments" style={{paddingTop:"50px"}}>
                     {size === 5 && (
                       <Button
                         className="show-more"

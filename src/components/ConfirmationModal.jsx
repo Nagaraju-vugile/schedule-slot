@@ -12,13 +12,13 @@ const ConfirmationModal = ({ modal, toggle, handleCancel }) => {
         <ModalHeader toggle={toggle}>
           Are you sure you want to cancel the slot?
         </ModalHeader>
-        <ModalBody>Please confirm and proceed.</ModalBody>
+        <ModalBody>Please confirm that you wish to cancel this event. A cancellation email will be sent out to you and invitee.</ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={cancelHandler}>
-            Confirm
+            Yes, cancel
           </Button>
           <Button color="secondary" onClick={toggle}>
-            No
+            Dont cancel
           </Button>
         </ModalFooter>
       </Modal>

@@ -90,18 +90,27 @@ const ReasonCancel = () => {
             className="my-2 card-border"
             style={{ justifyContent: "center" }}
           >
+            <Row>
+              <Col xs="3">
+                <Button onClick={() => handleBack()} className="back-button">
+                  Back
+                </Button>
+              </Col>
+              <Col xs="9" style={{paddingTop: "12px"}}>
+            <div><h5>Please confirm the details</h5></div></Col>
+            </Row>
             <CardHeader className="card-header">
               {reschedulerDataSelected && (
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Date:</b>
+                      <b>Selected date:</b>
                     </Col>
                     <Col> {reschedulerDataSelected?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Time:</b>
+                      <b>Selected time:</b>
                     </Col>
                     <Col>
                       {reschedulerDataSelected?.StartTime?.split(":")[0]}:
@@ -110,7 +119,7 @@ const ReasonCancel = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Type: </b>
+                      <b>Selected type: </b>
                     </Col>
                     <Col>{reschedulerDataSelected?.type}</Col>
                   </Row>
@@ -121,6 +130,13 @@ const ReasonCancel = () => {
               <CardTitle tag="h6" className="appointments">
                 Why would you like to cancel the slot?
               </CardTitle>
+               <div
+                style={{
+                  borderBottom: "1px solid rgb(237 205 237)",
+                  marginTop: "4px",
+                  marginBottom: "4px",
+                }}
+              />
               <CardText className="appointments">
                 <div className="padding-top-content">
                   <Input
@@ -130,15 +146,13 @@ const ReasonCancel = () => {
                     onChange={(e) => updateAnswer(e)}
                     type="textarea"
                     name="text"
-                    id="exampleText"
+                    id="reason"
+                    placeholder="Add any additional message or reason for cancellation.."
                   />
                 </div>
               </CardText>
             </CardBody>
             <CardFooter className="card-header">
-              <Button color="primary" onClick={() => handleBack()}>
-                Back
-              </Button>
               <Button
                 color="danger"
                 className="book-slot"
@@ -153,26 +167,31 @@ const ReasonCancel = () => {
       )}
       {pyStatusMessage && (
         <>
+         <Row>
+            <div className="appointments">
+              <h4>Confirmed! </h4>
+            </div>
+          </Row>
           <div className="notification-success">
             <Alert color="success" className="min-width-notification">
               {pyStatusMessage}
             </Alert>
           </div>
-          <div className="appointments" style={{ minHeight: "150px" }}>
+          <div className="appointments" style={{ minHeight: "150px", margin: "10px" }}>
             <Card
               className="my-2 card-border"
               style={{ justifyContent: "center" }}
             >
-              <CardFooter className="card-header">
-                <div>
-                  <span className="another-slot-hint">
-                    Please go back to cancel another slot
-                  </span>
-                  <Button color="primary" onClick={() => handleBack()}>
+              <Row style={{margin:"10px"}}>
+                <Col xs="2">
+                  <Button onClick={() => handleBack()} className="back-button">
                     Back
                   </Button>
-                </div>
-              </CardFooter>
+                </Col>
+                <Col xs="10" style={{paddingTop: '12px'}}>
+                <i>A cancellation email has been sent to you and your invitee.</i>
+                </Col>
+              </Row>
             </Card>
           </div>
         </>

@@ -47,7 +47,6 @@ const Login = () => {
           <form className="Auth-form">
             <div className="Auth-form-content">
               <h3 className="Auth-form-title">Sign in</h3>
-
               <div className="d-grid gap-2 mt-3">
                 <GoogleLogin
                   clientId={clientId}

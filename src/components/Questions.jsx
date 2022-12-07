@@ -46,6 +46,15 @@ const Questions = () => {
     (state) => state?.availabilitiesReducer?.userProfile
   );
 
+  const bookedSlotEmail = useSelector(
+    (state) => state?.availabilitiesReducer?.bookedSlot?.SchedulerList[0]?.SchedulerDetails?.pyEmail
+  );
+
+  const SchedulerDetailsQuestions = useSelector(
+    (state) => state?.availabilitiesReducer?.selectedSlotDetails?.schedulerListData
+    ?.SchedulerDetails?.Questions
+  );
+    console.log("SchedulerDetailsQuestions****", SchedulerDetailsQuestions)
   const checkAvailabilities = useSelector(
     (state) => state?.availabilitiesReducer?.availabilities
   );
@@ -157,21 +166,27 @@ const Questions = () => {
           className="question-section-card"
         >
           <Card className="my-2 card-border">
+          <Row>
+          <Col xs="3">
+            <Button onClick={() => handleBack()} className="back-button">
+              Back
+            </Button>
+          </Col>
+          <Col xs="9" style={{paddingTop: "12px"}}>
+            <div><h5>Please confirm the details</h5></div></Col>
+        </Row>
             <CardHeader className="card-header">
               {selectedSlotDetails && testPath < 0 && (
                 <Row>
-                  <Row className="appointments info-sub-header">
-                    Please confirm the details and proceed.
-                  </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Date:</b>
+                      <b>Selected date:</b>
                     </Col>
                     <Col>{selectedSlotDetails?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Time:</b>
+                      <b>Selected  time:</b>
                     </Col>
                     <Col>
                       {
@@ -189,7 +204,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Type:</b>
+                      <b>Selected  type:</b>
                     </Col>
                     <Col>{selectedSlotDetails?.timing?.Type}</Col>
                   </Row>
@@ -197,18 +212,15 @@ const Questions = () => {
               )}
               {reschedulerDataSelectedDate && testPath > 0 && (
                 <Row>
-                  <Row className="appointments info-sub-header">
-                    Please confirm the details and proceed.
-                  </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Date:</b>
+                      <b>Previous date:</b>
                     </Col>
                     <Col>{reschedulerDataSelectedDate?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Time:</b>
+                      <b>Previous time:</b>
                     </Col>
                     <Col>
                       {reschedulerDataSelectedDate?.StartTime?.split(":")[0]}:
@@ -217,7 +229,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Type:</b>
+                      <b>Previous type:</b>
                     </Col>
                     <Col>{reschedulerDataSelectedDate?.type}</Col>
                   </Row>
@@ -225,7 +237,14 @@ const Questions = () => {
               )}
             </CardHeader>
             <CardBody className="padding-top-style">
-              <div className="appointments word-break-style">{question}</div>
+            <div
+                style={{
+                  borderBottom: "1px solid rgb(237 205 237)",
+                  marginTop: "4px",
+                  marginBottom: "4px",
+                }}
+              />
+              <div className="appointments word-break-style">{SchedulerDetailsQuestions&&question}</div>
               <div className="appointments">
                 {type?.toLowerCase() === "text" && (
                   <div className="padding-top-content">
@@ -236,7 +255,8 @@ const Questions = () => {
                       onChange={(e) => updateAnswer(e)}
                       type="textarea"
                       name="text"
-                      id="exampleText"
+                      id="answer"
+                      placeholder="Provide you answer.."
                     />
                   </div>
                 )}
@@ -255,9 +275,6 @@ const Questions = () => {
               </div>
             </CardBody>
             <CardFooter className="card-footer">
-              <Button color="primary" onClick={() => handleBack()}>
-                Back
-              </Button>
               <Button
                 color="success"
                 className="book-slot"
@@ -272,9 +289,16 @@ const Questions = () => {
       )}
       {pyStatusMessage && (
         <>
+        <Row>
+            <div className="appointments">
+              <h4>Confirmed! </h4>
+            </div>
+          </Row>
           <div className="notification-success">
             <Alert color="success" className="min-width-notification">
-              {pyStatusMessage}
+              {(testPath < 0 &&
+                `Your slot is scheduled with ${bookedSlotEmail}`) ||
+                `Your slot is rescheduled with ${bookedSlotEmail}`}
             </Alert>
           </div>
           <SuccessConfirmation />

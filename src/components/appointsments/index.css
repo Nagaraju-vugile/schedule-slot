@@ -57,25 +57,15 @@
 
   .show-more{
     border: none;
-    /* background-color: white; */
     color: #275476;
     font-weight:500;
     text-decoration: none;
-    /* padding-bottom: 100px */
   }
 
   .show-more:hover{
     color: #17639d;
     cursor: pointer;
   }
-
-/* .show-more-div{
-  align-items: center;
-  display: flex!important;
-  font-weight: 700;
-  height: 100%;
-  justify-content: center;
-} */
 
 .no-availabilities-div{
   align-items: center;
@@ -88,18 +78,11 @@
 }
 
 .actions-div{
-  /* align-items: center; */
   display: flex!important;
-  /* font-weight: 700; */
   justify-content: center;
   padding-bottom: 20px;
   padding-top: 20px;
 }
-
-/* .actions-div-scheduler{
-  display: flex!important;
-  justify-content: center;
-} */
 
 .empty-div{
   min-width: 30%
@@ -158,11 +141,8 @@
     align-items: center;
     color: rgba(0, 0, 0, 0.54);
     box-shadow: rgb(98 85 149 / 90%) 1px 1px 10px;
-    /* padding: 0px; */
     border-radius: 2px;
     border: 1px solid transparent;
-    /* font-size: 14px; */
-    /* font-weight: 500; */
     font-family: Roboto, sans-serif;
     text-decoration: none;
     margin-right: 2px;
@@ -252,10 +232,6 @@ padding-top: 15px;
 }
 
 .border-main-div{
-  /* border: 1px solid rgb(233 218 218); */
-  /* border-left: 1px solid rgb(233 218 218);
-  border-right: 1px solid rgb(233 218 218);
-  border-bottom: 1px solid rgb(233 218 218); */
   padding-top: 20px;
   padding-bottom: 100px;
 }
@@ -286,21 +262,16 @@ padding-top: 15px;
 .loginButton{
   display: flex;
   justify-content: end;
-  /* padding: 2px; */
 }
 
 .logout-btn{
-  /* box-shadow: rgb(98 85 149 / 90%) 1px 1px 10px; */
   background-color: rgb(255, 255, 255);
     display: inline-flex;
     align-items: center;
-    color: rgba(0, 0, 0, 0.54);
+    color: black !important;
     box-shadow: inset rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 1px 0px !important;
-    /* padding: 0px; */
     border-radius: 2px;
     border: 1px solid transparent;
-    /* font-size: 14px; */
-    /* font-weight: 500; */
     font-family: Roboto, sans-serif;
     text-decoration: none;
     margin-right: 2px;
@@ -377,12 +348,10 @@ padding-top: 15px;
   .info-sub-header{
     display: flex;
     justify-content: center;
-    /* background-color: #e9f4ff; */
   }
   .booking-value{
     display: flex;
     justify-content: center;
-    /* background-color: #e9f4ff; */
   }
   .page-link{
     width: 100%;
@@ -407,22 +376,16 @@ padding-top: 15px;
     padding-left:0px;
     width:10%;
   }
-  /* .padding-left-fullname{
-    padding-left: 0px;
-  } */
+
   .padding-left-style{
     padding-left: 0px;
   }
-  /* .flex-style{
-    padding-left: 0px;
-  } */
 
   .profile-style{
     display: flex;
-    /* justify-content: center; */
     flex-direction: column-reverse;
-    /* width: 100%; */
   }
+
   .styled-profile{
     justify-content: start;
     display: flex;
@@ -474,7 +437,6 @@ padding-top: 15px;
   .react-datepicker{
     position:absolute !important;
     left: -180px !important;
-    /* right: -290px !important; */
   }
 
   .search-by-type-input{
@@ -484,9 +446,6 @@ padding-top: 15px;
 }
 
 @media screen and (max-width: 900px) {
-  /* .calender-margin{
-    margin-left:3px;
-  } */
   .padding-left-style-resp{
     padding-left:0px;
   }
@@ -659,8 +618,6 @@ label {
   margin:10px;
   display: flex;
   justify-content: center;
-  /* padding-left: 22px;
-  width: 100%; */
 }
 
 @media screen and (max-width: 800px) {
@@ -685,19 +642,7 @@ label {
   .calender-margin{
     margin-left:30px;
   }
-  /* .padding-left-style-resp{
-    width:10%;
-  } */
 }
-
-/* .react-autosuggest__suggestion{
-cursor: pointer !important;
-}
-
-.react-autosuggest__suggestions-list{
-  list-style-type: none !important;
-  padding-left:0px !important;
-} */
 
 .react-autosuggest__container {
   position: relative;
@@ -755,6 +700,30 @@ cursor: pointer !important;
 
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
+}
+
+.back-button{
+  background-color: white;
+  border: none;
+  color: #950695;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+.react-datepicker__input-container{
+  display: none !important;
+}
+
+.react-datepicker-popper{
+  padding-top:0px !important;
+}
+
+.logout-btn:hover, .logout-btn:focus, .logout-btn:active {
+  background-color: transparent !important;
+}
+
+.dropdown-item:hover{
+  background-color: white !important; 
 }
 
 

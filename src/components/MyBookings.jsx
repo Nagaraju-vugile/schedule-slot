@@ -12,7 +12,7 @@ import {
   PaginationLink,
   Row,
   Spinner,
-  Input
+  Input,
 } from "reactstrap";
 
 import {
@@ -36,10 +36,11 @@ const MyBookings = () => {
   );
   const [displayData, setDisplayData] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const pageSize = 5;
-  const [pagesCount, setPagesCount] = useState(Math.ceil(myBookingsData?.length / pageSize) || 0);
-  console.log("pagesCount---------------", pagesCount)
-  const [search, setSearch] = useState('');
+  const pageSize = 10;
+  const [pagesCount, setPagesCount] = useState(
+    Math.ceil(myBookingsData?.length / pageSize) || 0
+  );
+  const [search, setSearch] = useState("");
 
   sessionStorage.setItem("prevLocation", path);
   const loader = useSelector(
@@ -58,7 +59,7 @@ const MyBookings = () => {
         StartTime,
       })
     );
-    navigate("/scheduler/re-schedule/" + id + "?Type=" + type);
+    navigate("/scheduler/re-schedule/" + id + (type && "?Type=" + type));
   };
 
   const handleCancel = (id, date, type, guid, pxObjClass, StartTime) => {
@@ -76,11 +77,12 @@ const MyBookings = () => {
   };
 
   const updateDisplay = () => {
-    if(search === '')setDisplayData(
-      myBookingsData
-        ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
-        .map((data, i) => data)
-    );
+    if (search === "")
+      setDisplayData(
+        myBookingsData
+          ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+          .map((data, i) => data)
+      );
   };
 
   useEffect(() => {
@@ -92,21 +94,24 @@ const MyBookings = () => {
 
   useEffect(() => {
     updateDisplay();
-    setPagesCount(Math.ceil(myBookingsData?.length / pageSize)||0);
+    setPagesCount(Math.ceil(myBookingsData?.length / pageSize) || 0);
   }, [myBookingsData, currentPage]);
 
   useEffect(() => {
-    const filteredSearch =   myBookingsData?.filter(item=>item?.SchedulerType?.toLowerCase()?.includes(search?.toLowerCase()));
+    const filteredSearch = myBookingsData?.filter((item) =>
+      item?.SchedulerType?.toLowerCase()?.includes(search?.toLowerCase())
+    );
     setDisplayData(
       filteredSearch
         ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
         .map((data, i) => data)
     );
-    filteredSearch&&setPagesCount(Math.ceil(filteredSearch?.length / pageSize));
+    filteredSearch &&
+      setPagesCount(Math.ceil(filteredSearch?.length / pageSize));
   }, [search, currentPage]);
 
   useEffect(() => {
-    if(displayData?.length<1)setCurrentPage(1);
+    if (displayData?.length < 1) setCurrentPage(0);
   }, [displayData]);
 
   const storedUser = sessionStorage.getItem("userProfile");
@@ -140,16 +145,22 @@ const MyBookings = () => {
         <NavBar />
         <Row>
           <Col className="booking-header">
-            <h4>My bookings</h4>
+            <h4>Available bookings</h4>
           </Col>
         </Row>
         {/* <Row className="search-by-type-input">
           <Col xs="4">
-          <Input type="text" name="search" id="search" value = {search}placeholder="Search by type" onChange={(e)=>handleSearch(e)}/>
-
+            <Input
+              type="text"
+              name="search"
+              id="search"
+              value={search}
+              placeholder="Search by type"
+              onChange={(e) => handleSearch(e)}
+            />
           </Col>
         </Row> */}
-        {myBookingsData?.length>0 && (
+        {myBookingsData?.length > 0 && (
           <>
             <Row>
               <Row className="table-row-style">
@@ -166,7 +177,10 @@ const MyBookings = () => {
                 <Row
                   key={index}
                   className="table-row-style"
-                  style={{ backgroundColor: index % 2 === 0 ? "rgb(243 240 240 / 80%)" : "white" }}
+                  style={{
+                    backgroundColor:
+                      index % 2 === 0 ? "rgb(243 240 240 / 80%)" : "white",
+                  }}
                 >
                   <Col className="booking-value">{index + 1}</Col>
                   <Col className="booking-value">{item.SchedulerType}</Col>
@@ -278,7 +292,7 @@ const MyBookings = () => {
             </Row>
           </>
         )}
-        {(!myBookingsData||myBookingsData?.length<1) && (
+        {(!myBookingsData || myBookingsData?.length < 1) && (
           <div className="no-availabilities-div">No bookings found</div>
         )}
       </Container>

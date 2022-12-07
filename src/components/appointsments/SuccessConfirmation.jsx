@@ -25,7 +25,6 @@ const SuccessConfirmation = () => {
     if (checkPath < 0) navigate("/scheduler/" + idCheck + queryCheck);
     else {
          navigate("/my-bookings");
-      // navigate("/scheduler/re-schedule/" + idCheck + queryCheck);
     }
   };
 
@@ -33,7 +32,9 @@ const SuccessConfirmation = () => {
     (state) => state?.availabilitiesReducer?.userProfile
   );
 
-  
+  const bookedSlotType = useSelector(
+    (state) => state?.availabilitiesReducer?.bookedSlot?.SchedulerList[0]?.SchedulerDetails?.Schedules[0]?.Type
+  );
 
   const dateSelected = useSelector(
     (state) => state?.availabilitiesReducer?.selectedSlotDetails?.date
@@ -44,8 +45,17 @@ const SuccessConfirmation = () => {
         ?.updatePySelected[0].StartTimeText
   );
   return (
-    <div className="appointments" style={{margin: "10px"}}>
+    <Row className="question-section-card">
       <Card className="my-2 card-border">
+      <Row>
+          <Col xs="3">
+            <Button onClick={() => handleBack()} className="back-button">
+              Back
+            </Button>
+          </Col>
+          <Col xs="9" style={{paddingTop: "12px"}}>
+            <div><h5>Scheduled information</h5></div></Col>
+        </Row>
         <CardBody className="padding-top-style">
           <div className="appointments">
             <Row>
@@ -64,29 +74,29 @@ const SuccessConfirmation = () => {
                   </span>
                 </div>
                 <div className="padding-top-content">
-                  <span className="info-sub-header"> Booked date: </span>
+                  <span className="info-sub-header"> Scheduled date: </span>
                   <span className="success-confrm-value">{dateSelected}</span>
                 </div>
                 <div className="padding-top-content">
-                  <span className="info-sub-header"> Booked slot: </span>
+                  <span className="info-sub-header"> Scheduled slot: </span>
                   <span className="success-confrm-value">{slotSelected}</span>
+                </div>
+                <div className="padding-top-content">
+                  <span className="info-sub-header"> Scheduled type: </span>
+                  <span className="success-confrm-value">{bookedSlotType}</span>
                 </div>
               </Col>
             </Row>
           </div>
-        </CardBody>
-        <CardFooter className="card-footer">
-          <div>
-            <span className="another-slot-hint">
-              Go back to book for another slot
+          <Row>
+            <span className="success-confrm-value padding-top-content">
+              <i>A calender invite with scheduled details has been forwarded to
+              your email address.</i>
             </span>
-            <Button color="primary" onClick={() => handleBack()}>
-              Back
-            </Button>
-          </div>
-        </CardFooter>
+          </Row>
+        </CardBody>
       </Card>
-    </div>
+    </Row>
   );
 };
 

@@ -1,33 +1,17 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import {
-  Container, Nav,
-  NavItem,
-  NavLink, Row
-} from "reactstrap";
+import { Container, Nav, NavItem, NavLink, Row } from "reactstrap";
 
 const NavBar = () => {
   const activeTab = useSelector(
     (state) => state?.availabilitiesReducer?.activeTab
   );
 
-  
-
   const [currentActiveTab, setCurrentActiveTab] = useState(activeTab);
   return (
     <Container className="container-scheduler">
       <Row className="style-padding-bottom">
         <Nav tabs>
-          {/* <NavItem>
-            <NavLink
-              className={currentActiveTab === "1" ? "active" : ""}
-              href="/"
-              onClick={() => setCurrentActiveTab("1")}
-              disabled={currentActiveTab === "1"}
-            >
-              Home
-            </NavLink>
-          </NavItem> */}
           <NavItem>
             <NavLink
               className={currentActiveTab === "1" ? "active" : ""}
