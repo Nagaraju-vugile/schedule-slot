@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 import {
   Alert,
   Button,
@@ -19,6 +20,7 @@ import { cancelSlot } from "../store/scheduler/actions";
 import ConfirmationModal from "./ConfirmationModal";
 import Footer from "./Footer";
 import Header from "./Header";
+import NavBar from "./NavBar";
 
 const ReasonCancel = () => {
   let dispatch = useDispatch();
@@ -71,7 +73,7 @@ const ReasonCancel = () => {
   if (loader) {
     return (
       <div className="loader">
-        <Spinner color="dark">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">Loading...</Spinner>
       </div>
     );
   }
@@ -83,34 +85,41 @@ const ReasonCancel = () => {
   return (
     <div className="layout-main">
       <Header />
-
+      <NavBar />
       {!pyStatusMessage && (
-        <Row className="appointments" style={{ minHeight: "150px", margin: "10px" }}>
+        <Row
+          className="appointments"
+          style={{ minHeight: "150px", margin: "10px" }}
+        >
           <Card
             className="my-2 card-border"
             style={{ justifyContent: "center" }}
           >
             <Row>
-              <Col xs="3">
-                <Button onClick={() => handleBack()} className="back-button">
+              <Col xs="4">
+                <Button onClick={() => handleBack()} className="back-button" color="link">
+                    <IoIosArrowBack className="next-button-svg" />
                   Back
                 </Button>
               </Col>
-              <Col xs="9" style={{paddingTop: "12px"}}>
-            <div><h5>Please confirm the details</h5></div></Col>
+              <Col xs="8" style={{ paddingTop: "12px" }}>
+                <div>
+                  <h5>Please confirm the details</h5>
+                </div>
+              </Col>
             </Row>
             <CardHeader className="card-header">
               {reschedulerDataSelected && (
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected date:</b>
+                      Selected date:
                     </Col>
                     <Col> {reschedulerDataSelected?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected time:</b>
+                      Selected time:
                     </Col>
                     <Col>
                       {reschedulerDataSelected?.StartTime?.split(":")[0]}:
@@ -119,7 +128,7 @@ const ReasonCancel = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected type: </b>
+                      Selected type:
                     </Col>
                     <Col>{reschedulerDataSelected?.type}</Col>
                   </Row>
@@ -130,7 +139,7 @@ const ReasonCancel = () => {
               <CardTitle tag="h6" className="appointments">
                 Why would you like to cancel the slot?
               </CardTitle>
-               <div
+              <div
                 style={{
                   borderBottom: "1px solid rgb(237 205 237)",
                   marginTop: "4px",
@@ -167,29 +176,35 @@ const ReasonCancel = () => {
       )}
       {pyStatusMessage && (
         <>
-         <Row>
-            <div className="appointments">
-              <h4>Confirmed! </h4>
-            </div>
-          </Row>
           <div className="notification-success">
             <Alert color="success" className="min-width-notification">
-              {pyStatusMessage}
+              <Row>
+                <div className="appointments">
+                  <h4>Confirmed! </h4>
+                </div>
+              </Row>
+              <Row className="appointments">{pyStatusMessage}</Row>
             </Alert>
           </div>
-          <div className="appointments" style={{ minHeight: "150px", margin: "10px" }}>
+          <div
+            className="appointments"
+            style={{ minHeight: "150px", margin: "10px" }}
+          >
             <Card
               className="my-2 card-border"
               style={{ justifyContent: "center" }}
             >
-              <Row style={{margin:"10px"}}>
+              <Row style={{ margin: "10px" }}>
                 <Col xs="2">
-                  <Button onClick={() => handleBack()} className="back-button">
+                  <Button onClick={() => handleBack()} className="back-button" color="link">
+                  <IoIosArrowBack className="next-button-svg" />
                     Back
                   </Button>
                 </Col>
-                <Col xs="10" style={{paddingTop: '12px'}}>
-                <i>A cancellation email has been sent to you and your invitee.</i>
+                <Col xs="10" style={{ paddingTop: "12px" }}>
+                  <i>
+                    A cancellation email has been sent to you and your invitee.
+                  </i>
                 </Col>
               </Row>
             </Card>

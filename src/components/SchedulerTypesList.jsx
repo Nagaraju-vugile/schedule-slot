@@ -140,7 +140,9 @@ const SchedulerTypesList = () => {
   if (loader) {
     return (
       <div className="loader">
-        <Spinner color="dark">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">
+          Loading...
+        </Spinner>
       </div>
     );
   }
@@ -149,11 +151,13 @@ const SchedulerTypesList = () => {
     <div className="layout-main">
       <Header />
       <Container className="container-scheduler">
-        <NavBar />       
-        <Row style={{paddingBottom: "10px"}}><h4>Find available slots</h4></Row>
+        <NavBar />
+        <Row style={{ paddingBottom: "10px" }}>
+          <h5>Show available slots</h5>
+        </Row>
         {schedulerTypes && schedulerTypes.length > 0 && (
           <>
-            <Row className="scheduler-types-buttons">
+            {/* <Row className="scheduler-types-buttons">
               <Col className="scheduler-types-col">
                 <Autosuggest
                   suggestions={suggestions}
@@ -196,7 +200,54 @@ const SchedulerTypesList = () => {
                   Clear selection
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
+            <div className="testing">
+              <div className="testing-in-div">
+                <Autosuggest
+                  suggestions={suggestions}
+                  onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                  onSuggestionsClearRequested={onSuggestionsClearRequested}
+                  getSuggestionValue={getSuggestionValue}
+                  renderSuggestion={renderSuggestion}
+                  inputProps={inputProps}
+                  shouldRenderSuggestions={shouldRenderSuggestions}
+                />
+              </div>
+              {/* </Col> */}
+              {/* <Col className="scheduler-types-col"> */}
+
+              <div className="testing-in-div">
+                <Autosuggest
+                  suggestions={suggestionsType}
+                  onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
+                  onSuggestionsClearRequested={onSuggestionsClearRequestedType}
+                  getSuggestionValue={getSuggestionValueType}
+                  renderSuggestion={renderSuggestionType}
+                  inputProps={inputPropsType}
+                  shouldRenderSuggestions={shouldRenderSuggestionsType}
+                />
+              </div>
+              <div className="testing-in-div">
+                <Button
+                  className="btn-scheduler-type"
+                  color="primary"
+                  onClick={() => handleGoSearch()}
+                  disabled={!value && !valueType}
+                >
+                  Find slots
+                </Button>
+              </div>
+              <div className="testing-in-div">
+                <Button
+                  className="btn-scheduler-type"
+                  color="danger"
+                  onClick={() => handleClear()}
+                  disabled={!value && !valueType}
+                >
+                  Clear selection
+                </Button>
+              </div>
+            </div>
           </>
         )}
         {(!schedulerTypes || schedulerTypes.length < 1) && (

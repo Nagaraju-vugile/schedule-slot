@@ -28,7 +28,7 @@ const Appointments = ({
   const selectedStartDate = useSelector(
     (state) => state?.availabilitiesReducer?.selectedStartDate
   );
-  const dates = appointments && appointments?.map((item) => item.ScheduledDate);
+  const dates = appointments && appointments?.map((item) => item.DisplayDate);
   const SchedulerList = useSelector(
     (state) => state?.availabilitiesReducer?.availabilities?.SchedulerList
   );
@@ -69,7 +69,7 @@ const Appointments = ({
             <div xs="9" className="border-main-div">
               <Row>
                 <Col xs="1" className="prev-btn-padding">
-                  <Button className="button-next" onClick={() => handlePrev()}>
+                  <Button className="button-next" onClick={() => handlePrev()} color="link">
                     <IoIosArrowBack className="next-button-svg" />
                   </Button>
                 </Col>
@@ -94,7 +94,7 @@ const Appointments = ({
                   </Row>
                 </Col>
                 <Col xs="1" className="padding-left-style-resp">
-                  <Button className="button-next" onClick={handleNext}>
+                  <Button className="button-next" onClick={handleNext} color="link">
                     <IoIosArrowForward className="next-button-svg" />
                   </Button>
                 </Col>

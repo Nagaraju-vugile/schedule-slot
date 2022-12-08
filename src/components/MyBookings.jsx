@@ -133,7 +133,7 @@ const MyBookings = () => {
   if (loader) {
     return (
       <div className="loader">
-        <Spinner color="dark">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">Loading...</Spinner>
       </div>
     );
   }
@@ -145,23 +145,24 @@ const MyBookings = () => {
         <NavBar />
         <Row>
           <Col className="booking-header">
-            <h4>Available bookings</h4>
+            <h5>Available bookings</h5>
           </Col>
         </Row>
-        {/* <Row className="search-by-type-input">
-          <Col xs="4">
-            <Input
-              type="text"
-              name="search"
-              id="search"
-              value={search}
-              placeholder="Search by type"
-              onChange={(e) => handleSearch(e)}
-            />
-          </Col>
-        </Row> */}
+
         {myBookingsData?.length > 0 && (
           <>
+            <Row className="search-by-type-input">
+              <Col xs="4">
+                <Input
+                  type="text"
+                  name="search"
+                  id="search"
+                  value={search}
+                  placeholder="Search by type"
+                  onChange={(e) => handleSearch(e)}
+                />
+              </Col>
+            </Row>
             <Row>
               <Row className="table-row-style">
                 <Col className="info-sub-header">S.no</Col>
@@ -205,7 +206,7 @@ const MyBookings = () => {
                           item.StartTime
                         )
                       }
-                      className="action-button-table"
+                      className="action-button-table-reschedule"
                     >
                       Reschedule
                     </Button>
@@ -236,7 +237,7 @@ const MyBookings = () => {
                           item.StartTime
                         )
                       }
-                      className="action-button-table"
+                      className="action-button-table-cancel"
                     >
                       Cancel
                     </Button>

@@ -11,7 +11,7 @@ export default function Footer() {
       >
         <div
           className="text-center p-3"
-          style={{ backgroundColor: "#5c636a", color: "white" }}
+          style={{ backgroundColor: "#f8f9fa", color: "rgb(149, 6, 149)" }}
         >
           &copy; {new Date().getFullYear()} Copyright:{" "}
           <a className="link-color-footer" href="https://mdbootstrap.com/">

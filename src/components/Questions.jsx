@@ -22,6 +22,8 @@ import { bookSlot } from "../store/scheduler/actions";
 import SuccessConfirmation from "./appointsments/SuccessConfirmation";
 import Footer from "./Footer";
 import Header from "./Header";
+import { IoIosArrowBack } from "react-icons/io";
+import NavBar from "./NavBar";
 
 const Questions = () => {
   let dispatch = useDispatch();
@@ -132,7 +134,7 @@ const Questions = () => {
   if (loader) {
     return (
       <div className="loader">
-        <Spinner color="dark">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">Loading...</Spinner>
       </div>
     );
   }
@@ -140,16 +142,18 @@ const Questions = () => {
   return (
     <div className="layout-main">
       <Header />
+      <NavBar />
       {!pyStatusMessage && (
         <Row className="question-section-card">
           <Card className="my-2 card-border">
             <Row>
-              <Col xs="3">
-                <Button onClick={() => handleBack()} className="back-button">
+              <Col xs="4">
+                <Button onClick={() => handleBack()} className="back-button" color="link">
+                    <IoIosArrowBack className="next-button-svg" />
                   Back
                 </Button>
               </Col>
-              <Col xs="9" style={{ paddingTop: "12px" }}>
+              <Col xs="8" style={{ paddingTop: "12px" }}>
                 <div>
                   <h5>Please confirm the details</h5>
                 </div>
@@ -160,13 +164,13 @@ const Questions = () => {
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected date:</b>
+                      Selected date:
                     </Col>
                     <Col>{selectedSlotDetails?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected time:</b>
+                      Selected time:
                     </Col>
                     <Col>
                       {
@@ -184,7 +188,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Selected type:</b>
+                      Selected type:
                     </Col>
                     <Col>{selectedSlotDetails?.timing?.Type}</Col>
                   </Row>
@@ -194,13 +198,13 @@ const Questions = () => {
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Previous date:</b>
+                      Previous date:
                     </Col>
                     <Col>{reschedulerDataSelectedDate?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Previous time:</b>
+                      Previous time:
                     </Col>
                     <Col>
                       {reschedulerDataSelectedDate?.StartTime?.split(":")[0]}:
@@ -209,7 +213,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      <b>Previous type:</b>
+                      Previous type:
                     </Col>
                     <Col>{reschedulerDataSelectedDate?.type}</Col>
                   </Row>
@@ -263,7 +267,6 @@ const Questions = () => {
             </CardBody>
             <CardFooter className="card-footer">
               <Button
-                color="success"
                 className="book-slot"
                 onClick={() => handleBook()}
               >
@@ -275,16 +278,18 @@ const Questions = () => {
       )}
       {pyStatusMessage && (
         <>
-          <Row>
+          <div className="notification-success">
+            <Alert color="success" className="min-width-notification">
+            <Row>
             <div className="appointments">
               <h4>Confirmed! </h4>
             </div>
           </Row>
-          <div className="notification-success">
-            <Alert color="success" className="min-width-notification">
+          <Row className="appointments">
               {(testPath < 0 &&
                 `Your slot is scheduled with ${bookedSlotEmail}`) ||
                 `Your slot is rescheduled with ${bookedSlotEmail}`}
+                </Row>
             </Alert>
           </div>
           <SuccessConfirmation />

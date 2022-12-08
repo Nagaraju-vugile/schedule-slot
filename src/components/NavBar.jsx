@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <Container className="container-scheduler">
       <Row className="style-padding-bottom">
-        <Nav tabs>
+        <Nav>
           <NavItem>
             <NavLink
               className={currentActiveTab === "1" ? "active" : ""}

@@ -4,9 +4,7 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  Button,
-  Dropdown, DropdownItem, DropdownMenu, DropdownToggle
+import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink, Nav, NavItem
 } from "reactstrap";
 import {
   clearUserSessionDetails,
@@ -78,42 +76,43 @@ export default function Header() {
       <div className="loginButton">
         {profile ? (
           <>
-            <Button
-              color="link"
-              className="home-button"
-              onClick={() => handleHome()}
-            >
-              <AiFillHome style={{ marginBottom: "3px", marginRight: "3px" }} />
-              Home
-            </Button>
-            <Dropdown
-              isOpen={dropdownOpen}
-              toggle={toggle}
-              direction={(!dropdownOpen && "down") || "up"}
-            >
-              <DropdownToggle
-                caret
-                style={{ borderRadius: "0px" }}
-                className="profile-dropdown"
-              >
-                <AiFillSetting style={{ marginBottom: "3px", marginRight: "3px" }}/>
-                {selectedOption}
-              </DropdownToggle>
-              <DropdownMenu style={{ width: "100%" }}>
-                <DropdownItem onClick={() => handleProfile()}>
-                  <span style={{paddingLeft:"11px"}}>Profile</span>
-                </DropdownItem>
-                <DropdownItem onClick={() => handleLogout()}>
-                  <GoogleLogout
-                    clientId={clientId}
-                    buttonText="Sign out"
-                    onLogoutSuccess={logOut}
-                    className="logout-btn"
-                    icon={false}
+            <Nav>
+              <NavItem>
+                <NavLink href="#" onClick={() => handleHome()}>
+                  <AiFillHome
+                    style={{ marginBottom: "4px", marginRight: "6px" }}
                   />
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+                  Home
+                </NavLink>
+              </NavItem>
+              <Dropdown
+                nav
+                isOpen={dropdownOpen}
+                toggle={toggle}
+                direction={(!dropdownOpen && "down") || "up"}
+              >
+                <DropdownToggle nav caret>
+                  <AiFillSetting
+                    style={{ marginBottom: "4px", marginRight: "6px" }}
+                  />
+                  {selectedOption}
+                </DropdownToggle>
+                <DropdownMenu style={{ width: "100%" }}>
+                  <DropdownItem onClick={() => handleProfile()}>
+                    <span style={{ paddingLeft: "11px" }}>Profile</span>
+                  </DropdownItem>
+                  <DropdownItem onClick={() => handleLogout()}>
+                    <GoogleLogout
+                      clientId={clientId}
+                      buttonText="Sign out"
+                      onLogoutSuccess={logOut}
+                      className="logout-btn"
+                      icon={false}
+                    />
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </Nav>
           </>
         ) : (
           <GoogleLogin

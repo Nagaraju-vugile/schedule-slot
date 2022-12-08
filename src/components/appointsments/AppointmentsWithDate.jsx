@@ -55,13 +55,13 @@ const AppointmentsWithDate = ({
           timings?.map((timing, index) => {
             return (
               index < size &&
-              timing?.StartTimeText && (
+              timing?.pyText && (
                 <div className="availabilities-slot" key={index}>
                   <button
                     className="timing"
                     onClick={() => handleSelectedSlot(timing)}
                   >
-                    {timing?.StartTimeText}
+                    {timing?.pyText}
                   </button>
                 </div>
               )

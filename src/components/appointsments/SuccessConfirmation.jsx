@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button, Card, CardBody, CardFooter, Col, Row } from "reactstrap";
+import { IoIosArrowBack } from "react-icons/io";
 
 const SuccessConfirmation = () => {
   const navigate = useNavigate();
@@ -48,12 +49,13 @@ const SuccessConfirmation = () => {
     <Row className="question-section-card">
       <Card className="my-2 card-border">
       <Row>
-          <Col xs="3">
-            <Button onClick={() => handleBack()} className="back-button">
+          <Col xs="4">
+            <Button onClick={() => handleBack()} className="back-button" color="link">
+            <IoIosArrowBack className="next-button-svg" />
               Back
             </Button>
           </Col>
-          <Col xs="9" style={{paddingTop: "12px"}}>
+          <Col xs="8" style={{paddingTop: "12px"}}>
             <div><h5>Scheduled information</h5></div></Col>
         </Row>
         <CardBody className="padding-top-style">
@@ -89,7 +91,7 @@ const SuccessConfirmation = () => {
             </Row>
           </div>
           <Row>
-            <span className="success-confrm-value padding-top-content">
+            <span className="success-confrm-value padding-top-content appointments">
               <i>A calender invite with scheduled details has been forwarded to
               your email address.</i>
             </span>

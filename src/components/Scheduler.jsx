@@ -12,6 +12,7 @@ import Appointments from "./appointsments";
 import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Scheduler() {
   let dispatch = useDispatch();
@@ -66,7 +67,7 @@ export default function Scheduler() {
   if (loader) {
     return (
       <div className="loader">
-        <Spinner color="dark">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">Loading...</Spinner>
       </div>
     );
   }
@@ -78,7 +79,8 @@ export default function Scheduler() {
       <Container className="container-scheduler">
       <Row>
         <Col xs="3">
-          <Button onClick={() => handleBack()} className="back-button">
+          <Button onClick={() => handleBack()} className="back-button" color="link">
+            <IoIosArrowBack className="next-button-svg" />
             Back
           </Button>
         </Col>

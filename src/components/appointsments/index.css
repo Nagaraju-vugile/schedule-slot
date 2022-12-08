@@ -25,10 +25,14 @@
     font-size: 14px;
     margin-bottom: 10px;
     padding: 5px 15px;
-    border: 1px solid #d4f4fe;
-    background-color: #d4f4fe;
+    /* border: 1px solid #d4f4fe;
+    background-color: #d4f4fe; */
     border-radius: 4px;
     font-weight: 700;
+    background-color: white;
+    border: 1px solid #950695;
+    color: #950695;
+    transition: width 2s, height 2s, background-color 2s, transform 2s;
   }
 
   .timing-disabled{
@@ -37,15 +41,15 @@
     font-size: 14px;
     margin-bottom: 10px;
     padding: 0px 7px;
-    border: 1px solid #d4f4fe;
-    background-color: #d4f4fe;
+    border: 1px solid #703270;;
+    background-color: white;
     border-radius: 4px;
     font-weight: 700;
     pointer-events: none;
-    color: #c72d3c
+    color: #950695
   }
 
-  .timing:hover{
+  /* .timing:hover{
     background-color: #65b3cb;
     cursor: pointer;
   }
@@ -53,18 +57,37 @@
   .timing:focus{
     background-color: #65b3cb;
     cursor: pointer;
-  }
+  } */
+
+  /* .timing:hover,
+  .timing:focus {
+    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em);
+  } */
 
   .show-more{
     border: none;
     color: #275476;
     font-weight:500;
     text-decoration: none;
+    background-color: white;
+    /* color: #950695; */
+    width: 15%;
   }
 
-  .show-more:hover{
+  /* .show-more:hover{
     color: #17639d;
     cursor: pointer;
+  } */
+
+  .show-more:hover,
+  .show-more:focus, 
+  .show-more:active {
+    /* box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+    transform: translateY(-0.25em); */
+    /* color: #780b78; */
+    cursor: pointer;
+    background-color: white;
   }
 
 .no-availabilities-div{
@@ -94,7 +117,8 @@
   font-weight: 600;
   height: 100%;
   justify-content: center;
-  padding-top:300px;
+  padding-top:250px;
+  color: #950695;
 }
 
 .availabilities-day-name{
@@ -131,8 +155,25 @@
   width: 24px;
 }
 
+/* .book-slot{
+  margin-left:20px;
+} */
+
 .book-slot{
   margin-left:20px;
+  background-color: #4444d5;
+  border: #4444d5;
+}
+
+.book-slot:disabled{
+  margin-left:20px;
+  background-color: #4444d5;
+  border: #4444d5;
+}
+
+.book-slot:hover{
+  background-color: #4444d5;
+  border: #4444d5;
 }
 
 .home-button{
@@ -229,6 +270,7 @@ padding-top: 15px;
   justify-content: center;
   display: flex;
   margin-bottom: 2px;
+  flex-direction: column;
 }
 
 .border-main-div{
@@ -268,7 +310,7 @@ padding-top: 15px;
   background-color: rgb(255, 255, 255);
     display: inline-flex;
     align-items: center;
-    color: black !important;
+    color: #950695 !important;
     box-shadow: inset rgb(0 0 0 / 0%) 0px 0px 0px 0px, rgb(0 0 0 / 0%) 0px 0px 1px 0px !important;
     border-radius: 2px;
     border: 1px solid transparent;
@@ -286,6 +328,7 @@ padding-top: 15px;
   display: flex;
   justify-content: end;
   word-break: break-word;
+  font-weight: 600;
 }
 
 .table-row-style{
@@ -295,6 +338,10 @@ padding-top: 15px;
 .search-by-type-input{
   display: flex;
   justify-content: end;
+}
+
+.nav-link:hover{
+  border-bottom: 2px solid #950695;
 }
 
 @media screen and (max-width: 500px) {
@@ -338,6 +385,13 @@ padding-top: 15px;
     fill: red
   }
   .action-button-table{
+    display: none;
+  }
+
+  .action-button-table-reschedule{
+    display: none;
+  }
+  .action-button-table-cancel{
     display: none;
   }
 
@@ -417,7 +471,8 @@ padding-top: 15px;
    margin-left: 60px ;
   }
   .show-more{
-    padding-right: 80px;
+    width: 50%;
+    padding-right: 60px;
   }
   .prev-btn-padding{
     padding-left: 0px;
@@ -437,6 +492,17 @@ padding-top: 15px;
   .react-datepicker{
     position:absolute !important;
     left: -180px !important;
+  }
+
+  .btn-prime{
+    width:100%;
+  }
+  
+  .btn-dang{
+    width:100%;
+  }
+  .react-datepicker__input-container {
+    padding-top:6px !important;
   }
 
   .search-by-type-input{
@@ -467,10 +533,31 @@ padding-top: 15px;
   .cancel-trash{
     display:none;
   }
-  .action-button-table{
+  /* .action-button-table-reschedule {
     min-width: 106px;
     margin-bottom: 2px;
     margin-right: 5px;
+    background-color: white;
+    border: 1px solid #4444d5;
+    color: #4444d5;
+  }
+
+  .action-button-table-reschedule:hover {
+    min-width: 106px;
+    margin-bottom: 2px;
+    margin-right: 5px;
+    background-color: #4444d5;
+    border: 1px solid #4444d5;
+    color: #4444d5;
+  } */
+
+  .action-button-table-cancel, .action-button-table-cancel:hover{
+    min-width: 106px;
+    margin-bottom: 2px;
+    margin-right: 5px;
+    background-color: white;
+    border: 1px solid #a71616;
+    color: #a71616;
   }
   .container-padding{
     padding-left: 0px ;
@@ -485,6 +572,7 @@ padding-top: 15px;
 .page-navigation{
   display: flex;
   justify-content: center;
+  padding-top:15px;
 }
 
 @media screen and (max-width: 420px) {
@@ -506,6 +594,8 @@ padding-top: 15px;
   min-height: 150px;
 	height: 150px;
   background-image:  linear-gradient(#aeafff, #e5e5e5);
+  min-height: 90px;
+	height: 90px;
 }
 
 .Auth-form-container {
@@ -575,6 +665,7 @@ label {
 
 .padding-top-style{
   padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .style-padding-bottom{
@@ -606,6 +697,8 @@ label {
   width:100%;
   bottom:0;
   position: absolute;
+  background-color: #f8f9fa !important;
+  color: #950695 !important;
 }
 
 .layout-main{
@@ -617,7 +710,7 @@ label {
 }
 
 .link-color-footer{
-  color: white !important;
+  color: #950695 !important;
 }
 
 .question-section-card{
@@ -642,6 +735,9 @@ label {
   .calender-margin{
     margin-left:15px;
   }
+  .show-more{
+    width: 20%;
+  }
 }
 
 @media screen and (max-width: 400px) {
@@ -655,14 +751,15 @@ label {
 }
 
 .react-autosuggest__input {
-  width: 240px;
-  height: 30px;
+  width: 100%;
+  height: 40px;
   padding: 10px 20px;
   font-family: Helvetica, sans-serif;
   font-weight: 300;
   font-size: 16px;
   border: 1px solid #aaa;
-  border-radius: 4px;
+  border-radius: 0px;
+  border: 2px solid #d53bd5;
 }
 
 .react-autosuggest__input--focused {
@@ -714,6 +811,8 @@ label {
   color: #950695;
   margin-top: 5px;
   font-weight: 600;
+  text-decoration: none;
+  padding-left:0px;
 }
 
 .react-datepicker__input-container{
@@ -728,14 +827,220 @@ label {
   background-color: transparent !important;
 }
 
-.dropdown-item:hover{
+/* .dropdown-item:hover{
   background-color: white !important; 
-}
+} */
 
 .scheduler-types-col{
   padding-top:10px !important;
 }
 
+
+.btn-prime{
+  background-color: #4444d5;
+}
+
+.btn-dang{
+  background-color:#a71616;
+}
+
+.back-button{
+  background-color: white;
+  border: none;
+  color: #950695;
+  margin-top: 5px;
+  font-weight: 600;
+  text-decoration: none;
+  padding-left:0px;
+}
+
+.back-button:hover,
+.back-button:focus,
+.back-button:active{
+  background-color: white;
+  border: none;
+  color: #950695;
+}
+
+.cancel-slot{
+  margin-left:20px;
+  background-color: #a71616;
+  border: #a71616;
+}
+
+.cancel-slot:disabled{
+  margin-left:20px;
+  background-color: #a71616;
+  border: #a71616;
+}
+
+.cancel-slot:hover{
+  margin-left:20px;
+  background-color: #a71616;
+  border: #a71616;
+}
+
+.nav-link, .nav-link:hover{
+  color: #950695;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 600;
+}
+
+.profile-dropdown, .profile-dropdown:hover{
+ background-color: #7c087c;
+}
+
+.show-more:disabled{
+  /* color: #950695; */
+  background-color: white;
+}
+
+.btn-prime:disabled{
+  background-color: #4444d5;
+}
+
+/* .dropdown-item:focus{
+  background-color: white !important;
+} */
+/* .dropdown-item:active{
+  background-color: white !important;
+} */
+
+.react-datepicker__input-container{
+  display: none !important;
+}
+
+.react-datepicker-popper{
+  padding-top:0px !important;
+}
+
+.back-button:active{
+  background-color: none;
+}
+
+.dropdown-item{
+  color: #950695 !important;
+}
+
+.dropdown-menu:hover .logout-btn {
+  background-color: transparent !important;
+}
+
+/* .action-button-table-reschedule{
+  color: #29272c;
+    background: linear-gradient(128deg,#b85db8 0%,#992986 50%, #850a7e 100%);
+    transition: .25s ease-in-out;
+    background-size: 200% 100%;
+}
+
+.action-button-table-reschedule:hover{
+  color: white;
+  background-size: 50% 200%;
+  font-weight:600;
+} */
+
+/* .action-button-table-cancel{
+  color: #29272c;
+    text-decoration: none;
+    font-weight: 700;
+    background: linear-gradient(128deg,#a86664 0%,#b34444 50%, #d13429 100%);
+    transition: .25s ease-in-out;
+    background-size: 200% 100%;
+}
+
+.action-button-table-cancel:hover{
+  color: white;
+    background-size: 100% 50%;
+} */
+
+.action-button-table-reschedule{
+  border: 1px solid #550fc5f2;
+  background-color: white;
+  color: #550fc5f2;
+  transition: width 2s, height 2s, background-color 1.5s, transform 2s;
+  margin-right: 5px;
+}
+
+.action-button-table-reschedule:hover{
+  border: 1px solid #550fc5f2;
+  background-color: #550fc5f2;
+  color: white;
+  font-weight:500;
+}
+
+.action-button-table-cancel{
+  border: 1px solid #a71616;
+  background-color: white;
+  color: #a71616;
+  transition: width 2s, height 2s, background-color 1.5s, transform 2s;
+}
+
+.action-button-table-cancel:hover{
+  border: 1px solid #a71616;
+  background-color: #a71616;
+  color: white;
+  font-weight:500;
+}
+
+/* background: linear-gradient(128deg,#e919e9 0%, #930ec5 100%); */
+
+.timing:hover {
+  background-color: #960157;
+  font-weight:700;
+  color:white;
+}
+
+.btn-scheduler-type, .btn-scheduler-type:disabled{
+  border-radius:0px;
+  border: 2px solid #d53bd5;
+}
+
+.testing{
+  background-color: var(--bui_color_accent_background);
+    border-radius: var(--bui_border_radius_200);
+    box-shadow: var(--bui_shadow_100);
+    display: flex;
+    margin: var(--bui_spacing_6x) 0 var(--bui_spacing_4x);
+    padding: var(--bui_spacing_1x);
+    position: relative;
+    width: 100%;
+    justify-content: center;
+    /* border: 1px solid #950695; */
+}
+
+/* .testing-in-div:first-child {
+  flex: 1 1 auto;
+  margin-left: 0;
+} */
+
+.testing-in-dev{
+  background-color: var(--bui_color_white);
+    border-radius: var(--bui_border_radius_100);
+    box-sizing: border-box;
+    display: flex;
+    flex: 0 0 auto;
+    margin-left: var(--bui_spacing_1x);
+}
+
+@media screen and (max-width: 860px) {
+  .testing{
+    flex-direction: column !important;
+  }
+
+  .testing-in-dev{ 
+      flex-direction: column !important;
+  }
+  .btn-scheduler-type{
+    width:100%;
+  }
+  .react-autosuggest__container{
+    padding-top:2px;
+  }
+  .testing-in-div{
+    padding-top:2px;
+  }
+}
 
 
 
