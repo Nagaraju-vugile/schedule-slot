@@ -23,6 +23,18 @@ export const days = [
     "Dec"
   ];
 
+  export const url_sub_paths = {
+    secheduler:"scheduler",
+    rescheduler: "re-schedule",
+    questions: "questions",
+    cancel: "cancel",
+    bookings: "my-bookings",
+    profile: "profile",
+    schedulersList: "schedulers-list",
+    login: "login",
+    type: "Type"
+  }
+
   export const urls = (id, type, formattedDate, action)=>{
     if (action === "getAvailabilities") {
       return `https://bluerosetech01.pegalabs.io/prweb/api/v1/data/D_GetSchedules?EmailID=${

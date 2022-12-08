@@ -14,6 +14,7 @@ import {
   Spinner,
   Input,
 } from "reactstrap";
+import config from "../config";
 
 import {
   clearCancelSlots,
@@ -36,7 +37,7 @@ const MyBookings = () => {
   );
   const [displayData, setDisplayData] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const pageSize = 10;
+  const pageSize = config.PAGES_COUNT;
   const [pagesCount, setPagesCount] = useState(
     Math.ceil(myBookingsData?.length / pageSize) || 0
   );
@@ -87,9 +88,9 @@ const MyBookings = () => {
 
   useEffect(() => {
     dispatch(myBookings("chandan_palamakula@bluerose-tech.com"));
-    dispatch(setActiveTab("2"));
+    dispatch(setActiveTab(config.ACTIVE_TAB.MY_BOOKINGS));
     dispatch(clearCancelSlots());
-    dispatch(selectedProfileOption("Settings"));
+    dispatch(selectedProfileOption(config.PROFILE_NAV_OPTIONS.SETTINGS));
   }, [dispatch]);
 
   useEffect(() => {

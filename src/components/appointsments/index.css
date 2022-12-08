@@ -996,7 +996,7 @@ label {
   border: 2px solid #d53bd5;
 }
 
-.testing{
+.find-by-input{
   background-color: var(--bui_color_accent_background);
     border-radius: var(--bui_border_radius_200);
     box-shadow: var(--bui_shadow_100);
@@ -1024,7 +1024,7 @@ label {
 }
 
 @media screen and (max-width: 860px) {
-  .testing{
+  .find-by-input{
     flex-direction: column !important;
   }
 

@@ -67,7 +67,9 @@ export default function Scheduler() {
   if (loader) {
     return (
       <div className="loader">
-        <Spinner animation="border" variant="warning">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">
+          Loading...
+        </Spinner>
       </div>
     );
   }
@@ -77,19 +79,18 @@ export default function Scheduler() {
       <Header />
       <NavBar />
       <Container className="container-scheduler">
-      <Row>
-        <Col xs="3">
-          <Button onClick={() => handleBack()} className="back-button" color="link">
-            <IoIosArrowBack className="next-button-svg" />
-            Back
-          </Button>
-        </Col>
-        {/* <Col xs="9" style={{ paddingTop: "12px" }}>
-          <div>
-            <h5>Book an appointment</h5>
-          </div>
-        </Col> */}
-      </Row>
+        <Row>
+          <Col xs="3">
+            <Button
+              onClick={() => handleBack()}
+              className="back-button"
+              color="link"
+            >
+              <IoIosArrowBack className="next-button-svg" />
+              Back
+            </Button>
+          </Col>
+        </Row>
       </Container>
       {schedulerList?.map((item, index) => (
         <Appointments

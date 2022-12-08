@@ -157,52 +157,8 @@ const SchedulerTypesList = () => {
         </Row>
         {schedulerTypes && schedulerTypes.length > 0 && (
           <>
-            {/* <Row className="scheduler-types-buttons">
-              <Col className="scheduler-types-col">
-                <Autosuggest
-                  suggestions={suggestions}
-                  onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                  onSuggestionsClearRequested={onSuggestionsClearRequested}
-                  getSuggestionValue={getSuggestionValue}
-                  renderSuggestion={renderSuggestion}
-                  inputProps={inputProps}
-                  shouldRenderSuggestions={shouldRenderSuggestions}
-                />
-              </Col>
-              <Col className="scheduler-types-col">
-                <Autosuggest
-                  suggestions={suggestionsType}
-                  onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
-                  onSuggestionsClearRequested={onSuggestionsClearRequestedType}
-                  getSuggestionValue={getSuggestionValueType}
-                  renderSuggestion={renderSuggestionType}
-                  inputProps={inputPropsType}
-                  shouldRenderSuggestions={shouldRenderSuggestionsType}
-                />
-              </Col>
-              <Col className="scheduler-types-col">
-                <Button
-                  className="btn-scheduler-type"
-                  color="primary"
-                  onClick={() => handleGoSearch()}
-                  disabled={!value && !valueType}
-                >
-                  Find slots
-                </Button>
-              </Col>
-              <Col className="scheduler-types-col">
-                <Button
-                  className="btn-scheduler-type"
-                  color="danger"
-                  onClick={() => handleClear()}
-                  disabled={!value && !valueType}
-                >
-                  Clear selection
-                </Button>
-              </Col>
-            </Row> */}
-            <div className="testing">
-              <div className="testing-in-div">
+            <div className="find-by-input">
+              <div className="find-by-input-div">
                 <Autosuggest
                   suggestions={suggestions}
                   onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -213,10 +169,8 @@ const SchedulerTypesList = () => {
                   shouldRenderSuggestions={shouldRenderSuggestions}
                 />
               </div>
-              {/* </Col> */}
-              {/* <Col className="scheduler-types-col"> */}
 
-              <div className="testing-in-div">
+              <div className="find-by-input-div">
                 <Autosuggest
                   suggestions={suggestionsType}
                   onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
@@ -227,7 +181,7 @@ const SchedulerTypesList = () => {
                   shouldRenderSuggestions={shouldRenderSuggestionsType}
                 />
               </div>
-              <div className="testing-in-div">
+              <div className="find-by-input-div">
                 <Button
                   className="btn-scheduler-type"
                   color="primary"
@@ -237,7 +191,7 @@ const SchedulerTypesList = () => {
                   Find slots
                 </Button>
               </div>
-              <div className="testing-in-div">
+              <div className="find-by-input-div">
                 <Button
                   className="btn-scheduler-type"
                   color="danger"
