@@ -76,7 +76,7 @@ export default function Header() {
       <div className="loginButton">
         {profile ? (
           <>
-            <Nav>
+            <Nav className="header-nav">
               <NavItem>
                 <NavLink href="#" onClick={() => handleHome()}>
                   <AiFillHome

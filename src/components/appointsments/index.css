@@ -515,6 +515,15 @@ padding-top: 15px;
   .scheduler-types-col{
     padding-top:10px !important;
   }
+
+  .header-nav{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  a:after{
+    margin-top:5px;
+  }
 }
 
 @media screen and (max-width: 900px) {

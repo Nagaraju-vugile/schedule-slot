@@ -25,6 +25,8 @@
 
     Creating credentials process: -> Credentials -> +CREATE CREDENTIALS ->Choose application type(app type we used for)
 
+    Note: Google sign in is not supported on browser in incognito mode
+
 # Deployment
     For deployments we have used digitalocean.
     For deployment changes need to configure at https://cloud.digitalocean.com/apps/aebc616c-e65e-4f9d-9814-be2eeffa2112/overview
