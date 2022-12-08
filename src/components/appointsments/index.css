@@ -1049,6 +1049,10 @@ label {
     flex-direction: column !important;
   }
 
+  .find-by-input-div{
+    padding-top:5px;
+  }
+
   .testing-in-dev{ 
       flex-direction: column !important;
   }
@@ -1060,6 +1064,9 @@ label {
   }
   .testing-in-div{
     padding-top:2px;
+  }
+  .booking-header{
+    text-align: center;
   }
 }
 
