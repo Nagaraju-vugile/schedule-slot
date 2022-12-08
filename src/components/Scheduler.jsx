@@ -80,7 +80,7 @@ export default function Scheduler() {
       <NavBar />
       <Container className="container-scheduler">
         <Row>
-          <Col xs="3">
+          <Col xs="4">
             <Button
               onClick={() => handleBack()}
               className="back-button"
