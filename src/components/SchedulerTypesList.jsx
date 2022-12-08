@@ -152,7 +152,7 @@ const SchedulerTypesList = () => {
       <Header />
       <Container className="container-scheduler">
         <NavBar />
-        <Row style={{ paddingBottom: "10px" }}>
+        <Row className="booking-header" style={{ paddingBottom: "10px" }}>
           <h5>Show available slots</h5>
         </Row>
         {schedulerTypes && schedulerTypes.length > 0 && (

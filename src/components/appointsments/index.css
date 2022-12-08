@@ -524,6 +524,15 @@ padding-top: 15px;
   a:after{
     margin-top:5px;
   }
+  .nav{
+    flex-direction: column;
+  }
+  .dropdown-item{
+    text-align: center;
+  }
+  .booking-header{
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 900px) {
