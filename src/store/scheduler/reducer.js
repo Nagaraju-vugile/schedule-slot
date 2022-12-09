@@ -25,6 +25,7 @@ import {
   SET_ACTIVE_TAB,
   CLEAR_CANCEL_SLOTS,
   SELECTED_PROFILE_OPTION,
+  CLEAR_ERROR,
 } from "./actionTypes";
 
 const initialState = {
@@ -207,6 +208,12 @@ const availabilitiesReducer = (state = initialState, action) => {
           state = {
             ...state,
             selectedProfileOption: action.payload,
+          };
+          break;
+          case CLEAR_ERROR:
+          state = {
+            ...state,
+            error: null,
           };
           break;
     default:

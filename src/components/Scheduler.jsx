@@ -5,6 +5,7 @@ import { Spinner, Button, Row, Col, Container } from "reactstrap";
 import {
   clearAvailabilities,
   clearBookedSlots,
+  clearError,
   getAvailabilities,
 } from "../store/scheduler/actions";
 import "../styles.css";
@@ -56,6 +57,7 @@ export default function Scheduler() {
   useEffect(() => {
     dispatch(clearAvailabilities());
     dispatch(getAvailabilities(selectedStartDate, id, query.get("Type")));
+    dispatch(clearError());
   }, []);
 
   useEffect(() => {

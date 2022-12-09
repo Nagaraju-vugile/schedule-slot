@@ -25,6 +25,7 @@ import {
     SET_ACTIVE_TAB,
     CLEAR_CANCEL_SLOTS,
     SELECTED_PROFILE_OPTION,
+    CLEAR_ERROR,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -203,4 +204,10 @@ import {
       payload: data
     };
   };
+
+  export const clearError = ()=>{
+    return {
+      type: CLEAR_ERROR,
+    }
+  }
 
