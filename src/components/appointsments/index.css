@@ -1093,6 +1093,7 @@ label {
 
 .sort-style{
   border-bottom:1px solid #937979;
+  cursor: pointer;
 }
 
 
