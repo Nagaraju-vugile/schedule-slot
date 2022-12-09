@@ -102,6 +102,10 @@ const Questions = () => {
     (state) => state?.availabilitiesReducer?.bookedSlot?.pyStatusMessage
   );
 
+  const pyStatus = useSelector(
+    (state) => state?.availabilitiesReducer?.error?.message?.data
+  );
+
   const updateAnswer = (e, indexVal) => {
     const updateData = questionsDataUpdate.map((item, index)=>{
       if(index === indexVal){
@@ -143,13 +147,28 @@ const Questions = () => {
     <div className="layout-main">
       <Header />
       <NavBar />
+      {pyStatus && (
+        <div className="notification-success">
+        <Alert color="danger" className="min-width-notification">
+          <Row>
+            <div className="appointments">
+              <h6>{pyStatus} </h6>
+            </div>
+          </Row>
+        </Alert>
+        </div>
+      )}
       {!pyStatusMessage && (
         <Row className="question-section-card">
           <Card className="my-2 card-border">
             <Row>
               <Col xs="4">
-                <Button onClick={() => handleBack()} className="back-button" color="link">
-                    <IoIosArrowBack className="next-button-svg" />
+                <Button
+                  onClick={() => handleBack()}
+                  className="back-button"
+                  color="link"
+                >
+                  <IoIosArrowBack className="next-button-svg" />
                   Back
                 </Button>
               </Col>
@@ -266,10 +285,7 @@ const Questions = () => {
               ))}
             </CardBody>
             <CardFooter className="card-footer">
-              <Button
-                className="book-slot"
-                onClick={() => handleBook()}
-              >
+              <Button className="book-slot" onClick={() => handleBook()}>
                 {(testPath < 0 && "Book") || "Reschedule"}
               </Button>
             </CardFooter>
@@ -280,16 +296,16 @@ const Questions = () => {
         <>
           <div className="notification-success">
             <Alert color="success" className="min-width-notification">
-            <Row>
-            <div className="appointments">
-              <h4>Confirmed! </h4>
-            </div>
-          </Row>
-          <Row className="appointments">
-              {(testPath < 0 &&
-                `Your slot is scheduled with ${bookedSlotEmail}`) ||
-                `Your slot is rescheduled with ${bookedSlotEmail}`}
-                </Row>
+              <Row>
+                <div className="appointments">
+                  <h4>Confirmed! </h4>
+                </div>
+              </Row>
+              <Row className="appointments">
+                {(testPath < 0 &&
+                  `Your slot is scheduled with ${bookedSlotEmail}`) ||
+                  `Your slot is rescheduled with ${bookedSlotEmail}`}
+              </Row>
             </Alert>
           </div>
           <SuccessConfirmation />

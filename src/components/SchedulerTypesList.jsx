@@ -5,7 +5,11 @@ import CookieConsent from "react-cookie-consent";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Col, Container, Row, Spinner } from "reactstrap";
+import { Button, Container, Row, Spinner,
+  ButtonDropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle } from "reactstrap";
 import { getUnique } from "../helpers/ui_helper";
 import {
   clearAvailabilities,
@@ -16,6 +20,7 @@ import {
 import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
+import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 
 const SchedulerTypesList = () => {
   let dispatch = useDispatch();
@@ -26,15 +31,27 @@ const SchedulerTypesList = () => {
   const schedulerTypes = useSelector(
     (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
   );
+  const [selectedId, setSelectedId] = useState("");
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-
+  const [selectedType, setSelectedType] = useState("");
+  const [openType, setOpenType] = useState(false);
   const [valueType, setValueType] = useState("");
   const [suggestionsType, setSuggestionsType] = useState([]);
+
+  const [openId, setOpenId] = useState(false);
 
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.loadingSchedulerTypes
   );
+
+  const toggleId = () => {
+    setOpenId(!openId);
+  };
+
+  const toggleType = () => {
+    setOpenType(!openType);
+  };
 
   useEffect(() => {
     if (storedUser === "null" || storedUser === null) {
@@ -93,9 +110,11 @@ const SchedulerTypesList = () => {
   };
 
   function shouldRenderSuggestions(value, reason) {
+    if(value !== '')
     return true;
   }
   function shouldRenderSuggestionsType(value, reason) {
+    if(value !== '')
     return true;
   }
   const onChange = (event, { newValue }) => {
@@ -118,6 +137,15 @@ const SchedulerTypesList = () => {
     onChange: onChangeType,
   };
 
+  const handleSearchType = (type, item) => {
+    if (type === "id") {
+      setSelectedId(item.SchedulerRefID);
+      setValue(item.SchedulerRefID);
+    } else{
+      setValueType(item.Type);
+    }
+  };
+
   const handleGoSearch = () => {
     navigate(
       "/scheduler" +
@@ -137,6 +165,69 @@ const SchedulerTypesList = () => {
     dispatch(selectedProfileOption("Settings"));
   }, [dispatch]);
 
+  const renderById = (schedulerTypes) => {
+    return (
+      <ButtonDropdown
+        isOpen={openId}
+        toggle={() => toggleId()}
+        direction={(!openId && "down") || "up"}
+        className="btn-scheduler-type"
+        style={{ height: "40px", width: "30px" }}
+      >
+        <DropdownToggle
+          caret
+          data-toggle="dropdown"
+          tag="span"
+          className="dropdown-toggle-search"
+        ></DropdownToggle>
+        {openId && (
+          <DropdownMenu>
+            {getUnique(schedulerTypes, "SchedulerRefID")?.map((item) => (
+              <DropdownItem
+                key={item.SchedulerRefID}
+                onClick={(e) => handleSearchType("id", item)}
+              >
+                {item.SchedulerRefID}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        )}
+      </ButtonDropdown>
+    );
+  };
+
+  const renderByType = (schedulerTypes) => {
+    return (
+      <ButtonDropdown
+        isOpen={openType}
+        toggle={() => toggleType()}
+        direction={(!openType && "down") || "up"}
+        className="btn-scheduler-type"
+        style={{ height: "40px", width: "30px" }}
+        color="link"
+      >
+        <DropdownToggle
+          caret
+          data-toggle="dropdown"
+          tag="span"
+          className="dropdown-toggle-search"
+        ></DropdownToggle>
+        {openType && (
+          <DropdownMenu>
+            {getUnique(schedulerTypes, "Type")?.map((item) => (
+              <DropdownItem
+                key={item.Type}
+                onClick={(e) => handleSearchType("type", item)}
+              >
+                {item.Type}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        )}
+      </ButtonDropdown>
+    );
+  };
+
   if (loader) {
     return (
       <div className="loader">
@@ -153,12 +244,12 @@ const SchedulerTypesList = () => {
       <Container className="container-scheduler">
         <NavBar />
         <Row className="booking-header" style={{ paddingBottom: "10px" }}>
-          <h5>Show available slots</h5>
+          <h5 style={{paddingLeft:"27px"}}>Show available slots</h5>
         </Row>
         {schedulerTypes && schedulerTypes.length > 0 && (
           <>
             <div className="find-by-input">
-              <div className="find-by-input-div">
+              <div className="find-by-input-div" style={{minWidth:"25%"}}>
                 <Autosuggest
                   suggestions={suggestions}
                   onSuggestionsFetchRequested={onSuggestionsFetchRequested}
@@ -169,8 +260,8 @@ const SchedulerTypesList = () => {
                   shouldRenderSuggestions={shouldRenderSuggestions}
                 />
               </div>
-
-              <div className="find-by-input-div">
+              <div className="find-by-input-div">{renderById(schedulerTypes)}</div>
+              <div className="find-by-input-div"  style={{minWidth:"25%"}}>
                 <Autosuggest
                   suggestions={suggestionsType}
                   onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
@@ -181,6 +272,7 @@ const SchedulerTypesList = () => {
                   shouldRenderSuggestions={shouldRenderSuggestionsType}
                 />
               </div>
+              <div className="find-by-input-div">{renderByType(schedulerTypes)}</div>
               <div className="find-by-input-div">
                 <Button
                   className="btn-scheduler-type"
@@ -188,6 +280,7 @@ const SchedulerTypesList = () => {
                   onClick={() => handleGoSearch()}
                   disabled={!value && !valueType}
                 >
+                  <AiOutlineSearch style={{ marginBottom: "4px", marginRight: "6px" }}/>
                   Find slots
                 </Button>
               </div>
@@ -198,6 +291,7 @@ const SchedulerTypesList = () => {
                   onClick={() => handleClear()}
                   disabled={!value && !valueType}
                 >
+                  <AiOutlineClose style={{ marginBottom: "4px", marginRight: "6px" }}/>
                   Clear selection
                 </Button>
               </div>

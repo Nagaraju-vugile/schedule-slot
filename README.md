@@ -10,7 +10,13 @@
     "react-datepicker": "^4.8.0",
     "react-google-login": "^5.2.2",
     "reactstrap": "^9.1.5",
-    "redux": "^4.2.0",
+    "redux": "^4.2.0"
+
+# Install application and run
+
+    1. go to root folder
+    2. npm install
+    3. npm run start
 
 # Configuration settings
 

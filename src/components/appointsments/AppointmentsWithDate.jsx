@@ -51,11 +51,10 @@ const AppointmentsWithDate = ({
             {months[updatedDate.getMonth()]}. {updatedDate.getDate()}
           </div>
         </div>
-        {timings?.length > 1 &&
+        {timings?.length > 0 &&
           timings?.map((timing, index) => {
             return (
-              index < size &&
-              timing?.pyText && (
+              (index < size && timing?.pyText && (
                 <div className="availabilities-slot" key={index}>
                   <button
                     className="timing"
@@ -64,12 +63,9 @@ const AppointmentsWithDate = ({
                     {timing?.pyText}
                   </button>
                 </div>
-              )
+              )) || <Button className="timing-disabled">unavailable</Button>
             );
           })}
-        {timings?.length <= 1 && (
-          <Button className="timing-disabled">unavailable</Button>
-        )}
       </div>
     </Col>
   );

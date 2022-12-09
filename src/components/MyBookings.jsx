@@ -87,7 +87,7 @@ const MyBookings = () => {
   };
 
   useEffect(() => {
-    dispatch(myBookings("chandan_palamakula@bluerose-tech.com"));
+    dispatch(myBookings("krishna_chaitanya@bluerose-tech.com"));
     dispatch(setActiveTab(config.ACTIVE_TAB.MY_BOOKINGS));
     dispatch(clearCancelSlots());
     dispatch(selectedProfileOption(config.PROFILE_NAV_OPTIONS.SETTINGS));

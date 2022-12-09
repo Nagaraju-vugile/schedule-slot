@@ -780,7 +780,8 @@ label {
   font-size: 16px;
   border: 1px solid #aaa;
   border-radius: 0px;
-  border: 2px solid #d53bd5;
+  /* border: 2px solid #d53bd5; */
+  box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px;
 }
 
 .react-autosuggest__input--focused {
@@ -1014,7 +1015,8 @@ label {
 
 .btn-scheduler-type, .btn-scheduler-type:disabled{
   border-radius:0px;
-  border: 2px solid #d53bd5;
+  /* border: 2px solid #d53bd5; */
+  box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px;
 }
 
 .find-by-input{
@@ -1028,6 +1030,7 @@ label {
     width: 100%;
     justify-content: center;
     /* border: 1px solid #950695; */
+    /* box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px; */
 }
 
 /* .testing-in-div:first-child {
@@ -1068,6 +1071,12 @@ label {
   .booking-header{
     text-align: center;
   }
+}
+
+.dropdown-toggle-search{
+  margin-left: 5px;
+  padding-top: 0px;
+  margin-top: 5px;
 }
 
 
