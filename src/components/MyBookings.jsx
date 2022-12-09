@@ -37,6 +37,8 @@ const MyBookings = () => {
   );
   const [displayData, setDisplayData] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
+  // const [selectedSortType, setSelectedSortType] = useState("");
+  const [ascend, setAscend] = useState(false);
   const pageSize = config.PAGES_COUNT;
   const [pagesCount, setPagesCount] = useState(
     Math.ceil(myBookingsData?.length / pageSize) || 0
@@ -131,6 +133,24 @@ const MyBookings = () => {
     setSearch(event.target.value);
   };
 
+  const sortBy = (type)=>{
+    // setSelectedSortType(type);
+    setAscend(!ascend);
+  //   [...displayData].sort((prev, next) =>
+  //   prev[type] > next[type] ? 1 : -1,
+  // );
+  if (!ascend){
+    setDisplayData(
+      [...displayData].sort((prev, next) => (prev[type] > next[type] ? 1 : -1))
+    );
+  }
+  else{
+    setDisplayData(
+      [...displayData].sort((prev, next) => (prev[type] < next[type] ? 1 : -1))
+    );
+  }
+  }
+
   if (loader) {
     return (
       <div className="loader">
@@ -166,13 +186,35 @@ const MyBookings = () => {
             </Row>
             <Row>
               <Row className="table-row-style">
-                <Col className="info-sub-header">S.no</Col>
-                <Col className="info-sub-header">Type</Col>
-                <Col className="info-sub-header">Scheduled date</Col>
-                <Col className="info-sub-header">Start time</Col>
-                <Col className="info-sub-header">End time</Col>
+                <Col className="info-sub-header">
+                  <span className="sort-style">S.no</span>
+                </Col>
+                <Col
+                  className="info-sub-header"
+                  onClick={() => sortBy("SchedulerType")}
+                >
+                  <span className="sort-style">Type</span>
+                </Col>
+                <Col
+                  className="info-sub-header"
+                  onClick={() => sortBy("ScheduledDate")}
+                >
+                  <span className="sort-style">Scheduled date</span>
+                </Col>
+                <Col
+                  className="info-sub-header"
+                  onClick={() => sortBy("StartTime")}
+                >
+                  <span className="sort-style">Start time</span>
+                </Col>
+                <Col
+                  className="info-sub-header"
+                  onClick={() => sortBy("EndTime")}
+                >
+                  <span className="sort-style">End time</span>
+                </Col>
                 <Col className="info-sub-header action-column-min-width">
-                  Action
+                  <span className="sort-style"> Action </span>
                 </Col>
               </Row>
               {displayData?.map((item, index) => (

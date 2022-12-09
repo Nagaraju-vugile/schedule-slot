@@ -536,6 +536,12 @@ padding-top: 15px;
   .find-by-input-div{
     padding-top:5px;
   }
+  .btn-scheduler-type {
+    width: 100%;
+  }
+  .dropdown-toggle-search {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -1071,12 +1077,22 @@ label {
   .booking-header{
     text-align: center;
   }
+  .btn-scheduler-type {
+    width: 100%;
+  }
+  .dropdown-toggle-search {
+    width: 100%;
+  }
 }
 
 .dropdown-toggle-search{
   margin-left: 5px;
   padding-top: 0px;
   margin-top: 5px;
+}
+
+.sort-style{
+  border-bottom:1px solid #937979;
 }
 
 
