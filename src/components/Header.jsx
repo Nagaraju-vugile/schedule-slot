@@ -1,11 +1,10 @@
 import { gapi } from "gapi-script";
 import React, { useEffect, useState } from "react";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import { GoogleLogout } from "react-google-login";
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink, Nav, NavItem
-} from "reactstrap";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from "reactstrap";
 import {
   clearUserSessionDetails,
   selectedProfileOption,
@@ -83,7 +82,6 @@ export default function Header() {
   return (
     <div className="header">
       <div className="loginButton">
-        {profile ? (
           <>
             <Nav className="header-nav">
               <NavItem>
@@ -123,16 +121,7 @@ export default function Header() {
               </Dropdown>
             </Nav>
           </>
-        ) : (
-          <GoogleLogin
-            clientId={clientId}
-            buttonText="Sign in"
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            cookiePolicy={"single_host_origin"}
-            isSignedIn={true}
-          />
-        )}
+        
       </div>
     </div>
   );

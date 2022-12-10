@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineFieldTime } from "react-icons/ai";
+import { AiOutlineFieldTime, AiOutlineSortAscending } from "react-icons/ai";
 import { BiTrash } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   Col,
-  Container,
-  Pagination,
+  Container, Input, Pagination,
   PaginationItem,
   PaginationLink,
   Row,
-  Spinner,
-  Input,
+  Spinner
 } from "reactstrap";
 import config from "../config";
 
@@ -22,7 +20,7 @@ import {
   selectedDataDisplay,
   selectedProfileOption,
   selectedReschedulerDetails,
-  setActiveTab,
+  setActiveTab
 } from "../store/scheduler/actions";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -91,7 +89,7 @@ const MyBookings = () => {
   };
 
   useEffect(() => {
-    dispatch(myBookings(userProfileEmail));
+    dispatch(myBookings('krishna_chaitanya@bluerose-tech.com'));
     dispatch(setActiveTab(config.ACTIVE_TAB.MY_BOOKINGS));
     dispatch(clearCancelSlots());
     dispatch(selectedProfileOption(config.PROFILE_NAV_OPTIONS.SETTINGS));
@@ -196,34 +194,38 @@ const MyBookings = () => {
                 <Row>
                   <Row className="table-row-style">
                     <Col className="info-sub-header">
-                      <span className="sort-style">S.no</span>
+                      <span>S.no</span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("SchedulerType")}
+                      title="Sort"
                     >
-                      <span className="sort-style">Type</span>
+                      <span className="sort-style">Type <AiOutlineSortAscending /></span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("ScheduledDate")}
+                      title="Sort"
                     >
-                      <span className="sort-style">Scheduled date</span>
+                      <span className="sort-style">Scheduled date <AiOutlineSortAscending /></span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("StartTime")}
+                      title="Sort"
                     >
-                      <span className="sort-style">Start time</span>
+                      <span className="sort-style">Start time <AiOutlineSortAscending /></span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("EndTime")}
+                      title="Sort"
                     >
-                      <span className="sort-style">End time</span>
+                      <span className="sort-style">End time <AiOutlineSortAscending /></span>
                     </Col>
                     <Col className="info-sub-header action-column-min-width">
-                      <span className="sort-style"> Action </span>
+                      <span> Action </span>
                     </Col>
                   </Row>
                   {displayData?.map((item, index) => (

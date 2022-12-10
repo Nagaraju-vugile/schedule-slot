@@ -3,24 +3,24 @@ import React, { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
 import CookieConsent from "react-cookie-consent";
 
+import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Container, Row, Spinner,
-  ButtonDropdown,
-  DropdownItem,
+import {
+  Button, ButtonDropdown, Container, DropdownItem,
   DropdownMenu,
-  DropdownToggle } from "reactstrap";
+  DropdownToggle, Row, Spinner
+} from "reactstrap";
 import { getUnique } from "../helpers/ui_helper";
 import {
   clearAvailabilities,
   getSchedulerTypeDetails,
   selectedProfileOption,
-  setActiveTab,
+  setActiveTab
 } from "../store/scheduler/actions";
 import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
-import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 
 const SchedulerTypesList = () => {
   let dispatch = useDispatch();
@@ -172,14 +172,17 @@ const SchedulerTypesList = () => {
         toggle={() => toggleId()}
         direction={(!openId && "down") || "up"}
         className="btn-scheduler-type"
-        style={{ height: "40px", width: "30px" }}
+        style={{ height: "38px", width: "30px", marginTop: "1px" }}
       >
         <DropdownToggle
           caret
           data-toggle="dropdown"
           tag="span"
           className="dropdown-toggle-search"
-        ></DropdownToggle>
+          title="Select scheduler id"
+        >
+          <span className="label-select-btn">Select id</span>
+        </DropdownToggle>
         {openId && (
           <DropdownMenu>
             {getUnique(schedulerTypes, "SchedulerRefID")?.map((item) => (
@@ -203,7 +206,7 @@ const SchedulerTypesList = () => {
         toggle={() => toggleType()}
         direction={(!openType && "down") || "up"}
         className="btn-scheduler-type"
-        style={{ height: "40px", width: "30px" }}
+        style={{ height: "38px", width: "30px", marginTop: "1px" }}
         color="link"
       >
         <DropdownToggle
@@ -211,7 +214,10 @@ const SchedulerTypesList = () => {
           data-toggle="dropdown"
           tag="span"
           className="dropdown-toggle-search"
-        ></DropdownToggle>
+          title="Select scheduler type"
+        >
+          <span className="label-select-btn">Select type</span>
+        </DropdownToggle>
         {openType && (
           <DropdownMenu>
             {getUnique(schedulerTypes, "Type")?.map((item) => (

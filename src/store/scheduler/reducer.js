@@ -32,9 +32,7 @@ const initialState = {
   availabilities: null,
   loadingAvailabilities: false,
   loadingPostDetails: false,
-  error: {
-    message: "",
-  },
+  error: null,
   // selectedStartDate: new Date("2022-12-02"),
   selectedStartDate: new Date(),
   loadingSchedulerTypes: false,
@@ -50,7 +48,7 @@ const initialState = {
   cancelSlot: null,
   cancelSlotLoader: false,
   activeTab: "1",
-  selectedProfileOption: "Settings"
+  selectedProfileOption: "Settings",
 };
 
 const availabilitiesReducer = (state = initialState, action) => {
@@ -68,9 +66,7 @@ const availabilitiesReducer = (state = initialState, action) => {
     case GET_AVAILABILITIES_FAIL:
       state = {
         ...state,
-        error: {
-          message: "Error",
-        },
+        error: action.payload,
         loadingAvailabilities: false,
       };
       break;
@@ -90,9 +86,7 @@ const availabilitiesReducer = (state = initialState, action) => {
     case GET_SCHEDULER_TYPES_FAIL:
       state = {
         ...state,
-        error: {
-          message: "Error",
-        },
+        error: action.payload,
         loadingSchedulerTypes: false,
       };
       break;
@@ -112,9 +106,7 @@ const availabilitiesReducer = (state = initialState, action) => {
     case BOOK_SLOT_FAIL:
       state = {
         ...state,
-        error: {
-          message: action.payload,
-        },
+        error: action.payload,
         loadingBookSlot: false,
       };
       break;
@@ -161,9 +153,8 @@ const availabilitiesReducer = (state = initialState, action) => {
     case MY_BOOKINGS_FAIL:
       state = {
         ...state,
-        error: {
-          message: "Error",
-        },
+        error: action.payload,
+
         myBookingsLoader: false,
       };
       break;
@@ -186,9 +177,8 @@ const availabilitiesReducer = (state = initialState, action) => {
     case CANCEL_SLOT_FAIL:
       state = {
         ...state,
-        error: {
-          message: "Error",
-        },
+        error: action.payload,
+
         cancelSlotLoader: false,
       };
       break;
@@ -198,24 +188,24 @@ const availabilitiesReducer = (state = initialState, action) => {
         activeTab: action.payload,
       };
       break;
-      case CLEAR_CANCEL_SLOTS:
-        state = {
-          ...state,
-          cancelSlot: null,
-        };
-        break;
-        case SELECTED_PROFILE_OPTION:
-          state = {
-            ...state,
-            selectedProfileOption: action.payload,
-          };
-          break;
-          case CLEAR_ERROR:
-          state = {
-            ...state,
-            error: null,
-          };
-          break;
+    case CLEAR_CANCEL_SLOTS:
+      state = {
+        ...state,
+        cancelSlot: null,
+      };
+      break;
+    case SELECTED_PROFILE_OPTION:
+      state = {
+        ...state,
+        selectedProfileOption: action.payload,
+      };
+      break;
+    case CLEAR_ERROR:
+      state = {
+        ...state,
+        error: null,
+      };
+      break;
     default:
       state = { ...state };
       break;

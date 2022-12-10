@@ -1,8 +1,8 @@
 import React from "react";
+import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Button, Card, CardBody, CardFooter, Col, Row } from "reactstrap";
-import { IoIosArrowBack } from "react-icons/io";
+import { Button, Card, CardBody, Col, Row } from "reactstrap";
 
 const SuccessConfirmation = () => {
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ const SuccessConfirmation = () => {
               </Col>
             </Row>
           </div>
-          <Row>
+          <Row style={{paddingBotom:"10px"}}>
             <span className="success-confrm-value padding-top-content appointments">
               <i>A calender invite with scheduled details has been forwarded to
               your email address.</i>

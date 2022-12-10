@@ -59,11 +59,17 @@ const AppointmentsWithDate = ({
                   <button
                     className="timing"
                     onClick={() => handleSelectedSlot(timing)}
+                    title={"Book at " + timing?.pyText || timing?.StartTimeText}
                   >
-                    {timing?.pyText}
+                    {timing?.pyText || timing?.StartTimeText}
                   </button>
                 </div>
-              )) || <Button className="timing-disabled">unavailable</Button>
+              )) ||
+              (index < size && timing?.pyStatusMessage === "Unavailable" && (
+                <Button className="timing-disabled">
+                  {timing.pyStatusMessage}
+                </Button>
+              ))
             );
           })}
       </div>

@@ -336,6 +336,8 @@ padding-top: 15px;
 }
 
 .search-by-type-input{
+  padding-top:5px;
+  padding-bottom:10px;
   display: flex;
   justify-content: end;
 }
@@ -541,6 +543,7 @@ padding-top: 15px;
   }
   .dropdown-toggle-search {
     width: 100%;
+    cursor: pointer;
   }
 }
 
@@ -1078,10 +1081,15 @@ label {
     text-align: center;
   }
   .btn-scheduler-type {
-    width: 100%;
+    width:100% !important;
+    text-align: center;
   }
   .dropdown-toggle-search {
     width: 100%;
+    cursor: pointer;
+  }
+  .label-select-btn{
+    display: inline !important;
   }
 }
 
@@ -1089,12 +1097,24 @@ label {
   margin-left: 5px;
   padding-top: 0px;
   margin-top: 5px;
+  cursor: pointer;
 }
 
 .sort-style{
   border-bottom:1px solid #937979;
   cursor: pointer;
 }
+
+.find-by-input-div{
+  padding-top:2px;
+}
+
+@media screen and (min-width: 860px) {
+  .label-select-btn{
+    display: none !important;
+  }
+}
+
 
 
 
