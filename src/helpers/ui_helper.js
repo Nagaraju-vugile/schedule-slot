@@ -1,5 +1,5 @@
 
-export const getPayloadBookSlot = (questionsDataUpdate, selectedSlotDetails, schedulerDetails)=>{
+export const getPayloadBookSlot = (questionsDataUpdate, selectedSlotDetails, schedulerDetails, user)=>{
     // const questionsFormed = {};
     // questionsFormed.Answer = answer;
     // questionsFormed.Question = question;
@@ -8,7 +8,8 @@ export const getPayloadBookSlot = (questionsDataUpdate, selectedSlotDetails, sch
     formedSlots.StartTimeText = selectedSlotDetails?.timing?.updatePySelected[0].StartTimeText;
     formedSlots.EndTimeText = selectedSlotDetails?.timing?.updatePySelected[0].EndTimeText;
     formedSlots.pySelected = selectedSlotDetails?.timing?.updatePySelected[0].pySelected;
-    formedSlots.pyUserIdentifier = "";
+    formedSlots.pyUserIdentifier = user.email;
+    formedSlots.pyUserName = user.name;
     const SchedulesFormed = {};
     SchedulesFormed.pyLabel = selectedSlotDetails?.timing?.pyLabel;
     SchedulesFormed.ScheduledDate = selectedSlotDetails?.timing?.ScheduledDate;
@@ -36,7 +37,8 @@ export const getPayloadBookRescheduler = (questionsDataUpdate, selectedSlotDetai
   formedSlots.StartTimeText = selectedSlotDetails.timing.updatePySelected[0].StartTimeText;
   formedSlots.EndTimeText = selectedSlotDetails.timing.updatePySelected[0].EndTimeText;
   formedSlots.pySelected = selectedSlotDetails.timing.updatePySelected[0].pySelected;
-  formedSlots.pyUserIdentifier = "";
+  formedSlots.pyUserIdentifier = user.email;
+  formedSlots.pyUserName = user.name
   formedSlots.CancelKey = guid;
   const SchedulesFormed = {};
   SchedulesFormed.pyLabel = selectedSlotDetails.timing.pyLabel;

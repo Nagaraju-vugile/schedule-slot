@@ -44,7 +44,9 @@ const MyBookings = () => {
     Math.ceil(myBookingsData?.length / pageSize) || 0
   );
   const [search, setSearch] = useState("");
-
+  const userProfileEmail = useSelector(
+    (state) => state?.availabilitiesReducer?.userProfile?.email
+  );
   sessionStorage.setItem("prevLocation", path);
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.myBookingsLoader
@@ -89,7 +91,7 @@ const MyBookings = () => {
   };
 
   useEffect(() => {
-    dispatch(myBookings("krishna_chaitanya@bluerose-tech.com"));
+    dispatch(myBookings(userProfileEmail));
     dispatch(setActiveTab(config.ACTIVE_TAB.MY_BOOKINGS));
     dispatch(clearCancelSlots());
     dispatch(selectedProfileOption(config.PROFILE_NAV_OPTIONS.SETTINGS));
@@ -151,13 +153,13 @@ const MyBookings = () => {
   }
   }
 
-  if (loader) {
-    return (
-      <div className="loader">
-        <Spinner animation="border" variant="warning">Loading...</Spinner>
-      </div>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <div className="loader">
+  //       <Spinner animation="border" variant="warning">Loading...</Spinner>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="layout-main">
@@ -169,175 +171,185 @@ const MyBookings = () => {
             <h5>Available bookings</h5>
           </Col>
         </Row>
-
-        {myBookingsData?.length > 0 && (
+        {(loader && (
+          <div className="loader">
+            <Spinner animation="border" variant="warning">
+              Loading...
+            </Spinner>
+          </div>
+        )) || (
           <>
-            <Row className="search-by-type-input">
-              <Col xs="4">
-                <Input
-                  type="text"
-                  name="search"
-                  id="search"
-                  value={search}
-                  placeholder="Search by type"
-                  onChange={(e) => handleSearch(e)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Row className="table-row-style">
-                <Col className="info-sub-header">
-                  <span className="sort-style">S.no</span>
-                </Col>
-                <Col
-                  className="info-sub-header"
-                  onClick={() => sortBy("SchedulerType")}
-                >
-                  <span className="sort-style">Type</span>
-                </Col>
-                <Col
-                  className="info-sub-header"
-                  onClick={() => sortBy("ScheduledDate")}
-                >
-                  <span className="sort-style">Scheduled date</span>
-                </Col>
-                <Col
-                  className="info-sub-header"
-                  onClick={() => sortBy("StartTime")}
-                >
-                  <span className="sort-style">Start time</span>
-                </Col>
-                <Col
-                  className="info-sub-header"
-                  onClick={() => sortBy("EndTime")}
-                >
-                  <span className="sort-style">End time</span>
-                </Col>
-                <Col className="info-sub-header action-column-min-width">
-                  <span className="sort-style"> Action </span>
-                </Col>
-              </Row>
-              {displayData?.map((item, index) => (
-                <Row
-                  key={index}
-                  className="table-row-style"
-                  style={{
-                    backgroundColor:
-                      index % 2 === 0 ? "rgb(243 240 240 / 80%)" : "white",
-                  }}
-                >
-                  <Col className="booking-value">{index + 1}</Col>
-                  <Col className="booking-value">{item.SchedulerType}</Col>
-                  <Col className="booking-value">{item.ScheduledDate}</Col>
-                  <Col className="booking-value">
-                    {item.StartTime.split(":")[0]}:
-                    {item.StartTime.split(":")[1]}
-                  </Col>
-                  <Col className="booking-value">
-                    {item.EndTime.split(":")[0]}:{item.EndTime.split(":")[1]}
-                  </Col>
-                  <Col className="booking-value action-column-min-width">
-                    <Button
-                      color="info"
-                      onClick={() =>
-                        handleReschedule(
-                          item.SchedulerEmailID,
-                          item.ScheduledDate,
-                          item.SchedulerType,
-                          item.pyGUID,
-                          item.pxObjClass,
-                          item.StartTime
-                        )
-                      }
-                      className="action-button-table-reschedule"
-                    >
-                      Reschedule
-                    </Button>
-
-                    <AiOutlineFieldTime
-                      className="edit-pencil"
-                      onClick={() =>
-                        handleReschedule(
-                          item.SchedulerEmailID,
-                          item.ScheduledDate,
-                          item.SchedulerType,
-                          item.pyGUID,
-                          item.pxObjClass,
-                          item.StartTime
-                        )
-                      }
-                    />
-
-                    <Button
-                      color="danger"
-                      onClick={() =>
-                        handleCancel(
-                          item.SchedulerEmailID,
-                          item.ScheduledDate,
-                          item.SchedulerType,
-                          item.pyGUID,
-                          item.pxObjClass,
-                          item.StartTime
-                        )
-                      }
-                      className="action-button-table-cancel"
-                    >
-                      Cancel
-                    </Button>
-                    <BiTrash
-                      className="cancel-trash"
-                      onClick={() =>
-                        handleCancel(
-                          item.SchedulerEmailID,
-                          item.ScheduledDate,
-                          item.SchedulerType,
-                          item.pyGUID,
-                          item.pxObjClass,
-                          item.StartTime
-                        )
-                      }
+            {myBookingsData?.length > 0 && (
+              <>
+                <Row className="search-by-type-input">
+                  <Col xs="4">
+                    <Input
+                      type="text"
+                      name="search"
+                      id="search"
+                      value={search}
+                      placeholder="Search by type"
+                      onChange={(e) => handleSearch(e)}
                     />
                   </Col>
                 </Row>
-              ))}
-            </Row>
-            <Row>
-              <Pagination
-                aria-label="page-navigation"
-                className="page-navigation"
-              >
-                <PaginationItem disabled={currentPage <= 0}>
-                  <PaginationLink
-                    onClick={(e) => handlePageClick(e, currentPage - 1)}
-                    href="#"
-                  >
-                    Prev
-                  </PaginationLink>
-                </PaginationItem>
-                {[...Array(pagesCount)].map((page, i) => (
-                  <PaginationItem active={i === currentPage} key={i}>
-                    <PaginationLink
-                      onClick={(e) => handlePageClick(e, i)}
-                      href="#"
+                <Row>
+                  <Row className="table-row-style">
+                    <Col className="info-sub-header">
+                      <span className="sort-style">S.no</span>
+                    </Col>
+                    <Col
+                      className="info-sub-header"
+                      onClick={() => sortBy("SchedulerType")}
                     >
-                      {i + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem disabled={currentPage >= pagesCount - 1}>
-                  <PaginationLink
-                    onClick={(e) => handlePageClick(e, currentPage + 1)}
-                    href="#"
+                      <span className="sort-style">Type</span>
+                    </Col>
+                    <Col
+                      className="info-sub-header"
+                      onClick={() => sortBy("ScheduledDate")}
+                    >
+                      <span className="sort-style">Scheduled date</span>
+                    </Col>
+                    <Col
+                      className="info-sub-header"
+                      onClick={() => sortBy("StartTime")}
+                    >
+                      <span className="sort-style">Start time</span>
+                    </Col>
+                    <Col
+                      className="info-sub-header"
+                      onClick={() => sortBy("EndTime")}
+                    >
+                      <span className="sort-style">End time</span>
+                    </Col>
+                    <Col className="info-sub-header action-column-min-width">
+                      <span className="sort-style"> Action </span>
+                    </Col>
+                  </Row>
+                  {displayData?.map((item, index) => (
+                    <Row
+                      key={index}
+                      className="table-row-style"
+                      style={{
+                        backgroundColor:
+                          index % 2 === 0 ? "rgb(243 240 240 / 80%)" : "white",
+                      }}
+                    >
+                      <Col className="booking-value">{index + 1}</Col>
+                      <Col className="booking-value">{item.SchedulerType}</Col>
+                      <Col className="booking-value">{item.ScheduledDate}</Col>
+                      <Col className="booking-value">
+                        {item.StartTime.split(":")[0]}:
+                        {item.StartTime.split(":")[1]}
+                      </Col>
+                      <Col className="booking-value">
+                        {item.EndTime.split(":")[0]}:
+                        {item.EndTime.split(":")[1]}
+                      </Col>
+                      <Col className="booking-value action-column-min-width">
+                        <Button
+                          color="info"
+                          onClick={() =>
+                            handleReschedule(
+                              item.SchedulerEmailID,
+                              item.ScheduledDate,
+                              item.SchedulerType,
+                              item.pyGUID,
+                              item.pxObjClass,
+                              item.StartTime
+                            )
+                          }
+                          className="action-button-table-reschedule"
+                        >
+                          Reschedule
+                        </Button>
+
+                        <AiOutlineFieldTime
+                          className="edit-pencil"
+                          onClick={() =>
+                            handleReschedule(
+                              item.SchedulerEmailID,
+                              item.ScheduledDate,
+                              item.SchedulerType,
+                              item.pyGUID,
+                              item.pxObjClass,
+                              item.StartTime
+                            )
+                          }
+                        />
+
+                        <Button
+                          color="danger"
+                          onClick={() =>
+                            handleCancel(
+                              item.SchedulerEmailID,
+                              item.ScheduledDate,
+                              item.SchedulerType,
+                              item.pyGUID,
+                              item.pxObjClass,
+                              item.StartTime
+                            )
+                          }
+                          className="action-button-table-cancel"
+                        >
+                          Cancel
+                        </Button>
+                        <BiTrash
+                          className="cancel-trash"
+                          onClick={() =>
+                            handleCancel(
+                              item.SchedulerEmailID,
+                              item.ScheduledDate,
+                              item.SchedulerType,
+                              item.pyGUID,
+                              item.pxObjClass,
+                              item.StartTime
+                            )
+                          }
+                        />
+                      </Col>
+                    </Row>
+                  ))}
+                </Row>
+                <Row>
+                  <Pagination
+                    aria-label="page-navigation"
+                    className="page-navigation"
                   >
-                    Next
-                  </PaginationLink>
-                </PaginationItem>
-              </Pagination>
-            </Row>
+                    <PaginationItem disabled={currentPage <= 0}>
+                      <PaginationLink
+                        onClick={(e) => handlePageClick(e, currentPage - 1)}
+                        href="#"
+                      >
+                        Prev
+                      </PaginationLink>
+                    </PaginationItem>
+                    {[...Array(pagesCount)].map((page, i) => (
+                      <PaginationItem active={i === currentPage} key={i}>
+                        <PaginationLink
+                          onClick={(e) => handlePageClick(e, i)}
+                          href="#"
+                        >
+                          {i + 1}
+                        </PaginationLink>
+                      </PaginationItem>
+                    ))}
+                    <PaginationItem disabled={currentPage >= pagesCount - 1}>
+                      <PaginationLink
+                        onClick={(e) => handlePageClick(e, currentPage + 1)}
+                        href="#"
+                      >
+                        Next
+                      </PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </Row>
+              </>
+            )}
+            {(!myBookingsData || myBookingsData?.length < 1) && (
+              <div className="no-availabilities-div">No bookings found</div>
+            )}
           </>
-        )}
-        {(!myBookingsData || myBookingsData?.length < 1) && (
-          <div className="no-availabilities-div">No bookings found</div>
         )}
       </Container>
       <Footer />

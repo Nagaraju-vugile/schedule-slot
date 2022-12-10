@@ -129,24 +129,28 @@ const Questions = () => {
       const payload = getPayloadBookSlot(
         questionsDataUpdate,
         selectedSlotDetails,
-        schedulerDetails
+        schedulerDetails,
+        userProfile
       );
       dispatch(bookSlot(payload, 1));
     }
   };
 
-  if (loader) {
-    return (
-      <div className="loader">
-        <Spinner animation="border" variant="warning">Loading...</Spinner>
-      </div>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <div className="loader">
+  //       <Spinner animation="border" variant="warning">Loading...</Spinner>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="layout-main">
       <Header />
       <NavBar />
+      {loader&& <div className="loader">
+        <Spinner animation="border" variant="warning">Loading...</Spinner>
+      </div>}
       {pyStatus && (
         <div className="notification-success">
         <Alert color="danger" className="min-width-notification">
@@ -158,7 +162,7 @@ const Questions = () => {
         </Alert>
         </div>
       )}
-      {!pyStatusMessage && (
+      {!pyStatusMessage && !loader&& (
         <Row className="question-section-card">
           <Card className="my-2 card-border">
             <Row>

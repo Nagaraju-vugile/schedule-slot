@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { Container, Nav, NavItem, NavLink, Row } from "reactstrap";
 
 const NavBar = () => {
-  const activeTab = useSelector(
-    (state) => state?.availabilitiesReducer?.activeTab
-  );
-
-  const [currentActiveTab, setCurrentActiveTab] = useState(activeTab);
+  let path = useLocation().pathname;
+  const [currentActiveTab, setCurrentActiveTab] = useState(path==='/my-bookings'?"2":"1");
   return (
     <Container className="container-scheduler">
       <Row className="style-padding-bottom">

@@ -70,13 +70,13 @@ const ReasonCancel = () => {
     }
   });
 
-  if (loader) {
-    return (
-      <div className="loader">
-        <Spinner animation="border" variant="warning">Loading...</Spinner>
-      </div>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <div className="loader">
+  //       <Spinner animation="border" variant="warning">Loading...</Spinner>
+  //     </div>
+  //   );
+  // }
 
   if (!reschedulerDataSelected) {
     handleBack();
@@ -86,7 +86,14 @@ const ReasonCancel = () => {
     <div className="layout-main">
       <Header />
       <NavBar />
-      {!pyStatusMessage && (
+      {loader && (
+        <div className="loader">
+          <Spinner animation="border" variant="warning">
+            Loading...
+          </Spinner>
+        </div>
+      )}
+      {!pyStatusMessage && !loader && (
         <Row
           className="appointments"
           style={{ minHeight: "150px", margin: "10px" }}
@@ -97,8 +104,12 @@ const ReasonCancel = () => {
           >
             <Row>
               <Col xs="4">
-                <Button onClick={() => handleBack()} className="back-button" color="link">
-                    <IoIosArrowBack className="next-button-svg" />
+                <Button
+                  onClick={() => handleBack()}
+                  className="back-button"
+                  color="link"
+                >
+                  <IoIosArrowBack className="next-button-svg" />
                   Back
                 </Button>
               </Col>
@@ -196,8 +207,12 @@ const ReasonCancel = () => {
             >
               <Row style={{ margin: "10px" }}>
                 <Col xs="2">
-                  <Button onClick={() => handleBack()} className="back-button" color="link">
-                  <IoIosArrowBack className="next-button-svg" />
+                  <Button
+                    onClick={() => handleBack()}
+                    className="back-button"
+                    color="link"
+                  >
+                    <IoIosArrowBack className="next-button-svg" />
                     Back
                   </Button>
                 </Col>

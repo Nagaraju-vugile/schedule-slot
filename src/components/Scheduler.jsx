@@ -66,15 +66,15 @@ export default function Scheduler() {
     dispatch(clearBookedSlots());
   }, [dispatch]);
 
-  if (loader) {
-    return (
-      <div className="loader">
-        <Spinner animation="border" variant="warning">
-          Loading...
-        </Spinner>
-      </div>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <div className="loader">
+  //       <Spinner animation="border" variant="warning">
+  //         Loading...
+  //       </Spinner>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="layout-main">
@@ -94,21 +94,32 @@ export default function Scheduler() {
           </Col>
         </Row>
       </Container>
-      {schedulerList?.map((item, index) => (
-        <Appointments
-          appointments={item?.SchedulerDetails?.Schedules}
-          indexAppointment={index}
-          navigateLink={
-            testPath < 0
-              ? "/scheduler/questions/"
-              : "/scheduler/re-schedule/questions/"
-          }
-          schedulerListData={item}
-        />
-      ))}
-      {(!schedulerList || schedulerList?.length === 0) && (
-        <div className="no-availabilities-div">No slots found</div>
+      {(loader && (
+        <div className="loader">
+          <Spinner animation="border" variant="warning">
+            Loading...
+          </Spinner>
+        </div>
+      )) || (
+        <>
+          {schedulerList?.map((item, index) => (
+            <Appointments
+              appointments={item?.SchedulerDetails?.Schedules}
+              indexAppointment={index}
+              navigateLink={
+                testPath < 0
+                  ? "/scheduler/questions/"
+                  : "/scheduler/re-schedule/questions/"
+              }
+              schedulerListData={item}
+            />
+          ))}
+          {(!schedulerList || schedulerList?.length === 0) && (
+            <div className="no-availabilities-div">No slots found</div>
+          )}
+        </>
       )}
+
       <Footer />
     </div>
   );

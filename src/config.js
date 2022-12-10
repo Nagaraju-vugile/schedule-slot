@@ -10,7 +10,7 @@
       SIGNOUT: "Sign out",
       SIGNIN: "Sign in"
     },
-    AUTH_CREDENTIALS: "Chandan_Palamakula:rules#123"
+    AUTH_CREDENTIALS: "ReactUser:Test@123"
 };
 
 export default config;

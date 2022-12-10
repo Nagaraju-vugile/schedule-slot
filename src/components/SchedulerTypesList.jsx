@@ -228,15 +228,15 @@ const SchedulerTypesList = () => {
     );
   };
 
-  if (loader) {
-    return (
-      <div className="loader">
-        <Spinner animation="border" variant="warning">
-          Loading...
-        </Spinner>
-      </div>
-    );
-  }
+  // if (loader) {
+  //   return (
+  //     <div className="loader">
+  //       <Spinner animation="border" variant="warning">
+  //         Loading...
+  //       </Spinner>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="layout-main">
@@ -244,62 +244,93 @@ const SchedulerTypesList = () => {
       <Container className="container-scheduler">
         <NavBar />
         <Row className="booking-header" style={{ paddingBottom: "10px" }}>
-          <h5 style={{paddingLeft:"27px"}}>Show available slots</h5>
+          <h5 style={{ paddingLeft: "27px" }}>Show available slots</h5>
         </Row>
-        {schedulerTypes && schedulerTypes.length > 0 && (
+        {(loader && (
+          <div className="loader">
+            <Spinner animation="border" variant="warning">
+              Loading...
+            </Spinner>
+          </div>
+        )) || (
           <>
-            <div className="find-by-input">
-              <div className="find-by-input-div" style={{minWidth:"25%"}}>
-                <Autosuggest
-                  suggestions={suggestions}
-                  onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                  onSuggestionsClearRequested={onSuggestionsClearRequested}
-                  getSuggestionValue={getSuggestionValue}
-                  renderSuggestion={renderSuggestion}
-                  inputProps={inputProps}
-                  shouldRenderSuggestions={shouldRenderSuggestions}
-                />
+            {" "}
+            {schedulerTypes && schedulerTypes.length > 0 && (
+              <>
+                <div className="find-by-input">
+                  <div
+                    className="find-by-input-div"
+                    style={{ minWidth: "25%" }}
+                  >
+                    <Autosuggest
+                      suggestions={suggestions}
+                      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                      onSuggestionsClearRequested={onSuggestionsClearRequested}
+                      getSuggestionValue={getSuggestionValue}
+                      renderSuggestion={renderSuggestion}
+                      inputProps={inputProps}
+                      shouldRenderSuggestions={shouldRenderSuggestions}
+                    />
+                  </div>
+                  <div className="find-by-input-div">
+                    {renderById(schedulerTypes)}
+                  </div>
+                  <div
+                    className="find-by-input-div"
+                    style={{ minWidth: "25%" }}
+                  >
+                    <Autosuggest
+                      suggestions={suggestionsType}
+                      onSuggestionsFetchRequested={
+                        onSuggestionsFetchRequestedType
+                      }
+                      onSuggestionsClearRequested={
+                        onSuggestionsClearRequestedType
+                      }
+                      getSuggestionValue={getSuggestionValueType}
+                      renderSuggestion={renderSuggestionType}
+                      inputProps={inputPropsType}
+                      shouldRenderSuggestions={shouldRenderSuggestionsType}
+                    />
+                  </div>
+                  <div className="find-by-input-div">
+                    {renderByType(schedulerTypes)}
+                  </div>
+                  <div className="find-by-input-div">
+                    <Button
+                      className="btn-scheduler-type"
+                      color="primary"
+                      onClick={() => handleGoSearch()}
+                      disabled={!value && !valueType}
+                    >
+                      <AiOutlineSearch
+                        style={{ marginBottom: "4px", marginRight: "6px" }}
+                      />
+                      Find slots
+                    </Button>
+                  </div>
+                  <div className="find-by-input-div">
+                    <Button
+                      className="btn-scheduler-type"
+                      color="danger"
+                      onClick={() => handleClear()}
+                      disabled={!value && !valueType}
+                    >
+                      <AiOutlineClose
+                        style={{ marginBottom: "4px", marginRight: "6px" }}
+                      />
+                      Clear selection
+                    </Button>
+                  </div>
+                </div>
+              </>
+            )}
+            {(!schedulerTypes || schedulerTypes.length < 1) && (
+              <div className="no-availabilities-div">
+                No scheduler types found
               </div>
-              <div className="find-by-input-div">{renderById(schedulerTypes)}</div>
-              <div className="find-by-input-div"  style={{minWidth:"25%"}}>
-                <Autosuggest
-                  suggestions={suggestionsType}
-                  onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
-                  onSuggestionsClearRequested={onSuggestionsClearRequestedType}
-                  getSuggestionValue={getSuggestionValueType}
-                  renderSuggestion={renderSuggestionType}
-                  inputProps={inputPropsType}
-                  shouldRenderSuggestions={shouldRenderSuggestionsType}
-                />
-              </div>
-              <div className="find-by-input-div">{renderByType(schedulerTypes)}</div>
-              <div className="find-by-input-div">
-                <Button
-                  className="btn-scheduler-type"
-                  color="primary"
-                  onClick={() => handleGoSearch()}
-                  disabled={!value && !valueType}
-                >
-                  <AiOutlineSearch style={{ marginBottom: "4px", marginRight: "6px" }}/>
-                  Find slots
-                </Button>
-              </div>
-              <div className="find-by-input-div">
-                <Button
-                  className="btn-scheduler-type"
-                  color="danger"
-                  onClick={() => handleClear()}
-                  disabled={!value && !valueType}
-                >
-                  <AiOutlineClose style={{ marginBottom: "4px", marginRight: "6px" }}/>
-                  Clear selection
-                </Button>
-              </div>
-            </div>
+            )}
           </>
-        )}
-        {(!schedulerTypes || schedulerTypes.length < 1) && (
-          <div className="no-availabilities-div">No scheduler types found</div>
         )}
       </Container>
       <Footer />

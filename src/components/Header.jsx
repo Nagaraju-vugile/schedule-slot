@@ -71,6 +71,15 @@ export default function Header() {
     dispatch(clearUserSessionDetails());
     navigate("/login");
   };
+
+  useEffect(() => {
+   if(path==="/my-bookings"){
+    dispatch(setActiveTab("2"));
+   } else if(path==="/schedulers-list" || path==="/"){
+    dispatch(setActiveTab("1"));
+   }
+  },[path]);
+
   return (
     <div className="header">
       <div className="loginButton">
