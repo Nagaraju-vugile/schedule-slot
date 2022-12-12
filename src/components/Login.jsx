@@ -4,7 +4,8 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from "reactstrap";
-import { setUserSeesionDetails } from "../store/scheduler/actions";
+import { isSignedIn, setUserSeesionDetails } from "../store/scheduler/actions";
+import CookieConsent from "react-cookie-consent";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Login = () => {
       gapi.client.init({
         clientId: clientId,
         scope: "",
-      });
+      }).than(res=>console.log("res**********", res));
     };
     gapi.load("client:auth2", initClient);
   });
@@ -32,6 +33,7 @@ const Login = () => {
       res.profileObj.email || sessionStorage.getItem("userProfile")
     );
     dispatch(setUserSeesionDetails(res.profileObj));
+    dispatch(isSignedIn(true));
     if (path === "/login" && sessionStorage.getItem("userProfile") !== null)
       navigate(prevPath);
   };
@@ -62,6 +64,16 @@ const Login = () => {
           </form>
         </div>
       </div>
+      <CookieConsent
+        location="bottom"
+        buttonText="Please accept"
+        cookieName="schedulerCoockies"
+        style={{ background: "#2B373B" }}
+        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+        hideOnAccept
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </Container>
   );
 };

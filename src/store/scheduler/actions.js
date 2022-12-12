@@ -26,6 +26,7 @@ import {
     CLEAR_CANCEL_SLOTS,
     SELECTED_PROFILE_OPTION,
     CLEAR_ERROR,
+    IS_SIGNED_IN,
   } from "./actionTypes";
   
   export const getAvailabilities = (selectedStartDate, id, type) => {
@@ -210,4 +211,12 @@ import {
       type: CLEAR_ERROR,
     }
   }
+  export const isSignedIn = (data)=>{
+    return {
+      type: IS_SIGNED_IN,
+      payload: data
+    }
+  }
+
+  
 

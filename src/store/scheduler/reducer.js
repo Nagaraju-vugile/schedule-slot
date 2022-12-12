@@ -26,6 +26,7 @@ import {
   CLEAR_CANCEL_SLOTS,
   SELECTED_PROFILE_OPTION,
   CLEAR_ERROR,
+  IS_SIGNED_IN,
 } from "./actionTypes";
 
 const initialState = {
@@ -49,6 +50,7 @@ const initialState = {
   cancelSlotLoader: false,
   activeTab: "1",
   selectedProfileOption: "Settings",
+  isSignedIn:false
 };
 
 const availabilitiesReducer = (state = initialState, action) => {
@@ -204,6 +206,12 @@ const availabilitiesReducer = (state = initialState, action) => {
       state = {
         ...state,
         error: null,
+      };
+      break;
+      case IS_SIGNED_IN:
+      state = {
+        ...state,
+        isSignedIn: action.payload,
       };
       break;
     default:
