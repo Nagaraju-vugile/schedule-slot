@@ -24,6 +24,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import { IoIosArrowBack } from "react-icons/io";
 import NavBar from "./NavBar";
+import { messages } from "../constants";
 
 const Questions = () => {
   let dispatch = useDispatch();
@@ -136,20 +137,12 @@ const Questions = () => {
     }
   };
 
-  // if (loader) {
-  //   return (
-  //     <div className="loader">
-  //       <Spinner animation="border" variant="warning">Loading...</Spinner>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="layout-main">
       <Header />
       <NavBar />
       {loader&& <div className="loader">
-        <Spinner animation="border" variant="warning">Loading...</Spinner>
+        <Spinner animation="border" variant="warning">{messages.labels.loading}</Spinner>
       </div>}
       {pyStatus && (
         <div className="notification-success">
@@ -173,12 +166,12 @@ const Questions = () => {
                   color="link"
                 >
                   <IoIosArrowBack className="next-button-svg" />
-                  Back
+                  {messages.buttons.back}
                 </Button>
               </Col>
               <Col xs="8" style={{ paddingTop: "12px" }}>
                 <div>
-                  <h5>Please confirm the details</h5>
+                  <h5>{messages.confirmationMessages.confirmDetails}</h5>
                 </div>
               </Col>
             </Row>
@@ -187,13 +180,13 @@ const Questions = () => {
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Selected date:
+                    {messages.labels.selectedDate}:
                     </Col>
                     <Col>{selectedSlotDetails?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Selected time:
+                    {messages.labels.selectedTime}:
                     </Col>
                     <Col>
                       {
@@ -211,7 +204,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Selected type:
+                    {messages.labels.selectedType}:
                     </Col>
                     <Col>{selectedSlotDetails?.timing?.Type}</Col>
                   </Row>
@@ -221,13 +214,13 @@ const Questions = () => {
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Previous date:
+                      {messages.labels.previousDate}:
                     </Col>
                     <Col>{reschedulerDataSelectedDate?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Previous time:
+                    {messages.labels.previousTime}:
                     </Col>
                     <Col>
                       {reschedulerDataSelectedDate?.StartTime?.split(":")[0]}:
@@ -236,7 +229,7 @@ const Questions = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Previous type:
+                    {messages.labels.previousType}:
                     </Col>
                     <Col>{reschedulerDataSelectedDate?.type}</Col>
                   </Row>
@@ -276,11 +269,11 @@ const Questions = () => {
                       <div onChange={(e) => updateAnswer(e, index)}>
                         <Label>
                           <Input type="radio" name="selectAns" value="yes" />
-                          Yes
+                          {messages.labels.yes}
                         </Label>
                         <Label>
                           <Input type="radio" name="selectAns" value="no" />
-                          No
+                          {messages.labels.no}
                         </Label>
                       </div>
                     )}
@@ -302,7 +295,7 @@ const Questions = () => {
             <Alert color="success" className="min-width-notification">
               <Row>
                 <div className="appointments">
-                  <h4>Confirmed! </h4>
+                  <h4>{messages.successMessages.confirmed} </h4>
                 </div>
               </Row>
               <Row className="appointments">

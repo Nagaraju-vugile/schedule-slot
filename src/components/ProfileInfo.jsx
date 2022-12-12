@@ -1,6 +1,7 @@
 import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Col, Row } from "reactstrap";
+import { messages } from "../constants";
 
 
 const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
@@ -34,7 +35,7 @@ const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
         {pyEmail && (
           <div className="flex-style">
             <span className="padding-left-style">
-              <b>Id:</b> {pyEmail}
+              <b>{messages.labels.id}:</b> {pyEmail}
             </span>
           </div>
         )}
@@ -42,18 +43,18 @@ const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
       <Row>
         <div className="flex-style">
           <span className="padding-left-style">
-            <b>Address- </b>
+            <b>{messages.labels.address}- </b>
           </span>
           <div className="padding-left-style">
             <div>
               <span>
-                <b>Type: </b>
+                <b>{messages.labels.type}: </b>
               </span>
               {addressType}
             </div>
             <div>
               <span>
-                <b>Virtual medium: </b>
+                <b>{messages.labels.medium}: </b>
               </span>
               {virtualMedium}
             </div>

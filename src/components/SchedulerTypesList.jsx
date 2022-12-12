@@ -1,8 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
-import CookieConsent from "react-cookie-consent";
-
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -11,6 +9,7 @@ import {
   DropdownMenu,
   DropdownToggle, Row, Spinner
 } from "reactstrap";
+import { messages } from "../constants";
 import { getUnique } from "../helpers/ui_helper";
 import {
   clearAvailabilities,
@@ -31,10 +30,8 @@ const SchedulerTypesList = () => {
   const schedulerTypes = useSelector(
     (state) => state?.availabilitiesReducer?.schedulerTypes?.pxResults
   );
-  const [selectedId, setSelectedId] = useState("");
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [selectedType, setSelectedType] = useState("");
   const [openType, setOpenType] = useState(false);
   const [valueType, setValueType] = useState("");
   const [suggestionsType, setSuggestionsType] = useState([]);
@@ -126,20 +123,19 @@ const SchedulerTypesList = () => {
   };
 
   const inputProps = {
-    placeholder: "Find by id",
+    placeholder: messages.placeholder.findById,
     value,
     onChange: onChange,
   };
 
   const inputPropsType = {
-    placeholder: "Find by type",
+    placeholder: messages.placeholder.findByType,
     value: valueType,
     onChange: onChangeType,
   };
 
   const handleSearchType = (type, item) => {
     if (type === "id") {
-      setSelectedId(item.SchedulerRefID);
       setValue(item.SchedulerRefID);
     } else{
       setValueType(item.Type);
@@ -162,7 +158,7 @@ const SchedulerTypesList = () => {
     dispatch(getSchedulerTypeDetails());
     dispatch(clearAvailabilities());
     dispatch(setActiveTab("1"));
-    dispatch(selectedProfileOption("Settings"));
+    dispatch(selectedProfileOption(messages.buttons.settings));
   }, [dispatch]);
 
   const renderById = (schedulerTypes) => {
@@ -181,7 +177,7 @@ const SchedulerTypesList = () => {
           className="dropdown-toggle-search"
           title="Select scheduler id"
         >
-          <span className="label-select-btn">Select id</span>
+          <span className="label-select-btn">{messages.buttons.selectId}</span>
         </DropdownToggle>
         {openId && (
           <DropdownMenu>
@@ -216,7 +212,7 @@ const SchedulerTypesList = () => {
           className="dropdown-toggle-search"
           title="Select scheduler type"
         >
-          <span className="label-select-btn">Select type</span>
+          <span className="label-select-btn">{messages.buttons.selectType}</span>
         </DropdownToggle>
         {openType && (
           <DropdownMenu>
@@ -234,33 +230,22 @@ const SchedulerTypesList = () => {
     );
   };
 
-  // if (loader) {
-  //   return (
-  //     <div className="loader">
-  //       <Spinner animation="border" variant="warning">
-  //         Loading...
-  //       </Spinner>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="layout-main">
       <Header />
       <Container className="container-scheduler">
         <NavBar />
         <Row className="booking-header" style={{ paddingBottom: "10px" }}>
-          <h5 style={{ paddingLeft: "27px" }}>Show available slots</h5>
+          <h5 style={{ paddingLeft: "27px" }}>{messages.labels.showAvailablesSlots}</h5>
         </Row>
         {(loader && (
           <div className="loader">
             <Spinner animation="border" variant="warning">
-              Loading...
+              {messages.labels.loading}
             </Spinner>
           </div>
         )) || (
           <>
-            {" "}
             {schedulerTypes && schedulerTypes.length > 0 && (
               <>
                 <div className="find-by-input">
@@ -312,7 +297,7 @@ const SchedulerTypesList = () => {
                       <AiOutlineSearch
                         style={{ marginBottom: "4px", marginRight: "6px" }}
                       />
-                      Find slots
+                      {messages.buttons.findSlots}
                     </Button>
                   </div>
                   <div className="find-by-input-div">
@@ -325,7 +310,7 @@ const SchedulerTypesList = () => {
                       <AiOutlineClose
                         style={{ marginBottom: "4px", marginRight: "6px" }}
                       />
-                      Clear selection
+                      {messages.buttons.clearSelection}
                     </Button>
                   </div>
                 </div>
@@ -333,23 +318,13 @@ const SchedulerTypesList = () => {
             )}
             {(!schedulerTypes || schedulerTypes.length < 1) && (
               <div className="no-availabilities-div">
-                No scheduler types found
+                {messages.errorMessages.noSchedulers}
               </div>
             )}
           </>
         )}
       </Container>
       <Footer />
-      <CookieConsent
-        location="bottom"
-        buttonText="Please accept"
-        cookieName="schedulerCoockies"
-        style={{ background: "#2B373B" }}
-        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-        hideOnAccept
-      >
-        This website uses cookies to enhance the user experience.
-      </CookieConsent>
     </div>
   );
 };

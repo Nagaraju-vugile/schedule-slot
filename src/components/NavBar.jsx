@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Nav, NavItem, NavLink, Row } from "reactstrap";
+import { messages } from "../constants";
 
 const NavBar = () => {
   let path = useLocation().pathname;
@@ -16,7 +17,7 @@ const NavBar = () => {
               onClick={() => setCurrentActiveTab("1")}
               disabled={currentActiveTab === "1"}
             >
-              Scheduler
+              {messages.nav.scheduler}
             </NavLink>
           </NavItem>
           <NavItem>
@@ -26,7 +27,7 @@ const NavBar = () => {
               onClick={() => setCurrentActiveTab("2")}
               disabled={currentActiveTab === "2"}
             >
-              My bookings
+              {messages.nav.myBookigs}
             </NavLink>
           </NavItem>
         </Nav>

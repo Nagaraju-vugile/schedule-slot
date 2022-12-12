@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink, Nav, NavItem
 } from "reactstrap";
+import { messages } from "../constants";
 import {
   clearUserSessionDetails,
   selectedProfileOption,
@@ -91,7 +92,7 @@ export default function Header() {
                   <AiFillHome
                     style={{ marginBottom: "4px", marginRight: "6px" }}
                   />
-                  Home
+                  {messages.buttons.home}
                 </NavLink>
               </NavItem>
               <Dropdown
@@ -108,7 +109,7 @@ export default function Header() {
                 </DropdownToggle>
                 <DropdownMenu style={{ width: "100%" }}>
                   <DropdownItem onClick={() => handleProfile()}>
-                    <span style={{ paddingLeft: "11px" }}>Profile</span>
+                    <span style={{ paddingLeft: "11px" }}>{messages.buttons.profile}</span>
                   </DropdownItem>
                   <DropdownItem onClick={() => handleLogout()}>
                     <GoogleLogout

@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from "reactstrap";
 import { isSignedIn, setUserSeesionDetails } from "../store/scheduler/actions";
 import CookieConsent from "react-cookie-consent";
+import { messages } from "../constants";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Login = () => {
       gapi.client.init({
         clientId: clientId,
         scope: "",
-      }).than(res=>console.log("res**********", res));
+      });
     };
     gapi.load("client:auth2", initClient);
   });
@@ -48,7 +49,7 @@ const Login = () => {
         <div className="Auth-form-container">
           <form className="Auth-form">
             <div className="Auth-form-content">
-              <h3 className="Auth-form-title">Sign in</h3>
+              <h3 className="Auth-form-title">{messages.buttons.signIn}</h3>
               <div className="d-grid gap-2 mt-3">
                 <GoogleLogin
                   clientId={clientId}
@@ -72,7 +73,7 @@ const Login = () => {
         buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
         hideOnAccept
       >
-        This website uses cookies to enhance the user experience.
+        {messages.cookiesContentMessage}
       </CookieConsent>
     </Container>
   );

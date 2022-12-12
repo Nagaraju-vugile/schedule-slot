@@ -14,6 +14,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
 import { IoIosArrowBack } from "react-icons/io";
+import { messages } from "../constants";
 
 export default function Scheduler() {
   let dispatch = useDispatch();
@@ -66,16 +67,6 @@ export default function Scheduler() {
     dispatch(clearBookedSlots());
   }, [dispatch]);
 
-  // if (loader) {
-  //   return (
-  //     <div className="loader">
-  //       <Spinner animation="border" variant="warning">
-  //         Loading...
-  //       </Spinner>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="layout-main">
       <Header />
@@ -89,7 +80,7 @@ export default function Scheduler() {
               color="link"
             >
               <IoIosArrowBack className="next-button-svg" />
-              Back
+              {messages.buttons.back}
             </Button>
           </Col>
         </Row>
@@ -97,7 +88,7 @@ export default function Scheduler() {
       {(loader && (
         <div className="loader">
           <Spinner animation="border" variant="warning">
-            Loading...
+            {messages.labels.loading}
           </Spinner>
         </div>
       )) || (
@@ -115,7 +106,7 @@ export default function Scheduler() {
             />
           ))}
           {(!schedulerList || schedulerList?.length === 0) && (
-            <div className="no-availabilities-div">No slots found</div>
+            <div className="no-availabilities-div">{messages.errorMessages.noSlots}</div>
           )}
         </>
       )}

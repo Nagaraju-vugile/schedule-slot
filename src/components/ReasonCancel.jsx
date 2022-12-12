@@ -21,6 +21,7 @@ import ConfirmationModal from "./ConfirmationModal";
 import Footer from "./Footer";
 import Header from "./Header";
 import NavBar from "./NavBar";
+import { messages } from "../constants";
 
 const ReasonCancel = () => {
   let dispatch = useDispatch();
@@ -70,14 +71,6 @@ const ReasonCancel = () => {
     }
   });
 
-  // if (loader) {
-  //   return (
-  //     <div className="loader">
-  //       <Spinner animation="border" variant="warning">Loading...</Spinner>
-  //     </div>
-  //   );
-  // }
-
   if (!reschedulerDataSelected) {
     handleBack();
   }
@@ -89,7 +82,7 @@ const ReasonCancel = () => {
       {loader && (
         <div className="loader">
           <Spinner animation="border" variant="warning">
-            Loading...
+          {messages.labels.loading}
           </Spinner>
         </div>
       )}
@@ -110,12 +103,12 @@ const ReasonCancel = () => {
                   color="link"
                 >
                   <IoIosArrowBack className="next-button-svg" />
-                  Back
+                  {messages.buttons.back}
                 </Button>
               </Col>
               <Col xs="8" style={{ paddingTop: "12px" }}>
                 <div>
-                  <h5>Please confirm the details</h5>
+                  <h5>{messages.confirmationMessages.confirmDetails}</h5>
                 </div>
               </Col>
             </Row>
@@ -124,13 +117,13 @@ const ReasonCancel = () => {
                 <Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Selected date:
+                      {messages.labels.selectedDate}:
                     </Col>
                     <Col> {reschedulerDataSelected?.date}</Col>
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Selected time:
+                    {messages.labels.selectedTime}:
                     </Col>
                     <Col>
                       {reschedulerDataSelected?.StartTime?.split(":")[0]}:
@@ -139,7 +132,7 @@ const ReasonCancel = () => {
                   </Row>
                   <Row>
                     <Col xs="6" className="display-end">
-                      Selected type:
+                    {messages.labels.selectedType}:
                     </Col>
                     <Col>{reschedulerDataSelected?.type}</Col>
                   </Row>
@@ -148,7 +141,7 @@ const ReasonCancel = () => {
             </CardHeader>
             <CardBody className="padding-top-style">
               <CardTitle tag="h6" className="appointments">
-                Why would you like to cancel the slot?
+                {messages.confirmationMessages.cancelConfirmMessage}
               </CardTitle>
               <div
                 style={{
@@ -179,7 +172,7 @@ const ReasonCancel = () => {
                 onClick={() => toggle()}
                 disabled={answer === ""}
               >
-                Cancel slot
+                {messages.buttons.cancelSlot}
               </Button>
             </CardFooter>
           </Card>
@@ -191,7 +184,7 @@ const ReasonCancel = () => {
             <Alert color="success" className="min-width-notification">
               <Row>
                 <div className="appointments">
-                  <h4>Confirmed! </h4>
+                  <h4>{messages.successMessages.confirmed} </h4>
                 </div>
               </Row>
               <Row className="appointments">{pyStatusMessage}</Row>
@@ -213,12 +206,12 @@ const ReasonCancel = () => {
                     color="link"
                   >
                     <IoIosArrowBack className="next-button-svg" />
-                    Back
+                    {messages.buttons.back}
                   </Button>
                 </Col>
                 <Col xs="10" style={{ paddingTop: "12px" }}>
                   <i>
-                    A cancellation email has been sent to you and your invitee.
+                    {messages.successMessages.cancelSlotConfirm}
                   </i>
                 </Col>
               </Row>

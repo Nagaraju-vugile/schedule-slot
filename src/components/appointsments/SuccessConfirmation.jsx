@@ -3,6 +3,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button, Card, CardBody, Col, Row } from "reactstrap";
+import { messages } from "../../constants";
 
 const SuccessConfirmation = () => {
   const navigate = useNavigate();
@@ -52,39 +53,39 @@ const SuccessConfirmation = () => {
           <Col xs="4">
             <Button onClick={() => handleBack()} className="back-button" color="link">
             <IoIosArrowBack className="next-button-svg" />
-              Back
+            {messages.buttons.back}
             </Button>
           </Col>
           <Col xs="8" style={{paddingTop: "12px"}}>
-            <div><h5>Scheduled information</h5></div></Col>
+            <div><h5>{messages.labels.schedulerInformation}</h5></div></Col>
         </Row>
         <CardBody className="padding-top-style">
           <div className="appointments">
             <Row>
               <Col>
                 <div className="padding-top-content">
-                  <span className="info-sub-header">Email: </span>
+                  <span className="info-sub-header">{messages.labels.email}: </span>
 
                   <span className="success-confrm-value">
                     {userProfile.email}
                   </span>
                 </div>
                 <div className="padding-top-content">
-                  <span className="info-sub-header"> Full name: </span>
+                  <span className="info-sub-header"> {messages.labels.fullName}: </span>
                   <span className="success-confrm-value">
                     {userProfile.name}
                   </span>
                 </div>
                 <div className="padding-top-content">
-                  <span className="info-sub-header"> Scheduled date: </span>
+                  <span className="info-sub-header"> {messages.labels.scheduledDate}: </span>
                   <span className="success-confrm-value">{dateSelected}</span>
                 </div>
                 <div className="padding-top-content">
-                  <span className="info-sub-header"> Scheduled slot: </span>
+                  <span className="info-sub-header"> {messages.labels.scheduledSlot}: </span>
                   <span className="success-confrm-value">{slotSelected}</span>
                 </div>
                 <div className="padding-top-content">
-                  <span className="info-sub-header"> Scheduled type: </span>
+                  <span className="info-sub-header"> {messages.labels.scheduledType}: </span>
                   <span className="success-confrm-value">{bookedSlotType}</span>
                 </div>
               </Col>
@@ -92,8 +93,7 @@ const SuccessConfirmation = () => {
           </div>
           <Row style={{paddingBotom:"10px"}}>
             <span className="success-confrm-value padding-top-content appointments">
-              <i>A calender invite with scheduled details has been forwarded to
-              your email address.</i>
+              <i>{messages.successMessages.bookSlotConfirm}</i>
             </span>
           </Row>
         </CardBody>

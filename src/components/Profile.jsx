@@ -3,6 +3,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody, CardFooter, CardHeader, Row } from "reactstrap";
+import { messages } from "../constants";
 
 import Footer from "./Footer";
 import Header from "./Header";
@@ -25,7 +26,7 @@ const Profile = () => {
       <Header />
       <NavBar />
       <Row>
-        <h4 className="appointments"> Personal information </h4>
+        <h4 className="appointments"> {messages.labels.profileInfoHeader} </h4>
       </Row>
       <Row
         className="appointments"

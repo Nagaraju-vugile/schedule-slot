@@ -13,6 +13,7 @@ import {
   Spinner
 } from "reactstrap";
 import config from "../config";
+import { messages } from "../constants";
 
 import {
   clearCancelSlots,
@@ -35,16 +36,12 @@ const MyBookings = () => {
   );
   const [displayData, setDisplayData] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  // const [selectedSortType, setSelectedSortType] = useState("");
   const [ascend, setAscend] = useState(false);
   const pageSize = config.PAGES_COUNT;
   const [pagesCount, setPagesCount] = useState(
     Math.ceil(myBookingsData?.length / pageSize) || 0
   );
   const [search, setSearch] = useState("");
-  const userProfileEmail = useSelector(
-    (state) => state?.availabilitiesReducer?.userProfile?.email
-  );
   sessionStorage.setItem("prevLocation", path);
   const loader = useSelector(
     (state) => state?.availabilitiesReducer?.myBookingsLoader
@@ -134,11 +131,7 @@ const MyBookings = () => {
   };
 
   const sortBy = (type)=>{
-    // setSelectedSortType(type);
     setAscend(!ascend);
-  //   [...displayData].sort((prev, next) =>
-  //   prev[type] > next[type] ? 1 : -1,
-  // );
   if (!ascend){
     setDisplayData(
       [...displayData].sort((prev, next) => (prev[type] > next[type] ? 1 : -1))
@@ -151,14 +144,6 @@ const MyBookings = () => {
   }
   }
 
-  // if (loader) {
-  //   return (
-  //     <div className="loader">
-  //       <Spinner animation="border" variant="warning">Loading...</Spinner>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="layout-main">
       <Header />
@@ -166,13 +151,13 @@ const MyBookings = () => {
         <NavBar />
         <Row>
           <Col className="booking-header">
-            <h5>Available bookings</h5>
+            <h5>{messages.labels.showAvailableBookings}</h5>
           </Col>
         </Row>
         {(loader && (
           <div className="loader">
             <Spinner animation="border" variant="warning">
-              Loading...
+            {messages.labels.loading}
             </Spinner>
           </div>
         )) || (
@@ -201,31 +186,31 @@ const MyBookings = () => {
                       onClick={() => sortBy("SchedulerType")}
                       title="Sort"
                     >
-                      <span className="sort-style">Type <AiOutlineSortAscending /></span>
+                      <span className="sort-style">{messages.labels.type} <AiOutlineSortAscending /></span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("ScheduledDate")}
                       title="Sort"
                     >
-                      <span className="sort-style">Scheduled date <AiOutlineSortAscending /></span>
+                      <span className="sort-style">{messages.labels.scheduledDate} <AiOutlineSortAscending /></span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("StartTime")}
                       title="Sort"
                     >
-                      <span className="sort-style">Start time <AiOutlineSortAscending /></span>
+                      <span className="sort-style">{messages.labels.startTime} <AiOutlineSortAscending /></span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("EndTime")}
                       title="Sort"
                     >
-                      <span className="sort-style">End time <AiOutlineSortAscending /></span>
+                      <span className="sort-style">{messages.labels.endTime} <AiOutlineSortAscending /></span>
                     </Col>
                     <Col className="info-sub-header action-column-min-width">
-                      <span> Action </span>
+                      <span> {messages.labels.action}  </span>
                     </Col>
                   </Row>
                   {displayData?.map((item, index) => (
@@ -263,7 +248,7 @@ const MyBookings = () => {
                           }
                           className="action-button-table-reschedule"
                         >
-                          Reschedule
+                          {messages.buttons.reschedule}
                         </Button>
 
                         <AiOutlineFieldTime
@@ -294,7 +279,7 @@ const MyBookings = () => {
                           }
                           className="action-button-table-cancel"
                         >
-                          Cancel
+                          {messages.buttons.cancel}
                         </Button>
                         <BiTrash
                           className="cancel-trash"
@@ -323,7 +308,7 @@ const MyBookings = () => {
                         onClick={(e) => handlePageClick(e, currentPage - 1)}
                         href="#"
                       >
-                        Prev
+                        {messages.buttons.prev}
                       </PaginationLink>
                     </PaginationItem>
                     {[...Array(pagesCount)].map((page, i) => (
@@ -341,7 +326,7 @@ const MyBookings = () => {
                         onClick={(e) => handlePageClick(e, currentPage + 1)}
                         href="#"
                       >
-                        Next
+                        {messages.buttons.next}
                       </PaginationLink>
                     </PaginationItem>
                   </Pagination>
@@ -349,7 +334,7 @@ const MyBookings = () => {
               </>
             )}
             {(!myBookingsData || myBookingsData?.length < 1) && (
-              <div className="no-availabilities-div">No bookings found</div>
+              <div className="no-availabilities-div">{messages.errorMessages.noBookings}</div>
             )}
           </>
         )}

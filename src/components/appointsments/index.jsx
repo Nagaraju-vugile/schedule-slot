@@ -6,6 +6,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import { Button, Col, Container, Row } from "reactstrap";
+import { messages } from "../../constants";
 import { getMaxLength, nextDays, prevDays } from "../../helpers/ui_helper";
 import {
   getAvailabilities,
@@ -123,7 +124,7 @@ const Appointments = ({
               <Row>
                 {!appointments && (
                   <div className="no-availabilities-div">
-                    No schedules found
+                    {messages.errorMessages.noSchedules}
                   </div>
                 )}
               </Row>
@@ -137,7 +138,7 @@ const Appointments = ({
                         onClick={() => setSize(maxValue)}
                         disabled={maxValue <= 1}
                       >
-                        MORE
+                        {messages.buttons.more}
                       </Button>
                     )}
                     {size !== 5 && (
@@ -147,7 +148,7 @@ const Appointments = ({
                         onClick={() => setSize(5)}
                         disabled={maxValue <= 1}
                       >
-                        LESS
+                        {messages.buttons.less}
                       </Button>
                     )}
                   </Row>

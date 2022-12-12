@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { messages } from "../constants";
 
 const ConfirmationModal = ({ modal, toggle, handleCancel }) => {
   const cancelHandler = () => {
@@ -10,15 +11,15 @@ const ConfirmationModal = ({ modal, toggle, handleCancel }) => {
     <div>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>
-          Are you sure you want to cancel the slot?
+          {messages.confirmationMessages.confirmCancelHeader}
         </ModalHeader>
-        <ModalBody>Please confirm that you wish to cancel this event. A cancellation email will be sent out to you and invitee.</ModalBody>
+        <ModalBody>{messages.confirmationMessages.confirmCancelBody}</ModalBody>
         <ModalFooter>
           <Button color="danger" onClick={cancelHandler}>
-            Yes, cancel
+            {messages.buttons.yesCancel}
           </Button>
           <Button color="secondary" onClick={toggle}>
-            Dont cancel
+          {messages.buttons.dontCancel}
           </Button>
         </ModalFooter>
       </Modal>

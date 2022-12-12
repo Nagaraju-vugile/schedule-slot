@@ -49,22 +49,6 @@
     color: #950695
   }
 
-  /* .timing:hover{
-    background-color: #65b3cb;
-    cursor: pointer;
-  }
-
-  .timing:focus{
-    background-color: #65b3cb;
-    cursor: pointer;
-  } */
-
-  /* .timing:hover,
-  .timing:focus {
-    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-    transform: translateY(-0.25em);
-  } */
-
   .show-more{
     border: none;
     color: #275476;
@@ -74,11 +58,6 @@
     /* color: #950695; */
     width: 15%;
   }
-
-  /* .show-more:hover{
-    color: #17639d;
-    cursor: pointer;
-  } */
 
   .show-more:hover,
   .show-more:focus, 
@@ -858,14 +837,9 @@ label {
   background-color: transparent !important;
 }
 
-/* .dropdown-item:hover{
-  background-color: white !important; 
-} */
-
 .scheduler-types-col{
   padding-top:10px !important;
 }
-
 
 .btn-prime{
   background-color: #4444d5;
@@ -931,13 +905,6 @@ label {
   background-color: #4444d5;
 }
 
-/* .dropdown-item:focus{
-  background-color: white !important;
-} */
-/* .dropdown-item:active{
-  background-color: white !important;
-} */
-
 .react-datepicker__input-container{
   display: none !important;
 }
@@ -957,33 +924,6 @@ label {
 .dropdown-menu:hover .logout-btn {
   background-color: transparent !important;
 }
-
-/* .action-button-table-reschedule{
-  color: #29272c;
-    background: linear-gradient(128deg,#b85db8 0%,#992986 50%, #850a7e 100%);
-    transition: .25s ease-in-out;
-    background-size: 200% 100%;
-}
-
-.action-button-table-reschedule:hover{
-  color: white;
-  background-size: 50% 200%;
-  font-weight:600;
-} */
-
-/* .action-button-table-cancel{
-  color: #29272c;
-    text-decoration: none;
-    font-weight: 700;
-    background: linear-gradient(128deg,#a86664 0%,#b34444 50%, #d13429 100%);
-    transition: .25s ease-in-out;
-    background-size: 200% 100%;
-}
-
-.action-button-table-cancel:hover{
-  color: white;
-    background-size: 100% 50%;
-} */
 
 .action-button-table-reschedule{
   border: 1px solid #550fc5f2;
@@ -1041,11 +981,6 @@ label {
     /* border: 1px solid #950695; */
     /* box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px; */
 }
-
-/* .testing-in-div:first-child {
-  flex: 1 1 auto;
-  margin-left: 0;
-} */
 
 .testing-in-dev{
   background-color: var(--bui_color_white);
