@@ -238,20 +238,23 @@ const SchedulerTypesList = () => {
   };
 
   return (
-    <><div className="layout-main">
-      <Header />
-      <Container className="container-scheduler">
-        <NavBar />
-        <Row className="booking-header" style={{ paddingBottom: "10px" }}>
-          <h5 style={{ paddingLeft: "27px" }}>{messages.labels.showAvailablesSlots}</h5>
-        </Row>
-        {(loader && (
-          <div className="loader">
-            <Spinner animation="border" variant="warning">
-              {messages.labels.loading}
-            </Spinner>
-          </div>
-        )) || (
+    <>
+      <div className="layout-main">
+        <Header />
+        <Container className="container-scheduler">
+          <NavBar />
+          <Row className="booking-header" style={{ paddingBottom: "10px" }}>
+            <h5 style={{ paddingLeft: "27px" }}>
+              {messages.labels.showAvailablesSlots}
+            </h5>
+          </Row>
+          {(loader && (
+            <div className="loader">
+              <Spinner animation="border" variant="warning">
+                {messages.labels.loading}
+              </Spinner>
+            </div>
+          )) || (
             <>
               {schedulerTypes && schedulerTypes.length > 0 && (
                 <>
@@ -262,12 +265,17 @@ const SchedulerTypesList = () => {
                     >
                       <Autosuggest
                         suggestions={suggestions}
-                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={onSuggestionsClearRequested}
+                        onSuggestionsFetchRequested={
+                          onSuggestionsFetchRequested
+                        }
+                        onSuggestionsClearRequested={
+                          onSuggestionsClearRequested
+                        }
                         getSuggestionValue={getSuggestionValue}
                         renderSuggestion={renderSuggestion}
                         inputProps={inputProps}
-                        shouldRenderSuggestions={shouldRenderSuggestions} />
+                        shouldRenderSuggestions={shouldRenderSuggestions}
+                      />
                     </div>
                     <div className="find-by-input-div">
                       {renderById(schedulerTypes)}
@@ -278,12 +286,17 @@ const SchedulerTypesList = () => {
                     >
                       <Autosuggest
                         suggestions={suggestionsType}
-                        onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
-                        onSuggestionsClearRequested={onSuggestionsClearRequestedType}
+                        onSuggestionsFetchRequested={
+                          onSuggestionsFetchRequestedType
+                        }
+                        onSuggestionsClearRequested={
+                          onSuggestionsClearRequestedType
+                        }
                         getSuggestionValue={getSuggestionValueType}
                         renderSuggestion={renderSuggestionType}
                         inputProps={inputPropsType}
-                        shouldRenderSuggestions={shouldRenderSuggestionsType} />
+                        shouldRenderSuggestions={shouldRenderSuggestionsType}
+                      />
                     </div>
                     <div className="find-by-input-div">
                       {renderByType(schedulerTypes)}
@@ -296,7 +309,8 @@ const SchedulerTypesList = () => {
                         disabled={!value && !valueType}
                       >
                         <AiOutlineSearch
-                          style={{ marginBottom: "4px", marginRight: "6px" }} />
+                          style={{ marginBottom: "4px", marginRight: "6px" }}
+                        />
                         {messages.buttons.findSlots}
                       </Button>
                     </div>
@@ -308,7 +322,8 @@ const SchedulerTypesList = () => {
                         disabled={!value && !valueType}
                       >
                         <AiOutlineClose
-                          style={{ marginBottom: "4px", marginRight: "6px" }} />
+                          style={{ marginBottom: "4px", marginRight: "6px" }}
+                        />
                         {messages.buttons.clearSelection}
                       </Button>
                     </div>
@@ -322,30 +337,32 @@ const SchedulerTypesList = () => {
               )}
             </>
           )}
-      </Container>
-      <Footer />
-    </div><CookieConsent
-      location="top"
-      buttonText="Please accept"
-      cookieName="schedulerCookies"
-      style={{ background: "#2B373B" }}
-      buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-      hideOnAccept
-      onAccept={(acceptedByScrolling) => {
-        if (acceptedByScrolling) {
-          Cookies.set("schedulerCookies", true);
-        } else {
-          Cookies.set("schedulerCookies", true);
-        }
-      } }
-      enableDeclineButton
-      onDecline={() => {
-        Cookies.set("schedulerCookies", false);
-        resetCookieConsentValue()
-      } }
-    >
+        </Container>
+        <Footer />
+      </div>
+      <CookieConsent
+        location="top"
+        buttonText="I accept"
+        cookieName="schedulerCookies"
+        style={{ background: "#2B373B" }}
+        buttonStyle={{ color: "#4e503b" }}
+        hideOnAccept
+        onAccept={(acceptedByScrolling) => {
+          if (acceptedByScrolling) {
+            Cookies.set("schedulerCookies", true);
+          } else {
+            Cookies.set("schedulerCookies", true);
+          }
+        }}
+        enableDeclineButton
+        onDecline={() => {
+          Cookies.set("schedulerCookies", false);
+          resetCookieConsentValue();
+        }}
+      >
         {messages.cookiesContentMessage}
-      </CookieConsent></>
+      </CookieConsent>
+    </>
   );
 };
 
