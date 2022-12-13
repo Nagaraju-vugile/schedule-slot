@@ -6,6 +6,8 @@ import { messages } from "../constants";
 
 const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
   const pyEmail = SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyEmail;
+  const pyImage = SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyFilePath;
+
   const pyType =
     (SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.Schedules[indexAppointment]?.Type) ||
     "";
@@ -21,7 +23,8 @@ const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
       <Row>
         <Col xs="2">
           <div className="avatar">
-            <BsFillPersonFill className="avatar" />
+            {pyImage && <img src={pyImage} alt="profile" className="avatar" height="70px" width="70px" /> || <BsFillPersonFill className="avatar" /> }
+            
           </div>
         </Col>
         <Col xs="10" className="padding-left-fullname">
