@@ -4,16 +4,13 @@ import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container } from "reactstrap";
-import { isSignedIn, setUserSeesionDetails } from "../store/scheduler/actions";
-import CookieConsent from "react-cookie-consent";
 import { messages } from "../constants";
+import { isSignedIn, setUserSeesionDetails } from "../store/scheduler/actions";
 
 const Login = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
-
   let path = useLocation().pathname;
-
   const clientId =
     "192710840478-c1g1e51uv068erlttvl9o91fcku82d6u.apps.googleusercontent.com";
 
@@ -65,16 +62,6 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <CookieConsent
-        location="bottom"
-        buttonText="Please accept"
-        cookieName="schedulerCoockies"
-        style={{ background: "#2B373B" }}
-        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
-        hideOnAccept
-      >
-        {messages.cookiesContentMessage}
-      </CookieConsent>
     </Container>
   );
 };

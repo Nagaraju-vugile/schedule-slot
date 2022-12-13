@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
+import CookieConsent, { Cookies, resetCookieConsentValue } from "react-cookie-consent";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -55,6 +56,12 @@ const SchedulerTypesList = () => {
       navigate("/login");
     }
   });
+
+  useEffect(() => {
+    if(Cookies.get("schedulerCookies") === true || Cookies.get("schedulerCookies") === "true"){
+      Cookies.set("schedulerCookiesSet", sessionStorage.getItem("userProfile"));
+    }
+  }, [Cookies.get("schedulerCookies")]);
 
   function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -231,7 +238,7 @@ const SchedulerTypesList = () => {
   };
 
   return (
-    <div className="layout-main">
+    <><div className="layout-main">
       <Header />
       <Container className="container-scheduler">
         <NavBar />
@@ -245,87 +252,100 @@ const SchedulerTypesList = () => {
             </Spinner>
           </div>
         )) || (
-          <>
-            {schedulerTypes && schedulerTypes.length > 0 && (
-              <>
-                <div className="find-by-input">
-                  <div
-                    className="find-by-input-div"
-                    style={{ minWidth: "25%" }}
-                  >
-                    <Autosuggest
-                      suggestions={suggestions}
-                      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                      onSuggestionsClearRequested={onSuggestionsClearRequested}
-                      getSuggestionValue={getSuggestionValue}
-                      renderSuggestion={renderSuggestion}
-                      inputProps={inputProps}
-                      shouldRenderSuggestions={shouldRenderSuggestions}
-                    />
-                  </div>
-                  <div className="find-by-input-div">
-                    {renderById(schedulerTypes)}
-                  </div>
-                  <div
-                    className="find-by-input-div"
-                    style={{ minWidth: "25%" }}
-                  >
-                    <Autosuggest
-                      suggestions={suggestionsType}
-                      onSuggestionsFetchRequested={
-                        onSuggestionsFetchRequestedType
-                      }
-                      onSuggestionsClearRequested={
-                        onSuggestionsClearRequestedType
-                      }
-                      getSuggestionValue={getSuggestionValueType}
-                      renderSuggestion={renderSuggestionType}
-                      inputProps={inputPropsType}
-                      shouldRenderSuggestions={shouldRenderSuggestionsType}
-                    />
-                  </div>
-                  <div className="find-by-input-div">
-                    {renderByType(schedulerTypes)}
-                  </div>
-                  <div className="find-by-input-div">
-                    <Button
-                      className="btn-scheduler-type"
-                      color="primary"
-                      onClick={() => handleGoSearch()}
-                      disabled={!value && !valueType}
+            <>
+              {schedulerTypes && schedulerTypes.length > 0 && (
+                <>
+                  <div className="find-by-input">
+                    <div
+                      className="find-by-input-div"
+                      style={{ minWidth: "25%" }}
                     >
-                      <AiOutlineSearch
-                        style={{ marginBottom: "4px", marginRight: "6px" }}
-                      />
-                      {messages.buttons.findSlots}
-                    </Button>
-                  </div>
-                  <div className="find-by-input-div">
-                    <Button
-                      className="btn-scheduler-type"
-                      color="danger"
-                      onClick={() => handleClear()}
-                      disabled={!value && !valueType}
+                      <Autosuggest
+                        suggestions={suggestions}
+                        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                        onSuggestionsClearRequested={onSuggestionsClearRequested}
+                        getSuggestionValue={getSuggestionValue}
+                        renderSuggestion={renderSuggestion}
+                        inputProps={inputProps}
+                        shouldRenderSuggestions={shouldRenderSuggestions} />
+                    </div>
+                    <div className="find-by-input-div">
+                      {renderById(schedulerTypes)}
+                    </div>
+                    <div
+                      className="find-by-input-div"
+                      style={{ minWidth: "25%" }}
                     >
-                      <AiOutlineClose
-                        style={{ marginBottom: "4px", marginRight: "6px" }}
-                      />
-                      {messages.buttons.clearSelection}
-                    </Button>
+                      <Autosuggest
+                        suggestions={suggestionsType}
+                        onSuggestionsFetchRequested={onSuggestionsFetchRequestedType}
+                        onSuggestionsClearRequested={onSuggestionsClearRequestedType}
+                        getSuggestionValue={getSuggestionValueType}
+                        renderSuggestion={renderSuggestionType}
+                        inputProps={inputPropsType}
+                        shouldRenderSuggestions={shouldRenderSuggestionsType} />
+                    </div>
+                    <div className="find-by-input-div">
+                      {renderByType(schedulerTypes)}
+                    </div>
+                    <div className="find-by-input-div">
+                      <Button
+                        className="btn-scheduler-type"
+                        color="primary"
+                        onClick={() => handleGoSearch()}
+                        disabled={!value && !valueType}
+                      >
+                        <AiOutlineSearch
+                          style={{ marginBottom: "4px", marginRight: "6px" }} />
+                        {messages.buttons.findSlots}
+                      </Button>
+                    </div>
+                    <div className="find-by-input-div">
+                      <Button
+                        className="btn-scheduler-type"
+                        color="danger"
+                        onClick={() => handleClear()}
+                        disabled={!value && !valueType}
+                      >
+                        <AiOutlineClose
+                          style={{ marginBottom: "4px", marginRight: "6px" }} />
+                        {messages.buttons.clearSelection}
+                      </Button>
+                    </div>
                   </div>
+                </>
+              )}
+              {(!schedulerTypes || schedulerTypes.length < 1) && (
+                <div className="no-availabilities-div">
+                  {messages.errorMessages.noSchedulers}
                 </div>
-              </>
-            )}
-            {(!schedulerTypes || schedulerTypes.length < 1) && (
-              <div className="no-availabilities-div">
-                {messages.errorMessages.noSchedulers}
-              </div>
-            )}
-          </>
-        )}
+              )}
+            </>
+          )}
       </Container>
       <Footer />
-    </div>
+    </div><CookieConsent
+      location="top"
+      buttonText="Please accept"
+      cookieName="schedulerCookies"
+      style={{ background: "#2B373B" }}
+      buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+      hideOnAccept
+      onAccept={(acceptedByScrolling) => {
+        if (acceptedByScrolling) {
+          Cookies.set("schedulerCookies", true);
+        } else {
+          Cookies.set("schedulerCookies", true);
+        }
+      } }
+      enableDeclineButton
+      onDecline={() => {
+        Cookies.set("schedulerCookies", false);
+        resetCookieConsentValue()
+      } }
+    >
+        {messages.cookiesContentMessage}
+      </CookieConsent></>
   );
 };
 
