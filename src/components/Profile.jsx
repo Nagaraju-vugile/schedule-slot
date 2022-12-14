@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody, CardFooter, CardHeader, Row } from "reactstrap";
 import { messages } from "../constants";
+import ReactRoundedImage from "react-rounded-image";
 
 import Footer from "./Footer";
 import Header from "./Header";
@@ -16,6 +17,8 @@ const Profile = () => {
   );
 
   const storedUser = sessionStorage.getItem("userProfile");
+  const pyImageUrl = userProfile &&userProfile?.imageUrl;
+
   useEffect(() => {
     if (storedUser === "null" || storedUser === null) {
       navigate("/login");
@@ -36,7 +39,15 @@ const Profile = () => {
           <CardHeader className="card-header"></CardHeader>
           <CardBody className="padding-top-style">
             <div className="avatar appointments">
-              <BsFillPersonFill className="avatar" />
+              
+              {pyImageUrl&& <ReactRoundedImage
+                      image={pyImageUrl}
+                      roundedColor="none"
+                      imageWidth="80"
+                      imageHeight="80"
+                      roundedSize="2"
+                      borderRadius="20"
+                    /> || <BsFillPersonFill className="avatar" />}
             </div>
             <div className="appointments">{userProfile?.name}</div>
             <div className="appointments">{userProfile?.email}</div>

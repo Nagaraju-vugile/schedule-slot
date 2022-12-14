@@ -13,6 +13,8 @@ import {
   setActiveTab,
   setUserSeesionDetails
 } from "../store/scheduler/actions";
+import ReactRoundedImage from "react-rounded-image";
+import { BsFillPersonFill } from "react-icons/bs";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -29,6 +31,7 @@ export default function Header() {
   const [profile, setProfile] = useState(userProfile);
   const clientId =
     "192710840478-c1g1e51uv068erlttvl9o91fcku82d6u.apps.googleusercontent.com";
+    const pyImageUrl = userProfile &&userProfile?.imageUrl;
 
   useEffect(() => {
     const initClient = () => {
@@ -58,7 +61,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(selectedProfileOption("Logout"));
+    dispatch(selectedProfileOption("Settings"));
   };
 
   const onFailure = (err) => {
@@ -109,7 +112,9 @@ export default function Header() {
                 </DropdownToggle>
                 <DropdownMenu style={{ width: "100%" }}>
                   <DropdownItem onClick={() => handleProfile()}>
-                    <span style={{ paddingLeft: "11px" }}>{messages.buttons.profile}</span>
+                    <span style={{ paddingLeft: "11px" }}>
+                      {messages.buttons.profile}
+                    </span>
                   </DropdownItem>
                   <DropdownItem onClick={() => handleLogout()}>
                     <GoogleLogout
@@ -122,6 +127,20 @@ export default function Header() {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
+              <NavItem>
+                <div style={{paddingTop:"4px", paddingRight: "10px"}}>
+                  {(pyImageUrl && (
+                    <ReactRoundedImage
+                      image={pyImageUrl}
+                      roundedColor="none"
+                      imageWidth="30"
+                      imageHeight="30"
+                      roundedSize="2"
+                      borderRadius="20"
+                    />
+                  )) || <BsFillPersonFill className="avatar" />}
+                </div>
+              </NavItem>
             </Nav>
           </>
         ) : (

@@ -2,10 +2,12 @@ import React from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { Col, Row } from "reactstrap";
 import { messages } from "../constants";
+import ReactRoundedImage from "react-rounded-image";
 
 
 const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
   const pyEmail = SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyEmail;
+  const pyImageUrl = SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyFilePath;
   const pyType =
     (SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.Schedules[indexAppointment]?.Type) ||
     "";
@@ -18,15 +20,25 @@ const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
 
   return (
     <div className="flex-style">
-      <Row>
+      <Row className="image-name-style">
         <Col xs="2">
           <div className="avatar">
-            <BsFillPersonFill className="avatar" />
+            {(pyImageUrl && (
+              <ReactRoundedImage
+                image={pyImageUrl}
+                roundedColor="#950695"
+                imageWidth="70"
+                imageHeight="70"
+                roundedSize="2"
+                borderRadius="20"
+              />
+            )) || <BsFillPersonFill className="avatar" />}
           </div>
         </Col>
         <Col xs="10" className="padding-left-fullname">
           <div className={!pyType && "padding-top-fullname"}>
-            {SchedulerList && SchedulerList[indexAppointment]?.SchedulerDetails?.pyFullName}
+            {SchedulerList &&
+              SchedulerList[indexAppointment]?.SchedulerDetails?.pyFullName}
           </div>
           <div>{pyType}</div>
         </Col>
