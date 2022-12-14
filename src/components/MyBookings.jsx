@@ -34,6 +34,9 @@ const MyBookings = () => {
   const myBookingsData = useSelector(
     (state) => state?.availabilitiesReducer?.myBookings?.pxResults
   );
+  const userProfileEmail = useSelector(
+    (state) => state?.availabilitiesReducer?.userProfile?.email
+  );
   const [displayData, setDisplayData] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [ascend, setAscend] = useState(false);
@@ -86,11 +89,11 @@ const MyBookings = () => {
   };
 
   useEffect(() => {
-    dispatch(myBookings('krishna_chaitanya@bluerose-tech.com'));
+    dispatch(myBookings(userProfileEmail));
     dispatch(setActiveTab(config.ACTIVE_TAB.MY_BOOKINGS));
     dispatch(clearCancelSlots());
     dispatch(selectedProfileOption(config.PROFILE_NAV_OPTIONS.SETTINGS));
-  }, [dispatch]);
+  }, [dispatch, userProfileEmail]);
 
   useEffect(() => {
     updateDisplay();
