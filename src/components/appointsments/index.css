@@ -5,7 +5,7 @@
 
   .appointments-header{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     max-width: 628px;
   }
   .availabilities-day-date {
@@ -282,7 +282,7 @@ padding-top: 15px;
 
 .loginButton{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .logout-btn{
@@ -305,7 +305,7 @@ padding-top: 15px;
 
 .display-end{
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   word-break: break-word;
   font-weight: 600;
 }
@@ -318,7 +318,7 @@ padding-top: 15px;
   padding-top:5px;
   padding-bottom:10px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .nav-link:hover{
@@ -422,7 +422,7 @@ padding-top: 15px;
   }
 
   .styled-profile{
-    justify-content: start;
+    justify-content: flex-start;
     display: flex;
     width: 100%;
     margin-left:10px;

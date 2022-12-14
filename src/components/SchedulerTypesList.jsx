@@ -36,7 +36,7 @@ const SchedulerTypesList = () => {
   const [openType, setOpenType] = useState(false);
   const [valueType, setValueType] = useState("");
   const [suggestionsType, setSuggestionsType] = useState([]);
-
+  const cookie = Cookies.get("schedulerCookies");
   const [openId, setOpenId] = useState(false);
 
   const loader = useSelector(
@@ -61,7 +61,7 @@ const SchedulerTypesList = () => {
     if(Cookies.get("schedulerCookies") === true || Cookies.get("schedulerCookies") === "true"){
       Cookies.set("schedulerCookiesSet", sessionStorage.getItem("userProfile"));
     }
-  }, [Cookies.get("schedulerCookies")]);
+  }, [cookie]);
 
   function escapeRegexCharacters(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

@@ -17,7 +17,7 @@ const Profile = () => {
   );
 
   const storedUser = sessionStorage.getItem("userProfile");
-  const pyImageUrl = userProfile &&userProfile?.imageUrl;
+  const pyImageUrl = userProfile && userProfile?.imageUrl;
 
   useEffect(() => {
     if (storedUser === "null" || storedUser === null) {
@@ -39,16 +39,24 @@ const Profile = () => {
           <CardHeader className="card-header"></CardHeader>
           <CardBody className="padding-top-style">
             <div className="avatar appointments">
-              
-              {pyImageUrl&& <ReactRoundedImage
-                      image={pyImageUrl}
-                      roundedColor="none"
-                      imageWidth="80"
-                      imageHeight="80"
-                      roundedSize="2"
-                      borderRadius="20"
-                    /> || <BsFillPersonFill className="avatar" />}
+              {(pyImageUrl && (
+                <ReactRoundedImage
+                  image={pyImageUrl}
+                  roundedColor="none"
+                  imageWidth="80"
+                  imageHeight="80"
+                  roundedSize="2"
+                  borderRadius="20"
+                />
+              )) || <BsFillPersonFill className="avatar" />}
             </div>
+            <div
+                style={{
+                  borderBottom: "1px solid rgb(237 205 237)",
+                  marginTop: "4px",
+                  marginBottom: "4px",
+                }}
+            />
             <div className="appointments">{userProfile?.name}</div>
             <div className="appointments">{userProfile?.email}</div>
             <div className="appointments">{userProfile?.givenName}</div>

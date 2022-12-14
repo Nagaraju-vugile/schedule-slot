@@ -6,11 +6,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   Button,
   Col,
-  Container, Input, Pagination,
+  Container,
+  Input,
+  Pagination,
   PaginationItem,
   PaginationLink,
   Row,
-  Spinner
+  Spinner,
 } from "reactstrap";
 import config from "../config";
 import { messages } from "../constants";
@@ -21,7 +23,7 @@ import {
   selectedDataDisplay,
   selectedProfileOption,
   selectedReschedulerDetails,
-  setActiveTab
+  setActiveTab,
 } from "../store/scheduler/actions";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -80,12 +82,25 @@ const MyBookings = () => {
   };
 
   const updateDisplay = () => {
-    if (search === "")
-      setDisplayData(
-        myBookingsData
-          ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
-          .map((data, i) => data)
+    const currentBookings = myBookingsData
+      ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
+      .map((data, i) => data);
+
+    const sortByDate =
+      currentBookings &&
+      [...currentBookings].sort((prev, next) =>
+        prev["ScheduledDate"] > next["ScheduledDate"] ? 1 : -1
       );
+
+    const sortBySlots =
+      sortByDate &&
+      [...sortByDate].sort((prev, next) =>
+        prev["StartTime"] > next["StartTime"]
+          ? 1
+          : prev["ScheduledDate"] === next["ScheduledDate"] && -1
+      );
+
+    if (search === "") setDisplayData(sortBySlots);
   };
 
   useEffect(() => {
@@ -133,19 +148,22 @@ const MyBookings = () => {
     setSearch(event.target.value);
   };
 
-  const sortBy = (type)=>{
+  const sortBy = (type) => {
     setAscend(!ascend);
-  if (!ascend){
-    setDisplayData(
-      [...displayData].sort((prev, next) => (prev[type] > next[type] ? 1 : -1))
-    );
-  }
-  else{
-    setDisplayData(
-      [...displayData].sort((prev, next) => (prev[type] < next[type] ? 1 : -1))
-    );
-  }
-  }
+    if (!ascend) {
+      setDisplayData(
+        [...displayData].sort((prev, next) =>
+          prev[type] > next[type] ? 1 : -1
+        )
+      );
+    } else {
+      setDisplayData(
+        [...displayData].sort((prev, next) =>
+          prev[type] < next[type] ? 1 : -1
+        )
+      );
+    }
+  };
 
   return (
     <div className="layout-main">
@@ -160,7 +178,7 @@ const MyBookings = () => {
         {(loader && (
           <div className="loader">
             <Spinner animation="border" variant="warning">
-            {messages.labels.loading}
+              {messages.labels.loading}
             </Spinner>
           </div>
         )) || (
@@ -189,31 +207,40 @@ const MyBookings = () => {
                       onClick={() => sortBy("SchedulerType")}
                       title="Sort"
                     >
-                      <span className="sort-style">{messages.labels.type} <AiOutlineSortAscending /></span>
+                      <span className="sort-style">
+                        {messages.labels.type} <AiOutlineSortAscending />
+                      </span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("ScheduledDate")}
                       title="Sort"
                     >
-                      <span className="sort-style">{messages.labels.scheduledDate} <AiOutlineSortAscending /></span>
+                      <span className="sort-style">
+                        {messages.labels.scheduledDate}{" "}
+                        <AiOutlineSortAscending />
+                      </span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("StartTime")}
                       title="Sort"
                     >
-                      <span className="sort-style">{messages.labels.startTime} <AiOutlineSortAscending /></span>
+                      <span className="sort-style">
+                        {messages.labels.startTime} <AiOutlineSortAscending />
+                      </span>
                     </Col>
                     <Col
                       className="info-sub-header"
                       onClick={() => sortBy("EndTime")}
                       title="Sort"
                     >
-                      <span className="sort-style">{messages.labels.endTime} <AiOutlineSortAscending /></span>
+                      <span className="sort-style">
+                        {messages.labels.endTime} <AiOutlineSortAscending />
+                      </span>
                     </Col>
                     <Col className="info-sub-header action-column-min-width">
-                      <span> {messages.labels.action}  </span>
+                      <span> {messages.labels.action} </span>
                     </Col>
                   </Row>
                   {displayData?.map((item, index) => (
@@ -337,7 +364,9 @@ const MyBookings = () => {
               </>
             )}
             {(!myBookingsData || myBookingsData?.length < 1) && (
-              <div className="no-availabilities-div">{messages.errorMessages.noBookings}</div>
+              <div className="no-availabilities-div">
+                {messages.errorMessages.noBookings}
+              </div>
             )}
           </>
         )}

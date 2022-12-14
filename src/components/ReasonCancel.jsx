@@ -187,7 +187,7 @@ const ReasonCancel = () => {
                   <h4>{messages.successMessages.confirmed} </h4>
                 </div>
               </Row>
-              <Row className="appointments">{pyStatusMessage}</Row>
+              <Row className="appointments">Your slot is cancelled succussfully</Row>
             </Alert>
           </div>
           <div

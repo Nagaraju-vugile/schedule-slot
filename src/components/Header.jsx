@@ -82,7 +82,7 @@ export default function Header() {
    } else if(path==="/schedulers-list" || path==="/"){
     dispatch(setActiveTab("1"));
    }
-  },[path]);
+  },[path, dispatch]);
 
   return (
     <div className="header">
