@@ -138,7 +138,7 @@ export default function Header() {
                       roundedSize="2"
                       borderRadius="20"
                     />
-                  )) || <BsFillPersonFill className="avatar" />}
+                  )) || <BsFillPersonFill className="avatar-profile" />}
                 </div>
               </NavItem>
             </Nav>

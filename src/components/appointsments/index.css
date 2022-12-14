@@ -1081,6 +1081,11 @@ label {
   padding-left: 50px !important; 
 } */
 
+.avatar-profile {
+  min-width: 30px;
+  min-height: 30px;
+}
+
 
 
 
