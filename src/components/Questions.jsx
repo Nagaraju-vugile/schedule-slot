@@ -299,9 +299,12 @@ const Questions = () => {
                 </div>
               </Row>
               <Row className="appointments">
-                {(testPath < 0 &&
-                  `Your slot is scheduled with ${bookedSlotEmail}`) ||
-                  `Your slot is rescheduled with ${bookedSlotEmail}`}
+                {/* {(testPath < 0 &&
+                  `Your slot is scheduled successfully with ${bookedSlotEmail}`) ||
+                  `Your slot is rescheduled successfully with ${bookedSlotEmail}`} */}
+                   {(testPath < 0 &&
+                  `Your slot is scheduled successfully`) ||
+                  `Your slot is rescheduled successfully`}
               </Row>
             </Alert>
           </div>
