@@ -1,7 +1,7 @@
 import { gapi } from "gapi-script";
 import React, { useEffect, useState } from "react";
 import { GoogleLogin, GoogleLogout } from "react-google-login";
-import { AiFillHome, AiFillSetting } from "react-icons/ai";
+import { AiFillHome, AiFillSetting, AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink, Nav, NavItem
@@ -110,13 +110,29 @@ export default function Header() {
                   />
                   {selectedOption}
                 </DropdownToggle>
-                <DropdownMenu style={{ width: "100%" }}>
-                  <DropdownItem onClick={() => handleProfile()}>
+                <DropdownMenu style={{ width: "100%", }}>
+                  <DropdownItem className = "profile-dropdown-item" onClick={() => handleProfile()} style={{
+                        display: "flex",
+                      }}>
+                  <span
+                    >
+                      {(pyImageUrl && (
+                        <ReactRoundedImage
+                          image={pyImageUrl}
+                          roundedColor="none"
+                          imageWidth="30"
+                          imageHeight="30"
+                          roundedSize="2"
+                          borderRadius="20"
+                        />
+                      )) || <BsFillPersonFill className="avatar-profile" />}
+                    </span>
                     <span style={{ paddingLeft: "11px" }}>
                       {messages.buttons.profile}
                     </span>
                   </DropdownItem>
                   <DropdownItem onClick={() => handleLogout()}>
+                    <AiOutlineLogout />
                     <GoogleLogout
                       clientId={clientId}
                       buttonText="Sign out"
@@ -127,20 +143,6 @@ export default function Header() {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
-              <NavItem>
-                <div style={{paddingTop:"4px", paddingRight: "10px"}}>
-                  {(pyImageUrl && (
-                    <ReactRoundedImage
-                      image={pyImageUrl}
-                      roundedColor="none"
-                      imageWidth="30"
-                      imageHeight="30"
-                      roundedSize="2"
-                      borderRadius="20"
-                    />
-                  )) || <BsFillPersonFill className="avatar-profile" />}
-                </div>
-              </NavItem>
             </Nav>
           </>
         ) : (

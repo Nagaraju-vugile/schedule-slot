@@ -527,6 +527,9 @@ padding-top: 15px;
   .padding-left-fullname{
     padding-left: 15px !important; 
   }
+  .profile-dropdown-item{
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 900px) {
