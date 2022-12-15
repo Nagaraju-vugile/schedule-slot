@@ -111,7 +111,7 @@ export default function Header() {
                 toggle={toggle}
                 direction={(!dropdownOpen && "down") || "up"}
               >
-                <DropdownToggle nav caret>
+                <DropdownToggle nav>
                   <AiFillSetting
                     style={{ marginBottom: "4px", marginRight: "6px" }}
                   />

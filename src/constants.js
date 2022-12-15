@@ -120,7 +120,7 @@ export const days = [
       selectedTime: "Selected time",
       selectedType: "Selected type",
       profileInfoHeader: " Personal information",
-      address: "Address",
+      address: "Location",
       medium: "Medium",
       id: "Id",
       previousDate: "Previous date",
