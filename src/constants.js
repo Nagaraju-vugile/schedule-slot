@@ -57,7 +57,7 @@ export const days = [
   export const messages = {
     buttons: {
       home: "Home",
-      settings: "Settings",
+      settings: "My account",
       profile: "Profile",
       signIn: "Sign in",
       signOut: "Sign out",

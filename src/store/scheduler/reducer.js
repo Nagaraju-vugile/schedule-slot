@@ -49,7 +49,7 @@ const initialState = {
   cancelSlot: null,
   cancelSlotLoader: false,
   activeTab: "1",
-  selectedProfileOption: "Settings",
+  selectedProfileOption: "My account",
   isSignedIn:false
 };
 

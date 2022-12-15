@@ -4,14 +4,21 @@ import { GoogleLogin, GoogleLogout } from "react-google-login";
 import { AiFillHome, AiFillSetting, AiOutlineLogout } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import {Dropdown, DropdownItem, DropdownMenu, DropdownToggle, NavLink, Nav, NavItem
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  NavLink,
+  Nav,
+  NavItem,
 } from "reactstrap";
 import { messages } from "../constants";
 import {
   clearUserSessionDetails,
   selectedProfileOption,
   setActiveTab,
-  setUserSeesionDetails
+  setUserSeesionDetails,
 } from "../store/scheduler/actions";
 import ReactRoundedImage from "react-rounded-image";
 import { BsFillPersonFill } from "react-icons/bs";
@@ -31,7 +38,7 @@ export default function Header() {
   const [profile, setProfile] = useState(userProfile);
   const clientId =
     "192710840478-c1g1e51uv068erlttvl9o91fcku82d6u.apps.googleusercontent.com";
-    const pyImageUrl = userProfile &&userProfile?.imageUrl;
+  const pyImageUrl = userProfile && userProfile?.imageUrl;
 
   useEffect(() => {
     const initClient = () => {
@@ -61,7 +68,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(selectedProfileOption("Settings"));
+    dispatch(selectedProfileOption("My account"));
   };
 
   const onFailure = (err) => {
@@ -77,12 +84,12 @@ export default function Header() {
   };
 
   useEffect(() => {
-   if(path==="/my-bookings"){
-    dispatch(setActiveTab("2"));
-   } else if(path==="/schedulers-list" || path==="/"){
-    dispatch(setActiveTab("1"));
-   }
-  },[path, dispatch]);
+    if (path === "/my-bookings") {
+      dispatch(setActiveTab("2"));
+    } else if (path === "/schedulers-list" || path === "/") {
+      dispatch(setActiveTab("1"));
+    }
+  }, [path, dispatch]);
 
   return (
     <div className="header">
@@ -110,24 +117,13 @@ export default function Header() {
                   />
                   {selectedOption}
                 </DropdownToggle>
-                <DropdownMenu style={{ width: "100%", }}>
-                  <DropdownItem className = "profile-dropdown-item" onClick={() => handleProfile()} style={{
-                        display: "flex",
-                      }}>
-                  <span
-                    >
-                      {(pyImageUrl && (
-                        <ReactRoundedImage
-                          image={pyImageUrl}
-                          roundedColor="none"
-                          imageWidth="30"
-                          imageHeight="30"
-                          roundedSize="2"
-                          borderRadius="20"
-                        />
-                      )) || <BsFillPersonFill className="avatar-profile" />}
-                    </span>
-                    <span style={{ paddingLeft: "11px" }}>
+                <DropdownMenu style={{ width: "100%" }}>
+                  <DropdownItem
+                    onClick={() => handleProfile()}
+                  >
+                    
+                      <BsFillPersonFill />
+                      <span style={{ padding: "10px" }}>
                       {messages.buttons.profile}
                     </span>
                   </DropdownItem>
@@ -143,6 +139,20 @@ export default function Header() {
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
+              <NavItem>
+                <div className="profile-image">
+                  {(pyImageUrl && (
+                    <ReactRoundedImage
+                      image={pyImageUrl}
+                      roundedColor="none"
+                      imageWidth="30"
+                      imageHeight="30"
+                      roundedSize="2"
+                      borderRadius="20"
+                    />
+                  )) || <BsFillPersonFill className="avatar-profile" />}
+                </div>
+              </NavItem>
             </Nav>
           </>
         ) : (

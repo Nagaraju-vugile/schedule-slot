@@ -187,7 +187,7 @@ const SchedulerTypesList = () => {
           <span className="label-select-btn">{messages.buttons.selectId}</span>
         </DropdownToggle>
         {openId && (
-          <DropdownMenu>
+          <DropdownMenu className="dropdown-menu-search" right={true}>
             {getUnique(schedulerTypes, "SchedulerRefID")?.map((item) => (
               <DropdownItem
                 key={item.SchedulerRefID}
@@ -222,7 +222,7 @@ const SchedulerTypesList = () => {
           <span className="label-select-btn">{messages.buttons.selectType}</span>
         </DropdownToggle>
         {openType && (
-          <DropdownMenu>
+          <DropdownMenu className="dropdown-menu-search" right={true}>
             {getUnique(schedulerTypes, "Type")?.map((item) => (
               <DropdownItem
                 key={item.Type}

@@ -47,26 +47,32 @@ const ProfileInfo = ({ SchedulerList, indexAppointment }) => {
         {pyEmail && (
           <div className="flex-style">
             <span className="padding-left-style">
-              <b>{messages.labels.id}:</b> {pyEmail}
+              <span className="info-sub-header-label">
+                {messages.labels.id}:{" "}
+              </span>
+              {pyEmail}
             </span>
           </div>
         )}
       </Row>
       <Row>
-        <div className="flex-style">
-          <span className="padding-left-style">
-            <b>{messages.labels.address}- </b>
+        <div className="flex-style" style={{ marginTop: "5px" }}>
+          <span
+            className="padding-left-style"
+            style={{ fontSize: "18px", fontWeight: "600" }}
+          >
+            {messages.labels.address}:
           </span>
-          <div className="padding-left-style">
+          <div className="padding-left-style-address">
             <div>
-              <span>
-                <b>{messages.labels.type}: </b>
+              <span className="info-sub-header-label">
+                {messages.labels.type}:{" "}
               </span>
               {addressType}
             </div>
             <div>
-              <span>
-                <b>{messages.labels.medium}: </b>
+              <span className="info-sub-header-label">
+                {messages.labels.medium}:{" "}
               </span>
               {virtualMedium}
             </div>

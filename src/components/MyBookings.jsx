@@ -247,9 +247,9 @@ const MyBookings = () => {
                     <Row
                       key={index}
                       className="table-row-style"
-                      style={{
+                      style={{color:index % 2 === 0 ? "black" : "black",
                         backgroundColor:
-                          index % 2 === 0 ? "rgb(243 240 240 / 80%)" : "white",
+                          index % 2 === 0 ? "rgb(171 179 187)" : "#f0f0f0",
                       }}
                     >
                       <Col className="booking-value">{index + 1}</Col>

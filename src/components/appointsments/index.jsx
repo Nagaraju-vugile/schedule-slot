@@ -14,7 +14,7 @@ import {
 } from "../../store/scheduler/actions";
 import ProfileInfo from "../ProfileInfo";
 import AppointmentsWithDate from "./AppointmentsWithDate";
-import "./index.css";
+import "../../../src/main.css";
 
 const Appointments = ({
   appointments,
@@ -65,12 +65,19 @@ const Appointments = ({
   return (
     <div>
       <Container className="container-scheduler">
-        <Row className="profile-style">
+        <Row
+          className="profile-style"
+          style={{ borderBottom: "1px solid rgb(206 216 225)", marginBottom: "5px" }}
+        >
           <Col xs="9" className="container-padding">
             <div xs="9" className="border-main-div">
               <Row>
                 <Col xs="1" className="prev-btn-padding">
-                  <Button className="button-next" onClick={() => handlePrev()} color="link">
+                  <Button
+                    className="button-next"
+                    onClick={() => handlePrev()}
+                    color="link"
+                  >
                     <IoIosArrowBack className="next-button-svg" />
                   </Button>
                 </Col>
@@ -95,7 +102,11 @@ const Appointments = ({
                   </Row>
                 </Col>
                 <Col xs="1" className="padding-left-style-resp">
-                  <Button className="button-next" onClick={handleNext} color="link">
+                  <Button
+                    className="button-next"
+                    onClick={handleNext}
+                    color="link"
+                  >
                     <IoIosArrowForward className="next-button-svg" />
                   </Button>
                 </Col>
@@ -130,7 +141,7 @@ const Appointments = ({
               </Row>
               {appointments && (
                 <>
-                  <Row className="appointments" style={{paddingTop:"50px"}}>
+                  <Row className="appointments" style={{ paddingTop: "50px" }}>
                     {size === 5 && (
                       <Button
                         className="show-more"

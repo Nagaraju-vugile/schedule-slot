@@ -5,7 +5,7 @@
       MY_BOOKINGS: "2"
     },
     PROFILE_NAV_OPTIONS:{
-      SETTINGS: "Settings",
+      SETTINGS: "My account",
       PROFILE: "Profile",
       SIGNOUT: "Sign out",
       SIGNIN: "Sign in"

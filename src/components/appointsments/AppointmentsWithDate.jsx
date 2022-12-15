@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button, Col } from "reactstrap";
 import { days, months } from "../../constants";
 import { selectedSlotDetails } from "../../store/scheduler/actions";
-import "./index.css";
+// import "./index.css";
 
 const AppointmentsWithDate = ({
   date,
