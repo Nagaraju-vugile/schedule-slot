@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Spinner, Button, Row, Col, Container } from "reactstrap";
+import { Spinner, Button, Row, Col, Container, Card } from "reactstrap";
 import {
   clearAvailabilities,
   clearBookedSlots,
@@ -92,7 +92,11 @@ export default function Scheduler() {
           </Spinner>
         </div>
       )) || (
-        <>
+        <><Card  style={{
+          boxShadow: "rgb(0 0 0 / 16%) 1px 1px 10px",
+          margin:"10px",
+          backgroundColor: "#fbfbfb"
+        }}>
           {schedulerList?.map((item, index) => (
             <Appointments
               appointments={item?.SchedulerDetails?.Schedules}
@@ -108,6 +112,7 @@ export default function Scheduler() {
           {(!schedulerList || schedulerList?.length === 0) && (
             <div className="no-availabilities-div">{messages.errorMessages.noSlots}</div>
           )}
+          </Card>
         </>
       )}
 

@@ -175,7 +175,7 @@ const SchedulerTypesList = () => {
         toggle={() => toggleId()}
         direction={(!openId && "down") || "up"}
         className="btn-scheduler-type"
-        style={{ height: "38px", width: "30px", marginTop: "1px" }}
+        style={{ height: "40px", width: "30px", marginTop: "0px" }}
       >
         <DropdownToggle
           caret
@@ -209,7 +209,7 @@ const SchedulerTypesList = () => {
         toggle={() => toggleType()}
         direction={(!openType && "down") || "up"}
         className="btn-scheduler-type"
-        style={{ height: "38px", width: "30px", marginTop: "1px" }}
+        style={{ height: "40px", width: "30px", marginTop: "0px" }}
         color="link"
       >
         <DropdownToggle

@@ -314,6 +314,7 @@ padding-top: 15px;
 .table-row-style{
   padding-bottom: 5px;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .search-by-type-input{
@@ -662,7 +663,7 @@ label {
 }
 
 .action-column-min-width{
-  min-width: 21%;
+  min-width: 22%;
 }
 
 .card-border{
@@ -778,7 +779,8 @@ label {
   border: 1px solid #aaa;
   border-radius: 0px;
   /* border: 2px solid #d53bd5; */
-  box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px;
+  /* box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px; */
+  box-shadow:rgb(0 0 0 / 16%) 1px 1px 10px;
 }
 
 .react-autosuggest__input--focused {
@@ -935,9 +937,9 @@ label {
 }
 
 .action-button-table-reschedule{
-  border: 1px solid #550fc5f2;
+  border: 1px solid #4418cbf2;
   background-color: #f0f0f0;
-  color: #550fc5f2;
+  color: #4418cbf2;
   transition: width 2s, height 2s, background-color 1.5s, transform 2s;
   margin-right: 5px;
   border-radius:2px;
@@ -945,8 +947,8 @@ label {
 }
 
 .action-button-table-reschedule:hover{
-  border: 1px solid #550fc5f2;
-  background-color: #550fc5f2;
+  border: 1px solid #4418cbf2;
+  background-color: #4418cbf2;
   color: white;
   font-weight:500;
 }
@@ -977,8 +979,9 @@ label {
 
 .btn-scheduler-type, .btn-scheduler-type:disabled{
   border-radius:0px;
-  /* border: 2px solid #d53bd5; */
-  box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px;
+  border: 1px solid #b5b4b4;
+  /* box-shadow: rgb(221 61 241 / 88%) 1px 1px 10px; */
+  box-shadow:rgb(0 0 0 / 16%) 1px 1px 10px;
 }
 
 .find-by-input{
@@ -1118,6 +1121,12 @@ label {
 .dropdown-menu-search{
   max-height: 300px;
   overflow-y: scroll;
+}
+
+.table-row-style:hover{
+  background-color: rgb(171, 182, 204);
+  transition: width 2s, height 2s, background-color 1.5s, transform 2s;
+  cursor: pointer;
 }
 
 
